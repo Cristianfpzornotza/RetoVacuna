@@ -13,3 +13,20 @@
     margin: auto;
     border: 1px solid black;
 }
+
+#citavacunas{
+    border: 1px solid white;
+}
+
+#citavacunas:hover{
+    border: 1px solid black;
+    box-shadow: 0 0 0 2px black;
+}
+
+#hospitalzona{
+    border: 1px solid white;
+}
+
+#hospitalzona:hover{
+    border: 1px solid black;
+}
