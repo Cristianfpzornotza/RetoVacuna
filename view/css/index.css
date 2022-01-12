@@ -1,0 +1,15 @@
+.navlinks{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.navlinks:hover{
+    color: white;
+}
+
+#carouselExampleControls{
+    width: 85%;
+    margin: auto;
+    border: 1px solid black;
+}
