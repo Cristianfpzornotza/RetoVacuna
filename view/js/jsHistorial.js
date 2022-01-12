@@ -6,13 +6,14 @@ document.getElementById("btnradio2").addEventListener("click", function() {
 
 function loadHistorial(){	
 
-    var tabla ='<table class="table" id="tablahistorial">'
+    var tabla ='<h2 id="historialpaciente">Nombre completo del paciente</h2>'
+    +'<table class="table" id="tablahistorial">'
     +'<thead>'
       +'<tr>'
-      +'<th scope="col">#</th>'
-      +  '<th scope="col">First</th>'
-       + '<th scope="col">Last</th>'
-      +  '<th scope="col">Handle</th>'
+      +'<th scope="col">Numero</th>'
+      +  '<th scope="col">Descripcion</th>'
+       + '<th scope="col">Vacuna</th>'
+      +  '<th scope="col">Fecha</th>'
       +  '</tr>'
      + '</thead>'
     +'<tbody>'
