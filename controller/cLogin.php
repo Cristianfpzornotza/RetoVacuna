@@ -17,20 +17,12 @@ if (( $username !=null ) && ( $password !=null )){
     if ($user->findUser()>0) // si es correcto el userName y el password
     {
         session_start();
-        $_SESSION['idUser']=$user->getIdUser(); 
+        $_SESSION['idUser']=$user->getIdUsuario(); 
         $_SESSION['username']=$username; 
         
         $response['user']=$user->ObjVars(); 
         $response['error']="no error";  
         
-        if ($user->AdminVerify()) // this function returns 1 or 0 ig the user is admin
-        {
-            $_SESSION['admin']=1;
-            $response['admin']=1;
-        } else {
-            $_SESSION['admin']=0;
-            $response['admin']=0;
-        }
     }  else {        
         $response['error']="incorrect user/password"; // no correct user
     }
