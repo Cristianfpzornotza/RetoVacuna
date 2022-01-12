@@ -28,6 +28,27 @@ class pacientesModel extends pacientesClass{
         //mysqli_close ($this->link);
         $this->link->close();
     }
+
+    public function findPaciente() // login, fill and return id of the user
+    {
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        $sql="select * from pacientes where TIS='$this->TIS'";
+               
+        $result= $this->link->query($sql);
+       
+        if ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+            $this->idUsuario=$row['idUsuario'];
+            
+
+
+        }
+        
+        $this->CloseConnect();
+        return $this->idUsuario;
+    }
    
     public function ObjVars()
     {
