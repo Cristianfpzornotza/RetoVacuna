@@ -1,5 +1,5 @@
 <?php
-include_once '../model/userModel.php';
+include_once '../model/usuariosModel.php';
 
 $data=json_decode(file_get_contents("php://input"),true);
 
@@ -10,14 +10,14 @@ $response=array();
 
 if (( $username !=null ) && ( $password !=null )){
  
-    $user=new userModel();
-    $user->setUsername($username);
-    $user->setPassword($password);
+    $user=new usuariosModel();
+    $user->setName($username);
+    $user->setContrasena($password);
     
     if ($user->findUser()>0) // si es correcto el userName y el password
     {
         session_start();
-        $_SESSION['isUser']=$user->getIdUser(); 
+        $_SESSION['idUser']=$user->getIdUser(); 
         $_SESSION['username']=$username; 
         
         $response['user']=$user->ObjVars(); 
