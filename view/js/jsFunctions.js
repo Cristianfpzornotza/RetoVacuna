@@ -11,7 +11,7 @@ function login()
 	var Apellido=document.getElementById("apellido").value;
 	var Fecha=document.getElementById("fecha").value;
 	
-	var url = "controller/cLogin.php";
+	var url = "../../controller/cLoginPaciente.php";
 	var data = {'TIS':TIS, 'apellido':Apellido, 'fecha':Fecha};
 	
 	fetch(url, {

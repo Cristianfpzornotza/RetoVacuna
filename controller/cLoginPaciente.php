@@ -12,15 +12,14 @@ $response=array();
 if (( $TIS !=null ) && ( $apellido !=null ) && ( $fecha !=null )){
  
     $user=new pacientesModel();
-    $user->setName($username);
-    $user->setApellido($password);
-    $user->setTIS($password);
+    $user->setFechaNac($fecha);
+    $user->setApellido($apellido);
+    $user->setTIS($TIS);
     
-    if ($user->findPaciente()>0) // si es correcto el userName y el password
+    if ($user->findPaciente()) // si es correcto el userName y el password
     {
         session_start();
         $_SESSION['idPaciente']=$user->getIdPaciente(); 
-        $_SESSION['apellido']=$apellido; 
         
         $response['paciente']=$user->ObjVars(); 
         $response['error']="no error";  
