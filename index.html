@@ -77,12 +77,12 @@
 						</div>
 				</div>
 		  </div>
+		  
+
+		  <h3 class="mt-5 text-center">Datos Covid-19 2021 </h3>
 
 
-		  <h3 class="mt-5 text-center">Datos del Covid</h3>
-
-
-		  <div class=" mt-5 w-50 mb-5">
+		  <div class="container mt-5 w-50 mb-5">
 			  <div class="row">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
@@ -97,11 +97,15 @@
 				  </ul>
 				  <div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-						<canvas id="miGrafica" width="600" height="400"></canvas>
+						<canvas id="miGraficaBizk"></canvas>
 					</div>
 
-					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Esto es en Gipuzkoa</div>
-					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Esto es en Araba</div>
+					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						<canvas id="miGraficaGipu"></canvas>
+					</div>
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+						<canvas id="miGraficaAra"></canvas>
+					</div>
 				  </div>
 			  </div>
 		  </div>
@@ -125,25 +129,6 @@
 
 </body>
 
-<script>
-	let miCanvas=document.getElementById("miGrafica").getContext("2d");
-
-	var chart = new Chart(miCanvas,{
-		type:"line",
-		data:{
-			labels:["Amorebieta","Bilbao"],
-			datasets:[
-				{
-					label:"Positivos", 
-					backgroundColor:"rgb(0,0,0)",
-					data:["255"]
-				}
-			]
-		}
-	})
-
-
-</script>
 
 
 </html>
