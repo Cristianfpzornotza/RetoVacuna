@@ -1,7 +1,7 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+// document.addEventListener("DOMContentLoaded", function (event) {
 	
-    loadCitas();
-});
+//     loadCitas();
+// });
 
 function loadCitas(){	
 

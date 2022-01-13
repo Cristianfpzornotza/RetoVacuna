@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" ng-app='miApp'>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +7,44 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/consulta.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
 </head>
-<body>
+<body ng-controller="miControlador">
     
     <div id="btnprincipal" class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
         <label class="btn btn-outline-primary" for="btnradio1">Citas</label>
       
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" ng-click="Historial()">
         <label class="btn btn-outline-primary" for="btnradio2">Historial</label>
       </div>
 
-      <div id="insertaraqui">
+      <div id="insertaraqui" ng-show="ver=='si'">
+
+        
+        <h2 id="historialpaciente" >{{nombre}} {{apellidos}}</h2>
+        <table class="table" id="tablahistorial">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Vacuna</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <div >
+                    <tr ng-repeat="item in lista">
+                        
+                        <td>{{item.numeroDosis}}º Dosis</td>
+                        <td>{{item.tipo}}</td>
+                        <td>{{item.fecha}}</td>
+                    </tr>
+                </div>
+                
+            </tbody>
+        </table>
 
       </div>
 
@@ -30,5 +56,6 @@
     <script src="js/jsCitas.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+    
 </body>
 </html>
