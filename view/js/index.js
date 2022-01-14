@@ -1,90 +1,201 @@
 document.addEventListener("DOMContentLoaded",function(){
-
+    
+    loggedVerify();
     estilosmenu();
     graficaBizkaia();
     graficaGipuzkoa();
     miGraficaAra();
+
+    document.getElementById("btnlogin").addEventListener('click', login);
+
+
 })
 
+
+function login(){
+    
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    var url = "../../controller/cLogin.php";
+    var data = {'username': username, 'password': password};
+
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(result => {
+
+    if(result.error == "no error"){
+        window.location = "https://www.youtube.com/";
+    }else{
+        alert(result.error);
+    }
+
+    })
+    .catch(error => console.error('Error status:', error));    
+
+}
+
 function graficaBizkaia(){
-    let miCanvas=document.getElementById("miGraficaBizk").getContext("2d");
 
-    var xValues = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    var valor = document.getElementById("home-tab").value;
 
-        var chart = new Chart(miCanvas,{
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{ 
-            label:"Positivos",
-            data: ["255","871","552","661","431","550","620","700","759","639","721","809"],
-            backgroundColor:"red",
-            borderColor:"red",
-            fill: false
-            }, { 
-                label:"Fallecidos",
-            data: ["120","50","100","200","20","88","34","91","107","200","300","500"],
-            backgroundColor:"black",
-            borderColor:"black",
-            fill: false
-            }]
+    var url = "../../controller/cDatosCovi.php";
+    var data = {'id_provincia': valor};
+
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(result => {
+        
+        console.log(result);
+        var positivos = [];
+        var fallecidos = [];
+
+        for(let i = 0; i < result.datos.length; i++){
+             positivos[i] = result.datos[i].positivos;
+             fallecidos[i] = result.datos[i].fallecidos;
         }
- 
-});
+
+        let miCanvas=document.getElementById("miGraficaBizk").getContext("2d");
+
+        var xValues = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+            var chart = new Chart(miCanvas,{
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{ 
+                label:"Positivos",
+                data: positivos,
+                backgroundColor:"red",
+                borderColor:"red",
+                fill: false
+                }, { 
+                    label:"Fallecidos",
+                data: fallecidos,
+                backgroundColor:"black",
+                borderColor:"black",
+                fill: false
+                }]
+            }
+    
+    });
+
+
+    })    
+    .catch(error => console.error('Error status:', error));    
 }
 
 function graficaGipuzkoa(){
-    let miCanvas=document.getElementById("miGraficaGipu").getContext("2d");
+    var valor = document.getElementById("profile-tab").value;
 
-    var xValues = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    var url = "../../controller/cDatosCovi.php";
+    var data = {'id_provincia': valor};
 
-        var chart = new Chart(miCanvas,{
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{ 
-            label:"Positivos",
-            data: ["332","128","476","543","675","411","700","721","659","539","421","709"],
-            backgroundColor:"red",
-            borderColor:"red",
-            fill: false
-            }, { 
-                label:"Fallecidos",
-            data: ["100","75","150","220","120","58","74","121","20","190","300","400"],
-            backgroundColor:"black",
-            borderColor:"black",
-            fill: false
-            }]
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(result => {
+        
+        console.log(result);
+        var positivos = [];
+        var fallecidos = [];
+
+        for(let i = 0; i < result.datos.length; i++){
+             positivos[i] = result.datos[i].positivos;
+             fallecidos[i] = result.datos[i].fallecidos;
         }
- 
-});
+
+        let miCanvas=document.getElementById("miGraficaGipu").getContext("2d");
+
+        var xValues = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+            var chart = new Chart(miCanvas,{
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{ 
+                label:"Positivos",
+                data: positivos,
+                backgroundColor:"red",
+                borderColor:"red",
+                fill: false
+                }, { 
+                    label:"Fallecidos",
+                data: fallecidos,
+                backgroundColor:"black",
+                borderColor:"black",
+                fill: false
+                }]
+            }
+    
+    });
+
+
+    })    
+    .catch(error => console.error('Error status:', error)); 
 }
 
 function miGraficaAra(){
-    let miCanvas=document.getElementById("miGraficaAra").getContext("2d");
+    
+    var valor = document.getElementById("contact-tab").value;
 
-    var xValues = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    var url = "../../controller/cDatosCovi.php";
+    var data = {'id_provincia': valor};
 
-        var chart = new Chart(miCanvas,{
-        type: "line",
-        data: {
-            labels: xValues,
-            datasets: [{ 
-            label:"Positivos",
-            data: ["432","228","276","443","575","311","500","421","659","739","821","409"],
-            backgroundColor:"red",
-            borderColor:"red",
-            fill: false
-            }, { 
-                label:"Fallecidos",
-            data: ["150","21","50","320","220","158","134","221","420","190","20","100"],
-            backgroundColor:"black",
-            borderColor:"black",
-            fill: false
-            }]
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{'Content-Type': 'application/json'}
+    })
+    .then(res => res.json()).then(result => {
+        
+        console.log(result);
+        var positivos = [];
+        var fallecidos = [];
+
+        for(let i = 0; i < result.datos.length; i++){
+             positivos[i] = result.datos[i].positivos;
+             fallecidos[i] = result.datos[i].fallecidos;
         }
- 
-});
+
+        let miCanvas=document.getElementById("miGraficaAra").getContext("2d");
+
+        var xValues = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+            var chart = new Chart(miCanvas,{
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{ 
+                label:"Positivos",
+                data: positivos,
+                backgroundColor:"red",
+                borderColor:"red",
+                fill: false
+                }, { 
+                    label:"Fallecidos",
+                data: fallecidos,
+                backgroundColor:"black",
+                borderColor:"black",
+                fill: false
+                }]
+            }
+    
+    });
+
+
+    })    
+    .catch(error => console.error('Error status:', error)); 
+
+
 }
 
 function estilosmenu(){
@@ -123,6 +234,8 @@ function estilosmenu(){
 
     });
 }
+
+
 
 
 

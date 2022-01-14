@@ -24,11 +24,11 @@ if (( $username !=null ) && ( $password !=null )){
         $response['error']="no error";  
         
     }  else {        
-        $response['error']="incorrect user/password"; // no correct user
+        $response['error']="Usuario o contraseña incorrecta"; // no correct user
     }
 }  else {
     
-    $response['error']="username or password not filled";     // not filled user or password
+    $response['error']="Error! Usuario o contraseña vacias";     // not filled user or password
 }
 
 echo json_encode($response);

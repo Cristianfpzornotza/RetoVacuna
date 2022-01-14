@@ -47,3 +47,26 @@
 .btncita{
     width: 75px;
 }
+
+#footer{
+    margin-top: 200px;
+}
+
+.container-fluid{
+    padding: 0;
+}
+
+.navegador{
+    font-size: 25px;
+}
+
+#navbarNavDropdown .navbar-nav .dropdown .dropdown-menu{
+    width: 280px;
+    margin-left: -40px;
+    background-color: rgb(221, 242, 255);
+}
+
+#dropdownlogin li {
+    width: 80%;
+    margin: auto;
+}

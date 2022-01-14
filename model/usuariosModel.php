@@ -34,7 +34,7 @@ class usuariosModel extends usuariosClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
        
-        $idUser=-1;
+        $idUsuario=-1;
         
         $sql="select * from usuario where Nombre='$this->name'";
                
