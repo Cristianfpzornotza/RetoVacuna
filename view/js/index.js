@@ -1,13 +1,18 @@
 document.addEventListener("DOMContentLoaded",function(){
-    
-    //loggedVerify();
-    estilosmenu();
-    graficaBizkaia();
-    graficaGipuzkoa();
-    miGraficaAra();
+    console.log(location.pathname);
 
-    document.getElementById("btnlogin").addEventListener('click', login);
-    document.getElementById("btnlogout").addEventListener('click', logout);
+    if(location.pathname == "/index.html" || location.pathname=="/"){
+        loggedVerify();
+        graficaBizkaia();
+        graficaGipuzkoa();
+        miGraficaAra();
+        estilosmenu();
+        document.getElementById("btnlogin").addEventListener('click', login);
+    }else{
+        document.getElementById("btnlogout").addEventListener('click', logout);
+        loggedVerify();
+
+    }
 
 })
 
@@ -22,20 +27,15 @@ function loggedVerify(){
        		
 		console.log(result);
 		
-	    if (result.error !== "Sesión iniciada")
+	    if (result.error == "Sesión iniciada")
 	    {
-	        alert(result.error);
-	        
-	        document.getElementById('entrar').addEventListener('click',login);
-	   
+            if(location.pathname == "/index.html" || location.pathname=="/"){
+                window.location.href = "prueba.html"; 
+            } 
 	    } else {
 
-            if(result.nombre == "admin"){
-                alert("Tu login es de " + result.nombre);
-	    	    window.location.href = "banca.html";
-            }else{
-                document.getElementById("logindiv").innerHTML = "<h1 class='mt-3 me-1'>" + result.nombre + "</h1><a id='cerrarsesion' class='ms-1' href='index.html'>Cerrar Sesion</a>";
-                document.getElementById("cerrarsesion").addEventListener("click", logout);
+            if(location.pathname == "/prueba.html"){
+                window.location.href = "index.html"; 
             }
 	        
 	    }
@@ -59,7 +59,7 @@ function login(){
     .then(res => res.json()).then(result => {
 
     if(result.error == "no error"){
-        window.location = "prueba.html";
+        window.location.href = "prueba.html";
     }else{
         alert(result.error);
     }
@@ -274,7 +274,7 @@ function logout(){
     })
     .then(res => res.text()).then(result => {
 
-        location.href="../../index.html";
+        window.location.href=" index.html";
     })
     .catch(error => console.error('Error status:', error));
 }
