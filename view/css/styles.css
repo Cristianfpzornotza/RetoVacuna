@@ -11,7 +11,7 @@ body {font-family: Arial, Helvetica, sans-serif; background-color:rgb(112, 112, 
 .formulario{padding-left: 30px; padding-top: 10px;}
 #form-body{display: flex; justify-content: space-between;}
 .inputs{display: flex;}
-.inputs h2:first-child{width: min-content;}
+.inputs h2:first-child{width: min-content; font-weight: bold;}
 .inputs h2:first-child #TIS{padding-left: 5px; width: 160px;  border-radius: 5px;}
 .inputs h2:first-child #Fecha{padding-left: 5px; width: 270px; height: 43px; border-radius: 5px;}
 .inputs h2:last-child{color: red; width: min-content;}
