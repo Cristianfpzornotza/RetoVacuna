@@ -11,17 +11,17 @@
 #carouselExampleControls{
     width: 65%;
     margin: auto;
-    border: 1px solid black;
 }
 
 #citavacunas{
     border: 1px solid white;
     padding: 50px;
+
 }
 
 #citavacunas:hover{
-    border: 1px solid blue;
     transition: 0.5s;
+    box-shadow: 5px 5px 10px black;
 }
 
 #hospitalzona{
@@ -30,9 +30,8 @@
 }
 
 #hospitalzona:hover{
-    border: 1px solid blue;
     transition: 0.5s;
-
+    box-shadow: -5px 5px 10px black;
 }
 
 .halo{
@@ -57,16 +56,24 @@
 }
 
 .navegador{
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #navbarNavDropdown .navbar-nav .dropdown .dropdown-menu{
     width: 280px;
-    margin-left: -40px;
-    background-color: rgb(221, 242, 255);
+    margin-left: -60px;
+    margin-top: 30px;
+    background-color: rgb(49, 121, 255);
+    color: white;
+    border: 2px solid rgb(0, 238, 255);
 }
 
 #dropdownlogin li {
     width: 80%;
     margin: auto;
 }
+
+.dropdown-toggle::after{
+    display: none;
+}
+

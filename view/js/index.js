@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded",function(){
     console.log(location.pathname);
 
+
     if(location.pathname == "/index.html" || location.pathname=="/"){
         loggedVerify();
         graficaBizkaia();
@@ -8,6 +9,9 @@ document.addEventListener("DOMContentLoaded",function(){
         miGraficaAra();
         estilosmenu();
         document.getElementById("btnlogin").addEventListener('click', login);
+        document.getElementById("buttoncita").addEventListener('click', function(){
+            window.location.href = "login.html";
+        });
     }else{
         document.getElementById("btnlogout").addEventListener('click', logout);
         loggedVerify();
@@ -231,9 +235,9 @@ function miGraficaAra(){
 
 function estilosmenu(){
     document.getElementById("citavacunas").addEventListener('mouseover', function(){
-        document.querySelector("#citavacunas .halo").style.fontSize = "50px";
+        document.querySelector("#citavacunas .halo").style.fontSize = "35px";
         document.querySelector("#citavacunas .halo2").style.fontSize = "18px";
-        document.querySelector("#citavacunas .btncita").style.width = "200px";
+        document.querySelector("#citavacunas .btncita").style.width = "160px";
         document.querySelector("#citavacunas .halo").style.transition = "0.5s";
         document.querySelector("#citavacunas .halo2").style.transition = "0.5s";
         document.querySelector("#citavacunas .btncita").style.transition = "0.5s";
@@ -250,9 +254,9 @@ function estilosmenu(){
 
 
     document.getElementById("hospitalzona").addEventListener('mouseover', function(){
-        document.querySelector("#hospitalzona .halo").style.fontSize = "50px";
+        document.querySelector("#hospitalzona .halo").style.fontSize = "35px";
         document.querySelector("#hospitalzona .halo2").style.fontSize = "18px";
-        document.querySelector("#hospitalzona .btncita").style.width = "200px";
+        document.querySelector("#hospitalzona .btncita").style.width = "160px";
         document.querySelector("#hospitalzona .halo").style.transition = "0.5s";
         document.querySelector("#hospitalzona .halo2").style.transition = "0.5s";
         document.querySelector("#hospitalzona .btncita").style.transition = "0.5s";
