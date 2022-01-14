@@ -1,16 +1,47 @@
 document.addEventListener("DOMContentLoaded",function(){
     
-    loggedVerify();
+    //loggedVerify();
     estilosmenu();
     graficaBizkaia();
     graficaGipuzkoa();
     miGraficaAra();
 
     document.getElementById("btnlogin").addEventListener('click', login);
-
+    document.getElementById("btnlogout").addEventListener('click', logout);
 
 })
 
+function loggedVerify(){
+    
+    var url = "../../controller/cLoggedVerify.php";
+
+	fetch(url, {
+	  method: 'GET',  
+	})
+	.then(res => res.json()).then(result => {
+       		
+		console.log(result);
+		
+	    if (result.error !== "Sesión iniciada")
+	    {
+	        alert(result.error);
+	        
+	        document.getElementById('entrar').addEventListener('click',login);
+	   
+	    } else {
+
+            if(result.nombre == "admin"){
+                alert("Tu login es de " + result.nombre);
+	    	    window.location.href = "banca.html";
+            }else{
+                document.getElementById("logindiv").innerHTML = "<h1 class='mt-3 me-1'>" + result.nombre + "</h1><a id='cerrarsesion' class='ms-1' href='index.html'>Cerrar Sesion</a>";
+                document.getElementById("cerrarsesion").addEventListener("click", logout);
+            }
+	        
+	    }
+	})
+	.catch(error => console.error('Error status:', error));	
+}
 
 function login(){
     
@@ -28,7 +59,7 @@ function login(){
     .then(res => res.json()).then(result => {
 
     if(result.error == "no error"){
-        window.location = "https://www.youtube.com/";
+        window.location = "prueba.html";
     }else{
         alert(result.error);
     }
@@ -235,6 +266,18 @@ function estilosmenu(){
     });
 }
 
+function logout(){
+    var url = "../../controller/cLogout.php";
+
+    fetch(url, {
+    method: 'GET',
+    })
+    .then(res => res.text()).then(result => {
+
+        location.href="../../index.html";
+    })
+    .catch(error => console.error('Error status:', error));
+}
 
 
 
