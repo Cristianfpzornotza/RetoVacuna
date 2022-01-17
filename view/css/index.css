@@ -1,3 +1,7 @@
+body{
+    background-image: url(https://cdn3.vectorstock.com/i/thumb-large/36/07/colored-pills-seamless-wallpaper-pattern-vector-27843607.jpg);
+}
+
 .navlinks{
     text-decoration: none;
     color: black;
@@ -7,6 +11,17 @@
 .navlinks:hover{
     color: white;
 }
+
+nav li a{
+    padding: 0;
+}
+
+nav li:hover{
+    background-image: linear-gradient(to right, rgb(245, 245, 245), rgba(0, 162, 255, 0.692));
+    
+    border-radius: 20px;
+}
+
 
 #carouselExampleControls{
     width: 65%;
@@ -19,9 +34,13 @@
 
 }
 
+#hospitalzona{
+    border: none;
+}
+
 #citavacunas:hover{
     transition: 0.5s;
-    box-shadow: 5px 5px 10px black;
+    box-shadow: 15px 15px 30px black;
 }
 
 #hospitalzona{
@@ -31,7 +50,7 @@
 
 #hospitalzona:hover{
     transition: 0.5s;
-    box-shadow: -5px 5px 10px black;
+    box-shadow: -15px 15px 30px black;
 }
 
 .halo{

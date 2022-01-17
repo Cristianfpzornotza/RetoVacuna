@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
     if(location.pathname == "/index.html" || location.pathname=="/"){
+        enterlogin();
         loggedVerify();
         graficaBizkaia();
         graficaGipuzkoa();
@@ -283,6 +284,21 @@ function logout(){
     .catch(error => console.error('Error status:', error));
 }
 
+function enterlogin(){
+    document.getElementById("username").addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            document.getElementById("btnlogin").click();
+        }
+        });
+        
+        document.getElementById("password").addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            document.getElementById("btnlogin").click();
+        }
+        });
+}
 
 
 

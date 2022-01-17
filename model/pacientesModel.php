@@ -46,6 +46,8 @@ class pacientesModel extends pacientesClass{
             $new->setName($row['Nombre']);
             $new->setFechaNac($row['Fecha_nac']);
 
+            $this->idPaciente=$row['idPaciente'];
+
 
             array_push($list, get_object_vars($new));
         }
