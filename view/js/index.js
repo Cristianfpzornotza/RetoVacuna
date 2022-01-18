@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded",function(){
     console.log(location.pathname);
 
+    //document.getElementById("linkpdf").addEventListener('click', pdf);
 
     if(location.pathname == "/index.html" || location.pathname=="/"){
         enterlogin();
@@ -300,7 +301,18 @@ function enterlogin(){
         });
 }
 
-
+function changebg(id){
+    if(id=='home-tab'){
+        document.getElementById('myTabContent').style.backgroundColor='lightblue';
+        document.getElementById('home').style.backgroundColor='lightblue';
+    }else if(id=='profile-tab'){
+        document.getElementById('myTabContent').style.backgroundColor='rgb(255, 246, 117)';
+        document.getElementById('home').style.backgroundColor='rgb(255, 246, 117)';
+    }else{
+        document.getElementById('myTabContent').style.backgroundColor='rgb(148, 255, 133)';
+        document.getElementById('home').style.backgroundColor='rgb(148, 255, 133)';
+    }
+}
 
 
 

@@ -12,30 +12,90 @@ body{
     color: white;
 }
 
+.nav-tabs{
+    border: none;
+}
+
 nav li a{
     padding: 0;
 }
-
+/*
 nav li:hover{
     background-image: linear-gradient(to right, rgb(245, 245, 245), rgba(0, 162, 255, 0.692));
     
     border-radius: 20px;
+}*/
+
+#containerweb{
+    border-radius: 10px;
 }
 
+#divgrande{
+    border-radius: 10px;
+}
 
 #carouselExampleControls{
     width: 65%;
     margin: auto;
 }
 
-#citavacunas{
-    border: 1px solid white;
-    padding: 50px;
+#myTab li{
+    width: 30%;
+}
 
+#myTab li button{
+    border: none;
+    width: 100%;
+    padding: 30px;
+    color: black;
+}
+
+#myTab li #home-tab{
+    background-color: lightblue;
+}
+
+#myTab li #profile-tab{
+    background-color: rgb(255, 246, 117);
+}
+
+#containerweb{
+    box-shadow: 0 0 50px rgb(0, 0, 0);
+}
+
+#myTab li #contact-tab{
+    background-color: rgb(148, 255, 133);
+}
+
+#citavacunas{
+    padding: 50px;
+}
+
+#myTabContent{
+    background-color: lightblue;
+    margin: 1.65%;
+    margin-top: 0;
+}
+
+#myTabContent div{
+    width: 75%;
+    margin: auto;
+}
+
+#home{
+    margin: auto;
+    background-color: lightblue;
 }
 
 #hospitalzona{
     border: none;
+}
+
+#citavacunas{
+    background-repeat: no-repeat;
+    background-position-x: 0%;
+    background-position-y: 50%;
+    background-size: 30%;
+    background-color: lightblue;
 }
 
 #citavacunas:hover{
@@ -43,8 +103,11 @@ nav li:hover{
     box-shadow: 15px 15px 30px black;
 }
 
+#divvachis div{
+    height: 250px;
+}
+
 #hospitalzona{
-    border: 1px solid white;
     padding: 50px;
 }
 
@@ -67,7 +130,7 @@ nav li:hover{
 }
 
 #footer{
-    margin-top: 200px;
+    margin-top: 50px;
 }
 
 .container-fluid{

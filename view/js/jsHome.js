@@ -33,7 +33,7 @@ function loggedVerify(){
 		
 	    if (result.error == "Sesión iniciada")
 	    {
-            alert("Iniciao");
+            console.log(result.paciente);
 	    } else {
 			window.location.href = "login.html";
 	        
