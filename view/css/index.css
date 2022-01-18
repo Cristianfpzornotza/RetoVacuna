@@ -8,6 +8,10 @@ body{
     font-size: 20px;
 }
 
+#footer{
+    background-color: rgb(48, 48, 48);
+}
+
 .navlinks:hover{
     color: white;
 }

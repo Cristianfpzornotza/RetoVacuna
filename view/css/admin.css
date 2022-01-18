@@ -1,6 +1,16 @@
+body {
+    background-color: rgb(64, 64, 255);
+}
+
 #containerweb div div{
     background-color: #252591;
     color: white;
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+#containerweb{
+    width: 80%;
+    margin: auto;
+    background-color: rgb(223, 117, 117);
 }
