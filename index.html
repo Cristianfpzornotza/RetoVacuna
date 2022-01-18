@@ -226,12 +226,46 @@ function genPDF() {
 	
 	var doc = new jsPDF();
 	//var imgVC = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Flag_of_the_Basque_Country.svg/1200px-Flag_of_the_Basque_Country.svg.png";
-	var imgData = '';
+	var apellidos = "HORCAJADA BARNETO,";
+	var nombre = "PAUL";
+	var nacimiento = "2001-01-23";
+
+	doc.setDrawColor(0);
+	doc.setFillColor(239, 239, 239);
+	doc.rect(17, 13, 175, 30, 'F');
+
+	doc.setFontType('bold');
+	doc.setTextColor(0,0,255);
+	doc.setFontSize(14);
+	doc.text(20, 20, 'EU DIGITAL COVID CERTIFICATE/\nCERTIFICADO COVID DIGITAL DE LA UE/\nEB-KO COVID ZIURTAGIRI DIGITALA');
+	doc.setFontSize(12);
+	doc.setFontType('normal');
+	doc.text(20, 37, 'Vaccination · Vacunación · Txertaketa');
+	
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20, 55, 'Surname(s) and forename(s) / Apellido(s) y Nombre(s)\n/ Abizena(k) eta izena(k)');
+
+	doc.setDrawColor(211, 210, 209);
+	doc.rect(17, 50, 100, 70);
 
 	doc.setTextColor(0,0,255);
-	doc.setFontSize(12);
-	doc.text(20, 20, 'EU DIGITAL COVID CERTIFICATE/\nCERTIFICADO COVID DIGITAL DE LA UE/\nEB-KO COVID ZIURTAGIRI DIGITALA');
-	doc.addImage(imgVC, 'JPEG', 100, 20, 180, 180);
+	doc.setFontSize(14);
+	doc.text(20, 67, apellidos + "\n" + nombre);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20,90, "Date of birth / Fecha de nacimiento / Jaioteguna");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(20, 95, nacimiento);
+
+	doc.setFontType('bold');
+	doc.setTextColor(0,0,255);
+	doc.setFontSize(11);
+	doc.text(17, 125, 'Vaccination details / Datos de la vacunación / Txertaketari buruzko datuak:');
+
 
 	doc.save('Certificado Covi.pdf');
 	
