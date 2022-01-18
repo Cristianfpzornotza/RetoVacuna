@@ -10,7 +10,7 @@ $response = array();
 
 // $idCuentaBancaria=$dato->idCuentaBancaria;
 
-$paciente="1";
+$paciente=1;
 
 
 $response['list']=$historial->mostrar($paciente);

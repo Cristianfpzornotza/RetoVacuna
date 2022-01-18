@@ -43,7 +43,7 @@
             } else {
                 content += '<li id="'+j+'" class="btncalendario" ng-click="Horas()">';
             }
-            content += '<a id="'+j+'" href="javascript:;">' + date.getDate() +'</a>';
+            content += '<a ng-click="Horas()" id="'+j+'" href="javascript:;">' + date.getDate() +'</a>';
             content += '</li>';
             return content;
         }
