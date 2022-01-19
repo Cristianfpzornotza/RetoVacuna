@@ -1,6 +1,7 @@
 <?php
 include_once 'connect_data.php';
 include_once 'usuariosClass.php';
+include_once 'centroModel.php';
 
 class usuariosModel extends usuariosClass{
 
@@ -55,6 +56,13 @@ class usuariosModel extends usuariosClass{
         return $idUsuario;
     }
    
+
+
+
+
+
+
+
     public function ObjVars()
     {
         return get_object_vars($this);
