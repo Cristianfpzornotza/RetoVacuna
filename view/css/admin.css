@@ -1,16 +1,28 @@
-body {
-    background-color: rgb(64, 64, 255);
+html {
+    background-color: rgb(112, 157, 255);
 }
 
-#containerweb div div{
+body #contenedor{
+    background-color: rgb(112, 157, 255);
+}
+
+#containerweb div .banner{
     background-color: #252591;
     color: white;
     font-size: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 #containerweb{
     width: 80%;
     margin: auto;
-    background-color: rgb(223, 117, 117);
+    background-color: white;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.content{
+    padding: 20px;
 }
