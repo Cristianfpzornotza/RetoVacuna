@@ -18,11 +18,35 @@ body #contenedor{
 #containerweb{
     width: 80%;
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: white;
     border-radius: 10px;
     padding: 50px;
 }
 
+#containerweb p{
+    text-align: end;
+    margin-bottom: 10px;
+}
+
 .content{
     padding: 20px;
+    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+}
+
+.content .carta{
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid rgb(143, 143, 143);
+}
+
+.content img{
+    width: 100%;
+}
+
+.content .carta{
+    text-align: center;
 }
