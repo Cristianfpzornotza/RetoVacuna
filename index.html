@@ -226,12 +226,145 @@ function genPDF() {
 	
 	var doc = new jsPDF();
 	//var imgVC = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Flag_of_the_Basque_Country.svg/1200px-Flag_of_the_Basque_Country.svg.png";
-	var imgData = '';
+	var apellidos = "HORCAJADA BARNETO,";
+	var nombre = "PAUL";
+	var nacimiento = "2001-01-23";
+	var idcertificado = "01ES16V21DA3CB293D197AA4E433#9";
+	var vacuna = "Cominarty";
+	var fabricante = "Biontech Manufacturing GmbH";
+	var fecha = "2021-09-10";
+
+
+	doc.setDrawColor(0);
+	doc.setFillColor(239, 239, 239);
+	doc.rect(17, 13, 175, 30, 'F');
+
+	doc.setFontType('bold');
+	doc.setTextColor(0,0,255);
+	doc.setFontSize(14);
+	doc.text(20, 20, 'EU DIGITAL COVID CERTIFICATE/\nCERTIFICADO COVID DIGITAL DE LA UE/\nEB-KO COVID ZIURTAGIRI DIGITALA');
+	doc.setFontSize(12);
+	doc.setFontType('normal');
+	doc.text(20, 37, 'Vaccination · Vacunación · Txertaketa');
+	
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20, 55, 'Surname(s) and forename(s) / Apellido(s) y Nombre(s)\n/ Abizena(k) eta izena(k)');
+
+	doc.setDrawColor(211, 210, 209);
+	doc.rect(17, 50, 100, 70);
 
 	doc.setTextColor(0,0,255);
-	doc.setFontSize(12);
-	doc.text(20, 20, 'EU DIGITAL COVID CERTIFICATE/\nCERTIFICADO COVID DIGITAL DE LA UE/\nEB-KO COVID ZIURTAGIRI DIGITALA');
-	doc.addImage(imgVC, 'JPEG', 100, 20, 180, 180);
+	doc.setFontSize(14);
+	doc.text(20, 67, apellidos + "\n" + nombre);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20,90, "Date of birth / Fecha de nacimiento / Jaioteguna");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(20, 95, nacimiento);
+
+	doc.setFontType('bold');
+	doc.setTextColor(0,0,255);
+	doc.setFontSize(11);
+	doc.text(17, 125, 'Vaccination details / Datos de la vacunación / Txertaketari buruzko datuak:');
+
+	doc.setDrawColor(0);
+	doc.setFillColor(239, 239, 239);
+	doc.rect(17, 130, 175, 35, 'F');
+
+	doc.setFontType('normal');
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20,135, "Certificate identifier / Identificador del certificado / Ziurtagiriaren identifikatzailea");
+
+	doc.setFontSize(14);
+	doc.setTextColor(0,0,0);
+	doc.text(20,142, idcertificado);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20,152, "Certificate issuer / Emisor del certificado / Ziurtagiriaren igorlea");
+
+	doc.setFontSize(13);
+	doc.setTextColor(0,0,0);
+	doc.text(20,158, "Gobierno Vasco - Eusko Jaurlaritza");
+
+
+	doc.setDrawColor(208, 208, 208);
+	doc.rect(17, 170, 87.5, 15);
+
+	doc.setDrawColor(208, 208, 208);
+	doc.rect(104.5, 170, 87.5, 15);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20, 175, "Disease targeted / Enfermedad que se previene /\nPrebenitzen den gaixotasuna");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(110, 177, "COVID-19");
+
+	doc.setDrawColor(208, 208, 208);
+	doc.rect(17, 190, 87.5, 70);
+
+	doc.setDrawColor(208, 208, 208);
+	doc.rect(104.5, 190, 87.5, 70);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20, 197, "Vaccine prophylaxis / Tipo de Vacuna / Txerto mota");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(20, 203, "covid-19 vaccines / covid-19 vacunas /\ncovid-19 txertoak");
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20, 218, "Vaccine medicinal product / Vacuna administrada /\nEmandako txertoa");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(20, 228, vacuna);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(6);
+	doc.text(17, 268, "This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, also in view of new variants of concern of the virus. Before\ntravelling, please check the applicable public health measures and related restrictions applied at the point of destination. / El presente certificado no es un documento de viaje. Los datos científicos\nsobre la vacunación, el test y la recuperación de la COVID-19 siguen evolucionando, también a la vista de las nuevas variantes preocupantes del virus. Antes de viajar, sírvase comprobar las\nmedidas de salud pública aplicables y las restricciones correspondientes que se apliquen en el punto de destino. / Ziurtagiri hau ez da bidaia-dokumentua. COVID-19aren txertaketari, testari eta\ngaitzetik sendatzeari buruzko datu zientifikoek eboluzionatzen jarraitzen dute, are gehiago, birusaren aldaera kezkagarri berriak daudela ikusita. Bidaiatu aurretik, egiazta itzazu Osasun Publikoak\njarritako neurriak eta helmugan ezarritako murrizketak.");
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(20, 238, "Manufacturer / Fabricante / Fabrikatzailea");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(20, 245, fabricante);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(9);
+	doc.text(110, 197, "Number in a series of vaccinations and number of\ndoses / Número en una serie de vacunaciones y\nnúmero de dosis / Txertaketa-serieko kopurua eta dosi-\nkopurua");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(110, 215, "2/2");
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(110, 225, "Date of vaccination / Fecha de vacunación /\nTxertaketa-data");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(110, 235, fecha);
+
+	doc.setTextColor(128, 128, 128);
+	doc.setFontSize(10);
+	doc.text(110, 243, "Member State of vaccination / Estado miembro de\nvacunación / Txertaketaren estatu kidea");
+
+	doc.setTextColor(0,0,0);
+	doc.setFontSize(13);
+	doc.text(110, 254, "ES");
+
 
 	doc.save('Certificado Covi.pdf');
 	
