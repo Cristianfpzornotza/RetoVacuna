@@ -51,3 +51,8 @@ body #contenedor{
 .content .carta{
     text-align: center;
 }
+
+.content .carta button{
+    margin-top: 20px;
+    width: 35%;
+}

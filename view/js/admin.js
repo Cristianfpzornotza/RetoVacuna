@@ -10,13 +10,17 @@ var idAdmin=0;
 
     miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 
+        $scope.vercentros="si";
+        $scope.vercitas="no";
+        $scope.vertabla="no";
+        
         document.getElementById("btnlogout").addEventListener("click",logout);
 
-        var data="";
 
         $http.post('../../controller/cLoggedVerify.php').then(function (response) { 
             idAdmin=response.data.idUser;
 
+            
             
             console.log(response.data.error);
 
@@ -36,16 +40,41 @@ var idAdmin=0;
         }); 
 
 
-        //data={'idAdmin':idAdmin};
-
         $http.get('../../controller/cLoadCentros.php').then(function (response) { 
             $scope.listacentros = response.data.perro;
             console.log($scope.listacentros);
         });
 
-        $scope.vercentros="si";
-        $scope.vercitas="no";
-        $scope.vertabla="no";
+        $scope.vistas=function(item){
+
+            $scope.vercentros="no";
+            $scope.vercitas="si";
+
+            $scope.listaordenado=[];
+
+            console.log(item);
+
+            var newRow="";
+
+            newRow+="<select>";
+
+            for (let i = 0; i < $scope.listacentros.length; i++) {
+                
+                if(item.idCentro==$scope.listacentros[i].idCentro){
+                    $scope.listaordenado[0].$scope.listacentros[i];
+                }else{
+                    
+                }
+
+                newRow+="<option></option>";
+                
+            }
+
+            newRow+="</select>";
+
+        }
+
+
 
     }]);
 
