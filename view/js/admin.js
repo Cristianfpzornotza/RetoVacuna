@@ -20,7 +20,7 @@ var idAdmin=0;
 
             
             
-            console.log(response.data.error);
+            console.log(response.data);
 
             if (response.data.error == "Sesión iniciada")
             {
@@ -48,56 +48,32 @@ var idAdmin=0;
             $scope.vercentros="no";
             $scope.vercitas="si";
 
-            $scope.listaordenado=[];
-
             console.log(item);
 
-            var cont=1;
+            idCentro=item.idCentro;
 
-            for (let i = 0; i < $scope.listacentros.length; i++) {
+            console.log(idCentro);
+
+            $http.post('../../controller/cGetPacientes.php',idCentro).then(function (response) { 
                 
-                if(item.idCentro==$scope.listacentros[i].idCentro){
-                    $scope.listaordenado[0]=$scope.listacentros[i];
-                }else{
-                    $scope.listaordenado[cont]=$scope.listacentros[i];
-                    cont=cont+1;
-                }
-                
-            }
-
-            console.log($scope.listaordenado);
-
-            var newRow="";
-
-            newRow+="<select>";
-
-            for (let i = 0; i < $scope.listaordenado.length; i++) {
-                
-                newRow+="<option value='"+$scope.listaordenado[i].idCentro+"'>"+$scope.listaordenado[i].name+"</option>";
-                
-            }
-
-            newRow+="</select>";
-
-            document.getElementById("combocentro").innerHTML=newRow;
-
-            console.log("aaa");
+                $scope.listapacientes=response.data.datos;
+        
+            });
 
             $scope.loadtabla();
+
+            document.getElementById("btnnew").style.opacity = "0";
+            document.getElementById("btnnew").disabled=true;
+
+            document.getElementById("volver").addEventListener("click",function(){
+                document.getElementById("btnnew").style.opacity = "1";
+                document.getElementById("btnnew").disabled=false;
+            });
 
         }
 
         $scope.loadtabla=function(){
-
-            alert("huola");
-
-            // $http.post('../../controller/cLoadTabla.php',idCentro).then(function (response) { 
-            //     idAdmin=response.data.idUser;
-                  
-            //     console.log(response.data.error);
-    
-            // }); 
-
+            console.log("huola");
         }
 
 

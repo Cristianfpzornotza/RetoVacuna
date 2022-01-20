@@ -45,6 +45,7 @@ class usuariosModel extends usuariosClass{
         {
             $this->idUsuario=$row['idUsuario'];
             $passwordEncripted=$row['Contrasena'];
+            $this->categoria=$row['Categoria'];
             
             if (password_verify($this->contrasena, $passwordEncripted))
             {

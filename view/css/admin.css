@@ -40,7 +40,26 @@ body #contenedor{
 .content .carta{
     margin-bottom: 20px;
     padding: 10px;
-    border: 2px solid rgb(143, 143, 143);
+    border: 2px solid rgb(144, 164, 255);
+    background-color: rgb(195, 204, 255);
+    border-radius: 5px;
+}
+
+.content .carta h4{
+    padding: 10px;
+}
+
+.content .carta button{
+    padding: 10px;
+}
+
+#flexbotones{
+    display: flex;
+    justify-content: space-between;
+}
+
+#flexbotones button{
+    padding: 10px;
 }
 
 .content img{

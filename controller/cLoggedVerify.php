@@ -12,6 +12,7 @@ if (isset($_SESSION['username']))
 {
     $response["idUser"]=$_SESSION['idUser'];
     $response["username"]=$_SESSION['username'];
+    $response["categoria"]=$_SESSION['categoria'];
     $response["error"]="Sesión iniciada";
 }else{
     $response["error"]="Sesión no iniciada";
