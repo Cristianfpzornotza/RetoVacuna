@@ -31,10 +31,10 @@ class horarioModel extends horarioClass{
 
     public function recogerHorario($idPaciente) {
         $this->OpenConnect();
-
+       
        
         $dia=$this->codDia;
-        
+        // echo($dia);
         $sql = "SELECT centro.Nombre,horario.Cod_dia,horario.Hora_apertura,horario.Hora_cierre FROM pacientes 
         INNER JOIN municipio
         ON pacientes.Cod_municipio = municipio.idMunicipio
@@ -44,7 +44,8 @@ class horarioModel extends horarioClass{
         ON centro.idCentro = horario.Cod_centro
         INNER JOIN dias
         ON horario.Cod_dia = dias.idDias
-        WHERE pacientes.idPaciente='$idPaciente'and horario.Cod_dia='$dia';";
+        WHERE pacientes.idPaciente='$idPaciente' and 
+        horario.Cod_dia='$dia'";
         
 
         $result = $this->link->query($sql);

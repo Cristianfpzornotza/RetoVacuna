@@ -11,7 +11,9 @@ $dia=$dato['dia'];
 
 $horario = new horarioModel();
 $horario->setCodDia($dia);
+
 $response = array();
+
 
 $response['list']=$horario->recogerHorario($idPaciente);
 
@@ -26,4 +28,3 @@ $response['error']="no error";
 
 echo json_encode($response);
 
-unset($producto);

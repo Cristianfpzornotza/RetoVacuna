@@ -59,6 +59,21 @@ margin: auto;
     padding: 0;
   }
   
+  .tabla{
+    width:100%;
+    padding:10px;
+  }
+  .tabla ol li{
+    width:100px;
+    height:50px;
+    margin:auto;
+    list-style-type: none;
+    display: inline-block;
+    border:1px solid black;
+    text-align: center;
+  
+  }
+
   a {
     text-decoration: none;
   }

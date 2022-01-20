@@ -2,9 +2,12 @@ var MyApp = angular.module('miApp', []);
 MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
     
 	
-	$scope.ver='si';
-    $scope.ver2='no';
-    $scope.verCitas='no';
+	$scope.ver="si";
+    $scope.verdos="no";
+    $scope.verDias="no";
+    $scope.verHoras="no";
+    $scope.verCitas="no";
+    $scope.boton="no";
     $scope.nombre='';
     $scope.apellidos='';
     $scope.lista=[];
@@ -12,8 +15,8 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
 	$http.get('../controller/cConsultarHistorial.php').then(function (response) { 
 		$scope.lista = response.data.list;
 		console.log($scope.lista);
-		$scope.ver='si';
-		$scope.ver2='no';
+	
+        
 		// console.log($scope.ver);
 
 		
@@ -25,9 +28,12 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
 	
 
     $scope.Historial=function(){
-            
-        $scope.ver='si';
-        $scope.ver2='no';
+        $scope.ver="si";
+        $scope.verdos="no";
+        $scope.verDias="no";
+        $scope.verHoras="no";
+        $scope.verCitas="no";
+       
 
         $http.get('../controller/cConsultarHistorial.php').then(function (response) { 
                 $scope.lista = response.data.list;
@@ -43,19 +49,223 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
         });   
 }   
 $scope.Citas=function(){
+    $scope.ver="no";
+    $scope.verdos="si";
     
-	$scope.ver='no';
-    $scope.ver2='no';
-	 
-}     
 
-$scope.verdias='no';
-	$scope.verhoras='no';
+	 
+}    
+
+$scope.BTNCita=function(){
+ $scope.verDias="si";
+	
+} 
+ $scope.escogerhora=function(){
+    $scope.boton="si";
+       
+   }  
+   $scope.cogerCita=function(){
+    alert("SE HA PEDIDO LA CITA CORRECTAMENTE")
+       
+   }  
+$scope.Volver=function(){
+      
+	
+	
+}   
+
+    var dias = ["1", "2", "3", "4", "5", "6", "7"];
+    var x = document.getElementById("start");
+    var dia="";
+$scope.hours=function(){
+    $scope.verHoras="si";
+    
+          
+        if(dias[x.valueAsDate.getDay()-1]==undefined){
+            alert("Día: " + dias[6]);
+            dia=dias[x.valueAsDate.getDay()+1];
+        }
+	 else{
+        alert("Día: " + dias[x.valueAsDate.getDay()-1]);
+         dia=dias[x.valueAsDate.getDay()-1];
+     }
+
+console.log(dia)
+     var dato = {
+        dia: dia,
+        idpaciente: 1
+        };
+    
+    $http.post('../controller/cConsultaHoras.php',JSON.stringify(dato)).then(function (response) { 
+            
+
+        var horario= response.data.list;
+                console.log(response.data.list[0].horaCierre)
+
+                var prueba=horario[0].horaApertura.split(":");
+                var pruebacierre=horario[0].horaCierre.split(":");
+
+
+                var time = new Date();
+                    var hour = time.setHours(prueba[0]);
+                    var minute = time.setMinutes(prueba[1]);
+                    var second = time.setSeconds(prueba[2]);
+                    var temp = '' + ((hour > 12) ? hour - 12 : hour);
+                    if (hour == 0)
+                    temp = '12';
+                    temp += ((minute < 10) ? ':0' : ':') + minute;
+                    temp += ((second < 10) ? ':0' : ':') + second;
+                    temp += (hour >= 12) ? ' P.M.' : ' A.M.';
+                    
+
+                    
+                    console.log(pruebacierre[0]);
+                    console.log(prueba[0]);
+                    numerio=(pruebacierre[0]-prueba[0])*4
+                    $scope.horasminutos=[];
+                    $scope.horasminutos[0]=time.getHours()+":"+time.getMinutes();
+                for (let i=1; i < parseInt(numerio)+1; i++) {
+                    console.log(i)
+                    console.log(numerio)
+                    minutoSumar = 15;
+
+                    time.setTime(time.getTime() + (minutoSumar*60*1000));  // minutos * seg * milisegundos
+
+                    //function JSClock() {
+                    
+                    console.log(time.getHours()+":"+time.getMinutes());
+
+                    $scope.horasminutos[i]=time.getHours()+":"+time.getMinutes();
+
+                    
+                    
+                    
+                //}
+                }
+                console.log($scope.horasminutos);
+        
+
+                
+          
+        
+               /* var horario= response.data.list;
+                console.log(horario)
+                // console.log(horario[0].horaApertura+ "--" +horario[0].horaCierre);
+
+                
+        a=parseInt(horario[0].horaApertura);
+        c=parseInt(horario[0].horaCierre);
+        
+        console.log(a);
+        console.log(c);
+
+     
+
+        var horasminutos=[];/////ARRAY HORAS Y MINUTOS QUINCE EN QUINCE
+
+        horasminutos[0]=horario[0].horaApertura; ///8:55  horasminutos[1]= 9:10
+
+        var variable=horario[0].horaApertura.split(":"); ///SEPARAMOS LAS HORAS Y MINUTOS DE APERTURA
+        
+        var variable2=horario[0].horaCierre.split(":"); ///SEPARAMOS LAS HORAS Y MINUTOS DE CIERRE
+        parseInt(variable)
+        parseInt(variable2)
+
+        var cont=1;
+        var cont2=0;
+        parseInt(cont);
+        parseInt(cont2);
+
+        console.log(variable);
+        console.log(variable2);
+
+        variable[0]
+
+        console.log(variable[0]+"---"+variable[1])/////APERTURA
+        console.log(variable2[0]+"---"+variable2[1])/////CIERRE
+                    // if (a==c) {
+                        
+                    // }else{
+                    // horasminutos[cont]=c; 
+                    // }
+        
+////////////////////8; 8<15; 8++////////////////////////7
+        console.log(horasminutos)
+var citas=[];
+parseInt(citas)
+
+        for (variable[0]; variable[0]<variable2[0]; variable[0]++) {
+            citas[cont2]=variable[0]
+            cont2=cont2+1
+            citas[cont2]=parseInt(variable[1])+15;
+            variable[1]=parseInt(variable[1])+15
+            console.log(citas[cont2])
+            if (variable[1]>60) {
+                console.log("if"+variable[1])
+                citas[cont2]=parseInt(citas[1])-60;
+                console.log(citas[cont2])
+                cont2=cont2-1;
+                citas[cont2]=parseInt(citas[cont2])+1;
+                console.log(variable[1])
+                variable[1]=parseInt(variable[1])-60
+                horasminutos[cont]=citas[cont2]+":"+parseInt(variable[1])
+            } 
+            else{
+                cont2=cont2-1
+                // citas[cont2]=parseInt(citas[1])-60;
+                console.log()
+                horasminutos[cont]=citas[cont2]+":"+parseInt(variable[1])
+                cont2=cont2+1
+            }
+            cont=cont+1;
+        }
+        console.log(horasminutos);*/
+
+               
+        //         for (variable[0]; variable[0]<variable2[0]; variable[0]++) {
+
+        //             // console.log(empiezaminuto);
+        //             minutos=parseInt(variable[1])+15;
+
+        //             console.log(minutos)
+                    
+        //             var hora=parseInt(variable[0]);
+
+        //             if (minutos>60) {
+        //                 console.log("minutos mayor que 60 "+minutos)
+        //                 var resta=minutos-60;
+        //                 horasminutos[cont]=a+":"+resta;
+        //                 console.log("minutos mas quince"+resta)
+        //                 cont=cont+1;
+        //                 // b=b+1
+        //             }else{
+                        
+        //             }
+        //             horasminutos[0]=variable[0]+":"+variable[1];
+        //             a=a+1;
+        //             console.log(a);
+        //             // horasminutos[cont]=a+":"+c;
+                   
+        //             cont=cont+1
+                    
+        //         }
+        // console.log(horasminutos)
+            
+
+
+
+    
+    });
+}   
+
+
+
 
 $scope.Horas=function(){
       alert("ffd");
-	$scope.verdias='no';
-	$scope.verhoras='si';
+}
+
+
 
 //     console.log(event.target.id);
 //     dia=event.target.id;
@@ -285,18 +495,7 @@ $scope.Horas=function(){
 //         }
 // });
 	
-}   
-$scope.Volver=function(){
-      
-	$scope.verdias='si';
-	$scope.verhoras='no';
-	
-}   
-$scope.BTNCita=function(){
-      console.log("fedgyi")
-	$scope.verdias='si';
-	
-}   
+// }   
 
 
 

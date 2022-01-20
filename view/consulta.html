@@ -55,8 +55,8 @@
         </table>
 
       </div>
-      <div id="Citas" ng-show="verCitas=='si'">
-        <button>hola</button>
+      <div id="Citas" ng-show="verdos=='si'">
+        
         <div id="citabtn">
           <button type="button" class="btn btn-primary" id="btnpedircita" ng-click="BTNCita()">Pedir cita</button>
 
@@ -65,17 +65,32 @@
 
         <div>        
 
-          <div id="calendar" ng-show="verdias=='si'">
+          <div id="calendar" ng-show="verDias=='si'">
 
             <label for="start">Start date:</label>
             
-            <input ng-change="horas()" type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+           <input type="date"  id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20">
 
-            <div id="contenedorhoras" ng-show="verhoras=='si'">
+            <div class="tabla" ng-show="verHoras == 'si'">
+              <form action="#">
+              <ol>
+                <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn" >{{item}}</li>
+              </ol>  
+              <button ng-show="boton=='si'" type="submit" ng-click="cogerCita()" class="btn btn-primary">PEDIR</button>
+            </form>
+              <!-- <table>
+                <tr>
+                  <td ng-repeat="item in horasminutos"><input type="radio">{{item}}</td>
+                </tr>
+              </table> -->
+              
+            </div>
+         
+            <!-- <div id="contenedorhoras" ng-show="verhoras=='si'">
             
               <input type="radio">8:55<input type="radio">9:10
             
-            </div>
+            </div> -->
 
           </div>
         </div>
