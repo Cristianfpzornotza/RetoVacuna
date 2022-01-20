@@ -12,10 +12,8 @@ var idAdmin=0;
 
         $scope.vercentros="si";
         $scope.vercitas="no";
-        $scope.vertabla="no";
         
         document.getElementById("btnlogout").addEventListener("click",logout);
-
 
         $http.post('../../controller/cLoggedVerify.php').then(function (response) { 
             idAdmin=response.data.idUser;
@@ -54,26 +52,53 @@ var idAdmin=0;
 
             console.log(item);
 
-            var newRow="";
-
-            newRow+="<select>";
+            var cont=1;
 
             for (let i = 0; i < $scope.listacentros.length; i++) {
                 
                 if(item.idCentro==$scope.listacentros[i].idCentro){
-                    $scope.listaordenado[0].$scope.listacentros[i];
+                    $scope.listaordenado[0]=$scope.listacentros[i];
                 }else{
-                    
+                    $scope.listaordenado[cont]=$scope.listacentros[i];
+                    cont=cont+1;
                 }
+                
+            }
 
-                newRow+="<option></option>";
+            console.log($scope.listaordenado);
+
+            var newRow="";
+
+            newRow+="<select>";
+
+            for (let i = 0; i < $scope.listaordenado.length; i++) {
+                
+                newRow+="<option value='"+$scope.listaordenado[i].idCentro+"'>"+$scope.listaordenado[i].name+"</option>";
                 
             }
 
             newRow+="</select>";
 
+            document.getElementById("combocentro").innerHTML=newRow;
+
+            console.log("aaa");
+
+            $scope.loadtabla();
+
         }
 
+        $scope.loadtabla=function(){
+
+            alert("huola");
+
+            // $http.post('../../controller/cLoadTabla.php',idCentro).then(function (response) { 
+            //     idAdmin=response.data.idUser;
+                  
+            //     console.log(response.data.error);
+    
+            // }); 
+
+        }
 
 
     }]);

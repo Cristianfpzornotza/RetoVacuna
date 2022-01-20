@@ -56,3 +56,8 @@ body #contenedor{
     margin-top: 20px;
     width: 35%;
 }
+
+#tablebody{
+    height: 100px;
+    overflow: scroll;
+}
