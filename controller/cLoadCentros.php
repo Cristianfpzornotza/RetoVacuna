@@ -1,19 +1,22 @@
 <?php
-include_once '../model/usuariosModel.php';
+include_once '../model/centroModel.php';
 
-$data=json_decode(file_get_contents("php://input"),true);
+session_start(); 
 
-$username=$data['username'];
-$password=$data['password'];
+//$data=json_decode(file_get_contents("php://input"),true);
+
+$idAdmin=$_SESSION['idUser'];
+
 
 $response=array();
 
-if (( $username !=null ) && ( $password !=null )){
+if ($idAdmin !=null){
  
-    $user=new usuariosModel();
-    $user->setName($username);
-    $user->setContrasena($password);
+    $user=new centroModel();
+    $response['perro']=$user->listCentros($idAdmin);
     
+
+    /*
     if ($user->findUser()>0) // si es correcto el userName y el password
     {
         session_start();
@@ -25,11 +28,9 @@ if (( $username !=null ) && ( $password !=null )){
         
     }  else {        
         $response['error']="Usuario o contraseña incorrecta"; // no correct user
-    }
-}  else {
-    
-    $response['error']="Error! Usuario o contraseña vacias";     // not filled user or password
-}
+    }*/
+
+}  
 
 echo json_encode($response);
 

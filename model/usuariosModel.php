@@ -1,6 +1,7 @@
 <?php
 include_once 'connect_data.php';
 include_once 'usuariosClass.php';
+include_once 'centroModel.php';
 
 class usuariosModel extends usuariosClass{
 
@@ -28,7 +29,40 @@ class usuariosModel extends usuariosClass{
         //mysqli_close ($this->link);
         $this->link->close();
     }
+
+    public function findUser() // login, fill and return id of the user
+    {
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+       
+        $idUsuario=-1;
+        
+        $sql="select * from usuario where Nombre='$this->name'";
+               
+        $result= $this->link->query($sql);
+       
+        if ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+            $this->idUsuario=$row['idUsuario'];
+            $passwordEncripted=$row['Contrasena'];
+            
+            if (password_verify($this->contrasena, $passwordEncripted))
+            {
+                $idUsuario=$this->idUsuario;
+            }
+        }
+        
+        $this->CloseConnect();
+        return $idUsuario;
+    }
    
+
+
+
+
+
+
+
     public function ObjVars()
     {
         return get_object_vars($this);
