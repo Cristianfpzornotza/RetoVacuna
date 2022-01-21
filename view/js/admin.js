@@ -14,8 +14,12 @@ var idAdmin=0;
         $scope.vercitas="no";
         $scope.verpaciente="no";
         $scope.verboton="no";
+
+        $scope.admingeneral="no";
+        $scope.admincentro="no";
         
         document.getElementById("btnlogout").addEventListener("click",logout);
+        document.getElementById("btnlogout2").addEventListener("click",logout);
 
         $http.post('../../controller/cLoggedVerify.php').then(function (response) { 
             idAdmin=response.data.idUser;
@@ -23,6 +27,14 @@ var idAdmin=0;
             
             
             console.log(response.data);
+
+            if(response.data.categoria=="AdminGeneral"){
+                $scope.admingeneral="si";
+                $scope.admincentro="no";
+            }else{
+                $scope.admingeneral="no";
+                $scope.admincentro="si";
+            }
 
             if (response.data.error == "Sesión iniciada")
             {
@@ -54,6 +66,8 @@ var idAdmin=0;
 
             console.log(item);
 
+            $scope.hospital=item;
+
             idCentro=item.idCentro;
 
             console.log(idCentro);
@@ -82,6 +96,8 @@ var idAdmin=0;
             $scope.vercitas="no";
             $scope.verboton="no";
             $scope.verpaciente="no";
+
+            $scope.hospital="";
 
         }
 

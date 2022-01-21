@@ -16,7 +16,7 @@ body #contenedor{
 }
 
 #admincentro{
-    width: 80%;
+    width: 1200px;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -26,6 +26,30 @@ body #contenedor{
 }
 
 #admincentro p{
+    text-align: end;
+    margin-bottom: 10px;
+}
+
+#admingeneral div .banner{
+    background-color: #252591;
+    color: white;
+    font-size: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#admingeneral{
+    width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+#admingeneral p{
     text-align: end;
     margin-bottom: 10px;
 }
@@ -58,7 +82,7 @@ body #contenedor{
 
 #flexbotones{
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
 }
 
 #flexbotones button{

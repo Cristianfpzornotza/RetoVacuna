@@ -33,7 +33,7 @@ nav li:hover{
 
 #containerweb{
     border-radius: 10px;
-    
+    box-shadow: 0 0 35px rgb(0, 0, 0);
 }
 
 #divgrande{
@@ -62,10 +62,6 @@ nav li:hover{
 
 #myTab li #profile-tab{
     background-color: rgb(255, 246, 117);
-}
-
-#containerweb{
-    box-shadow: 0 0 35px rgb(0, 0, 0);
 }
 
 #myTab li #contact-tab{
