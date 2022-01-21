@@ -9,6 +9,7 @@ $dia=$dato['dia'];
 // echo $idPaciente;
 // echo $dia;
 
+
 $horario = new horarioModel();
 $horario->setCodDia($dia);
 

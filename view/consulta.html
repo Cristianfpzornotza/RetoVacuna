@@ -46,7 +46,7 @@
                     <tr ng-repeat="item in lista">
                         
                         <td>{{item.numeroDosis}}º Dosis</td>
-                        <td>{{item.tipo}}</td>
+                        <td>{{item.objVacuna.name}}</td>
                         <td>{{item.fecha}}</td>
                     </tr>
                 </div>
@@ -72,11 +72,11 @@
            <input type="date"  id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20">
 
             <div class="tabla" ng-show="verHoras == 'si'">
-              <form action="#">
+              <form action="javascript:void(0);">
               <ol>
-                <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn" >{{item}}</li>
+                <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn" value="{{item}}">{{item}}</li>
               </ol>  
-              <button ng-show="boton=='si'" type="submit" ng-click="cogerCita()" class="btn btn-primary">PEDIR</button>
+              <button ng-show="boton=='si'"  ng-click="cogerCita()" class="btn btn-primary">PEDIR</button>
             </form>
               <!-- <table>
                 <tr>

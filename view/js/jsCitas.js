@@ -1,6 +1,7 @@
 var MyApp = angular.module('miApp', []);
 MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
     
+    var paciente;
 	
 	$scope.ver="si";
     $scope.verdos="no";
@@ -11,20 +12,57 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
     $scope.nombre='';
     $scope.apellidos='';
     $scope.lista=[];
+    $scope.condiciones=[];
 
-	$http.get('../controller/cConsultarHistorial.php').then(function (response) { 
-		$scope.lista = response.data.list;
-		console.log($scope.lista);
+    $scope.paciente="";
+    var idPaciente=""
+
+    $http.get('../controller/cLoggedVerifyPaciente.php').then(function (response) { 
+		$scope.paciente = response.data.paciente;
+		console.log($scope.paciente.idPaciente);
+        idPaciente=$scope.paciente.idPaciente
+        console.log(idPaciente);
+
+        paciente = {
+            idpaciente : idPaciente
+        };
+
+        $scope.consultarh(paciente);
+
+    });   
+
+	// $http.get('../controller/cConsultarHistorial.php',JSON.stringify(paciente)).then(function (response) { 
+	// 	$scope.lista = response.data.list;
+	// 	console.log($scope.lista);
 	
         
-		// console.log($scope.ver);
+	// 	// console.log($scope.ver);
 
 		
-	$scope.nombre = $scope.lista[0].objPaciente.nombre;
-	$scope.apellidos = $scope.lista[0].objPaciente.apellidos;
-	console.log($scope.nombre);
-	console.log($scope.apellidos);
-});   
+    //     $scope.nombre = $scope.lista[0].objPaciente.nombre;
+    //     $scope.apellidos = $scope.lista[0].objPaciente.apellidos;
+    //     console.log($scope.nombre);
+    //     console.log($scope.apellidos);
+    // });   
+
+
+    $scope.consultarh=function (paciente) {
+
+        console.log(paciente);
+        $http.post('../controller/cConsultarHistorial.php',JSON.stringify(paciente)).then(function (response) { 
+            $scope.lista = response.data.list;
+            console.log($scope.lista);
+        
+            
+            // console.log($scope.ver);
+    
+            
+            $scope.nombre = $scope.lista[0].objPaciente.nombre;
+            $scope.apellidos = $scope.lista[0].objPaciente.apellidos;
+            console.log($scope.nombre);
+            console.log($scope.apellidos);
+        });   
+    }
 	
 
     $scope.Historial=function(){
@@ -33,21 +71,24 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
         $scope.verDias="no";
         $scope.verHoras="no";
         $scope.verCitas="no";
+
+        $scope.consultarh(paciente);
        
 
-        $http.get('../controller/cConsultarHistorial.php').then(function (response) { 
-                $scope.lista = response.data.list;
-                console.log($scope.lista);
+        // $http.get('../controller/cConsultarHistorial.php',JSON.stringify(paciente)).then(function (response) { 
+        //         $scope.lista = response.data.list;
+        //         console.log($scope.lista);
 
-                // console.log($scope.ver);
+        //         // console.log($scope.ver);
 
                 
-            $scope.nombre = $scope.lista[0].objPaciente.nombre;
-            $scope.apellidos = $scope.lista[0].objPaciente.apellidos;
-            console.log($scope.nombre);
-            console.log($scope.apellidos);
-        });   
-}   
+        //     $scope.nombre = $scope.lista[0].objPaciente.nombre;
+        //     $scope.apellidos = $scope.lista[0].objPaciente.apellidos;
+        //     console.log($scope.nombre);
+        //     console.log($scope.apellidos);
+        // });   
+    }   
+
 $scope.Citas=function(){
     $scope.ver="no";
     $scope.verdos="si";
@@ -64,8 +105,92 @@ $scope.BTNCita=function(){
     $scope.boton="si";
        
    }  
+
+//    citapaciente = {
+//     // Fecha : Fecha,
+//     // Cod_paciente : Cod_paciente,
+//     // Cod_vacuna : Cod_vacuna,
+//     // Cod_centro : Cod_centro,
+//     // Cod_anulacion : Cod_anulacion
+// };
    $scope.cogerCita=function(){
+
+    var seleccionado=document.querySelectorAll("li input");
+    var select="";
+    
+    for (let i = 0; i < seleccionado.length; i++) {
+        
+        if (seleccionado[i].checked==true) {
+           select= seleccionado[i];
+        }
+        
+    }
+    console.log(select.value)
+
     alert("SE HA PEDIDO LA CITA CORRECTAMENTE")
+
+    console.log(document.getElementById("start").value)
+
+    Cod_vacuna=Math.random() * (5 - 1) + 1;
+    console.log(Cod_vacuna);
+
+    citapaciente = {
+        Fecha : document.getElementById("start").value+" "+select.value+":00.000000",
+        //2022-01-20 14:19:44.000000
+        Cod_paciente : idPaciente,
+        Cod_vacuna : Cod_vacuna,
+        // Cod_centro : Cod_centro,
+        // Cod_anulacion : Cod_anulacion
+    };
+
+    var hola=$scope.paciente.fechaNac
+    
+    var prueba2=hola.split("-");
+
+
+    var Hoy = new Date();
+    var nacimiento = new Date(prueba2[0],parseInt(prueba2[1])-1,prueba2[2]);
+    console.log(nacimiento);
+    console.log(Hoy.getTime())
+    console.log(nacimiento.getTime())
+
+
+    var edad = Hoy.getFullYear() - nacimiento.getFullYear();
+    var m = Hoy.getMonth() - nacimiento.getMonth();
+
+    if (m < 0 || (m === 0 && Hoy.getDate() < nacimiento.getDate())) {
+        edad--;
+    }
+    console.log(edad);
+
+    var numerodedosis=""
+
+    $http.get('../controller/cConsultarCondiciones.php').then(function (response) { 
+        $scope.condiciones = response.data.list;
+        console.log($scope.condiciones[0]);
+
+
+        if (edad>11) {
+            
+            numerodedosis=$scope.condiciones[0].DosisDesde11;
+        } else{
+            
+            numerodedosis=$scope.condiciones[0].DosisHasta11;
+        }
+
+        console.log(numerodedosis);
+        console.log($scope.lista[0].numeroDosis);
+
+        if (numerodedosis<=$scope.lista[0].numeroDosis) {
+            alert("No puedes pedir mas citas porque tienes el nemro maximo de dosis")
+        } else(
+            alert("si")
+
+            
+        )
+
+    });
+    
        
    }  
 $scope.Volver=function(){
@@ -93,8 +218,9 @@ $scope.hours=function(){
 console.log(dia)
      var dato = {
         dia: dia,
-        idpaciente: 1
+        idpaciente: idPaciente
         };
+        console.log(dato);
     
     $http.post('../controller/cConsultaHoras.php',JSON.stringify(dato)).then(function (response) { 
             

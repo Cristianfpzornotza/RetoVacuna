@@ -1,8 +1,8 @@
 <?php
 include_once 'connect_data.php';
-include_once 'citasClass.php';
+include_once 'condicionesClass.php';
 
-class citasModel extends citasClass{
+class condicionesModel extends condicionesClass{
 
     private $link;
 
@@ -21,40 +21,44 @@ class citasModel extends citasClass{
         }
         $this->link->set_charset("utf8"); // honek behartu egiten du aplikazio eta 
         //                  //databasearen artean UTF -8 erabiltzera datuak trukatzeko
-    }                   
+    }      
+    
+    public function listCondiciones(){
+        $this->OpenConnect();
+
+        $sql="SELECT * FROM `condiciones`;";
+
+        $result= $this->link->query($sql);
+
+        $list=array();
+       
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+            
+            $condiciones = new condicionesModel();
+            $condiciones->setDosisHasta11($row['DosisHasta11']);
+            $condiciones->setDosisDesde11($row['DosisDesde11']);
+            $condiciones->setTiempoEntreDosis($row['TiempoEntreDosis/PCR']);
+
+            array_push($list, get_object_vars($condiciones));
+            
+        }
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+       
+
+    }
  
     public function CloseConnect()
     {
         //mysqli_close ($this->link);
         $this->link->close();
     }
-
-    public function insertarCita(){
-
-        $this->OpenConnect();
-        $Fecha=$this->Fecha;
-        $Cod_paciente=$this->Cod_paciente;
-        $Cod_vacuna=$this->Cod_vacuna;
-        $Cod_centro=$this->Cod_centro;
-        $Cod_anulacion=$this->Cod_anulacion;
-
-        $sql="INSERT INTO citas (Fecha, Cod_paciente, Cod_vacuna, Cod_centro, Cod_anulacion) VALUES ($Fecha,$Cod_paciente,$Cod_vacuna, $Cod_centro,$Cod_anulacion)";
-
-        $result= $this->link->query($sql);
-
-        $list=array();
-
-        
-        mysqli_free_result($result);
-        $this->CloseConnect();
-    
-       
-
-    }
+   
     public function ObjVars()
     {
         return get_object_vars($this);
     }
 
 }
-
