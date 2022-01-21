@@ -1,5 +1,6 @@
 body{
-    background-image: url(https://cdn3.vectorstock.com/i/thumb-large/36/07/colored-pills-seamless-wallpaper-pattern-vector-27843607.jpg);
+    /*background-image: url(https://cdn3.vectorstock.com/i/thumb-large/36/07/colored-pills-seamless-wallpaper-pattern-vector-27843607.jpg);
+*/background-color: rgb(176, 210, 255);
 }
 
 .navlinks{
@@ -64,7 +65,7 @@ nav li:hover{
 }
 
 #containerweb{
-    box-shadow: 0 0 50px rgb(0, 0, 0);
+    box-shadow: 0 0 35px rgb(0, 0, 0);
 }
 
 #myTab li #contact-tab{
@@ -143,12 +144,12 @@ nav li:hover{
 }
 
 .navegador{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #navbarNavDropdown .navbar-nav .dropdown .dropdown-menu{
     width: 280px;
-    margin-left: -60px;
+    margin-left: -70px;
     margin-top: 30px;
     background-color: rgb(49, 121, 255);
     color: white;

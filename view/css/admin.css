@@ -6,7 +6,7 @@ body #contenedor{
     background-color: rgb(112, 157, 255);
 }
 
-#containerweb div .banner{
+#admincentro div .banner{
     background-color: #252591;
     color: white;
     font-size: 30px;
@@ -15,7 +15,7 @@ body #contenedor{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#containerweb{
+#admincentro{
     width: 80%;
     margin: auto;
     margin-top: 20px;
@@ -25,7 +25,7 @@ body #contenedor{
     padding: 50px;
 }
 
-#containerweb p{
+#admincentro p{
     text-align: end;
     margin-bottom: 10px;
 }
@@ -40,8 +40,7 @@ body #contenedor{
 .content .carta{
     margin-bottom: 20px;
     padding: 10px;
-    border: 2px solid rgb(144, 164, 255);
-    background-color: rgb(195, 204, 255);
+    background-color: rgb(228, 232, 255);
     border-radius: 5px;
 }
 
@@ -53,9 +52,13 @@ body #contenedor{
     padding: 10px;
 }
 
+.content .carta:hover{
+    box-shadow: 15px 15px 30px black;
+}
+
 #flexbotones{
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
 }
 
 #flexbotones button{

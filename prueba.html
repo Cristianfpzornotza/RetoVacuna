@@ -10,14 +10,13 @@
 <body>
     <div id="contenedor" ng-controller="micontrolador">
 
-        <div id="containerweb">
+        <div id="admincentro">
 
             <div id="flexbotones" class="mb-2">
                 
-                <!-- Button trigger modal -->
+                <!-- Button trigger modal
                 <button id="btnnew" class="btn btn-primary"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Añadir paciente</button>
 
-                <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
@@ -34,10 +33,11 @@
                         </div>
                     </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div>
-                    <button ng-show="vercitas=='si'" ng-click="vercentros='si'; vercitas='no'" id="volver" class="btn btn-success">Volver</button>
+                    <button ng-show="verboton=='si'" ng-click="volver()" id="volver" class="btn btn-success">Volver</button>
+                    <button ng-show="verbotonpaciente=='si'" ng-click="volverpaciente()" id="volver" class="btn btn-success">Volver</button>
                     <button id="btnlogout" class="btn btn-danger">Cerrar sesión</button>
     
                 </div>
@@ -59,12 +59,11 @@
 
             <div ng-show="vercitas=='si'">
                 <div id="citas">
-                    <div class="banner">Citas</div>
+                    <div class="banner">Pacientes</div>
                     <div class="content">
                     </div>
                 </div>
                 <div id="centros">
-
 
                     <div class='card-body px-0 py-0'>
                         <div class='table-responsive h-100'>
@@ -93,7 +92,7 @@
                                             <td>{{item.objPaciente.DNI}}</td>
                                             <td>{{item.objMunicipio.name}}</td>
                                             <td>{{item.objPaciente.fechaNac}}</td>
-                                            <td><button class="btn btn-success">Gestionar</button></td>
+                                            <td><button ng-click="pacientevistas(item)" class="btn btn-success">Gestionar</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -104,7 +103,64 @@
                 </div>                
             </div>
 
+            <div ng-show="verpaciente=='si'">
+                
+                <div id="centros">
+                    <div class="banner" style="justify-content: space-between; display: flex;"><div>Paciente</div><div style="margin-right: 20px;">TIS: {{objetoPaciente.objPaciente.TIS}}</div></div>
+                    <div style="display: flex;">  
+                        <div>
+                            <img style="width: 350px; height: 350px; padding: 20px;" src="/view/img/placeholderusuario.jpg" alt="" srcset="">
+                        </div>
+                        <div style="width: 100%; padding: 20px; font-family: Arial, Helvetica, sans-serif;">
+                            <h2><b>{{objetoPaciente.objPaciente.name}}</b></h2>
+                            <h2><b>{{objetoPaciente.objPaciente.apellido}}</b></h2>
+                            <h4 style="color: grey;">DNI: {{objetoPaciente.objPaciente.DNI}}</h4>
+                            <div style="opacity: 0;">.</div>
+                            <h3 style="color: grey;">Municipio: {{objetoPaciente.objMunicipio.name}}</h3>
+                            <h3 style="color: grey;">Fecha nacimiento: {{objetoPaciente.objPaciente.fechaNac}}</h3>
+                            <div style="opacity: 0;">.</div>
+                            <h3 style="color: grey;" id="positivo">Fecha positivo: {{objetoPaciente.objPaciente.fechaPos}}</h3>
+                        </div>
+                    </div>
+                </div> 
+                <div id="centros">
+                    <div class="banner">Citas paciente</div>
+                    <div style="margin-top: 30px;">
+                        <div class='card-body px-0 py-0'>
+                            <div class='table-responsive h-100'>
+                                <div class='session-scroll' style='height:200px;position:relative;'>
+                                    <table class='table table-hover m-b-0'>
+                                        <thead>
+                                            <tr>
+                                                <th><span>Fecha</span></th>
+                                                <th><span>Vacuna <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
+                                                                class="feather icon-help-circle f-16"></i></a></span></th>
+                                                <th><span>Dosis <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
+                                                                class="feather icon-help-circle f-16"></i></a></span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in listacitas">
+                                                <td>{{item.fecha}}</td>
+                                                <td>{{item.objVacuna.name}}</td>
+                                                <td>1º</td>
+                                                <td><button ng-click="pacientevistas()" class="btn btn-success">Confirmar asistencia</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+
+                </div>                 
+            </div>
+
         </div> 
+
+        <div id="admingeneral">
+
+        </div>
 
     </div>
 </body>

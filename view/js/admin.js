@@ -12,6 +12,8 @@ var idAdmin=0;
 
         $scope.vercentros="si";
         $scope.vercitas="no";
+        $scope.verpaciente="no";
+        $scope.verboton="no";
         
         document.getElementById("btnlogout").addEventListener("click",logout);
 
@@ -47,6 +49,8 @@ var idAdmin=0;
 
             $scope.vercentros="no";
             $scope.vercitas="si";
+            $scope.verboton="si";
+            $scope.verpaciente="no";
 
             console.log(item);
 
@@ -60,20 +64,50 @@ var idAdmin=0;
         
             });
 
-            $scope.loadtabla();
 
-            document.getElementById("btnnew").style.opacity = "0";
-            document.getElementById("btnnew").disabled=true;
-
-            document.getElementById("volver").addEventListener("click",function(){
-                document.getElementById("btnnew").style.opacity = "1";
-                document.getElementById("btnnew").disabled=false;
-            });
 
         }
 
-        $scope.loadtabla=function(){
-            console.log("huola");
+        $scope.volverpaciente=function(){
+            $scope.vercentros="no";
+            $scope.vercitas="si";
+            $scope.verboton="si";
+            $scope.verbotonpaciente="no";
+            $scope.verpaciente="no";
+        }
+
+        $scope.volver=function(){
+
+            $scope.vercentros="si";
+            $scope.vercitas="no";
+            $scope.verboton="no";
+            $scope.verpaciente="no";
+
+        }
+
+        $scope.pacientevistas=function(item){
+            $scope.vercentros="no";
+            $scope.vercitas="no";
+            $scope.verboton="no";
+            $scope.verbotonpaciente="si";
+            $scope.verpaciente="si"; 
+
+            $scope.objetoPaciente=item;
+
+            idpaciente=item.objPaciente.idPaciente;
+
+            if(item.objPaciente.fechaPos==null){
+                document.getElementById("positivo").innerHTML="Fecha positivo: No ha dado positivo";
+            }else{
+                document.getElementById("positivo").innerHTML="Fecha positivo: "+$scope.objetoPaciente.objPaciente.fechaPos;
+            }
+
+            $http.post('../../controller/cLoadCitas.php',idpaciente).then(function (response) { 
+                $scope.listacitas = response.data.citas;
+
+                console.log($scope.listacitas);
+            });
+            
         }
 
 
