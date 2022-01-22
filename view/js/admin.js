@@ -14,6 +14,7 @@ var idAdmin=0;
         $scope.vercitas="no";
         $scope.verpaciente="no";
         $scope.verboton="no";
+        $scope.verinterfaz="si";
 
         $scope.admingeneral="no";
         $scope.admincentro="no";
@@ -30,6 +31,7 @@ var idAdmin=0;
 
             if(response.data.categoria=="AdminGeneral"){
                 $scope.admingeneral="si";
+                $scope.vercentros="no";
                 $scope.admincentro="no";
             }else{
                 $scope.admingeneral="no";
@@ -84,17 +86,21 @@ var idAdmin=0;
 
         $scope.volverpaciente=function(){
             $scope.vercentros="no";
+            $scope.verinterfaz="si";
             $scope.vercitas="si";
             $scope.verboton="si";
+            $scope.verboton2="si";
             $scope.verbotonpaciente="no";
             $scope.verpaciente="no";
         }
 
         $scope.volver=function(){
 
+            $scope.verinterfaz="no";
             $scope.vercentros="si";
             $scope.vercitas="no";
             $scope.verboton="no";
+            $scope.verboton2="si";
             $scope.verpaciente="no";
 
             $scope.hospital="";

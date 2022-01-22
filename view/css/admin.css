@@ -30,6 +30,28 @@ body #contenedor{
     margin-bottom: 10px;
 }
 
+#formulario{
+    padding: 40px;
+}
+
+#formulario div{
+    padding: 10px;
+}
+
+#formulario2{
+    padding: 40px;
+}
+
+#formulario2 div{
+    margin: auto;
+    padding: 10px;
+}
+
+#formulario2 div p{
+    text-align: center;
+    margin: 0;
+}
+
 #admingeneral div .banner{
     background-color: #252591;
     color: white;
