@@ -55,6 +55,30 @@ class centroModel extends centroClass{
 
     }
 
+    public function insertarcentro(){
+        $this->OpenConnect();
+
+        $sql="insert INTO centro(Nombre, img) VALUES ('$this->name','$this->img')";
+
+        $result= $this->link->query($sql);
+
+        $idCentro=-1;
+       
+        $sql="select * from centro where Nombre='$this->name'";
+
+        $result= $this->link->query($sql);
+
+        if ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+            $idCentro=$row['idCentro'];
+        }
+
+        $this->CloseConnect();
+        return $idCentro;
+       
+
+    }
+
     public function findPacienteByCentro() // login, fill and return id of the user
     {
         $this->OpenConnect();

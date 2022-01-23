@@ -49,6 +49,18 @@ class municipioModel extends municipioClass{
        
 
     }
+
+    public function insertarmunicipio(){
+        $this->OpenConnect();
+
+        $sql="insert INTO municipio(Nombre, Cod_centro) VALUES ($this->name,$this->codCentro)";
+
+        $result= $this->link->query($sql);
+
+        $this->CloseConnect();
+        return "no error";
+       
+    }
  
     public function CloseConnect()
     {

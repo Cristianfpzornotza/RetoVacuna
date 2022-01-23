@@ -3,6 +3,7 @@
 
 var miApp=angular.module('miApp',[]);
 var idAdmin=0;
+var filename="";
 
 
 /*  FUNCIONES
@@ -15,12 +16,14 @@ var idAdmin=0;
         $scope.verpaciente="no";
         $scope.verboton="no";
         $scope.verinterfaz="si";
+        $scope.agregarmunicipio="si";
 
         $scope.admingeneral="no";
         $scope.admincentro="no";
         
         document.getElementById("btnlogout").addEventListener("click",logout);
         document.getElementById("btnlogout2").addEventListener("click",logout);
+        document.getElementById("centroimg").addEventListener("change", setFileName);
 
         $http.post('../../controller/cLoggedVerify.php').then(function (response) { 
             idAdmin=response.data.idUser;
@@ -150,6 +153,21 @@ var idAdmin=0;
             
         }
 
+        $scope.mostrarmas=function(){
+
+            $scope.municipionuevo="si";
+            $scope.agregarmunicipio="no";
+            $scope.agregarmunicipio2="si";
+
+        }
+
+        $scope.mostrarmas2=function(){
+
+            $scope.municipionuevo2="si";
+            $scope.agregarmunicipio2="no";
+
+        }
+
         $scope.insertarpaciente=function(){
 
             datospaciente = { 
@@ -169,8 +187,79 @@ var idAdmin=0;
 
         }
 
+        $scope.insertarcentro=function(){
+
+            if($scope.municipio1==undefined){
+
+                $scope.municipio1="vacio";
+
+            }
+            
+            if ($scope.municipio2==undefined){
+
+                $scope.municipio2="vacio";
+
+            }
+
+            if ($scope.municipio3==undefined){
+
+                $scope.municipio3="vacio";
+
+            }
+
+            datoscentro = { 
+                nombrecentro : $scope.nombrecentro,
+                municipio1 : $scope.municipio1,
+                municipio2 : $scope.municipio2,
+                municipio3 : $scope.municipio3,
+                imgcentro : filename };
+
+                console.log(datoscentro);
+
+            $http.post('../../controller/cInsertarCentro.php',datoscentro).then(function (response) { 
+                $scope.centroinsert = response.data.error;
+
+                console.log($scope.centroinsert);
+            });
+
+        }
+
 
     }]);
+
+    function setFileName(){
+
+        var file   = this.files[0];
+        
+        var reader  = new FileReader();
+        filename = file.name;
+        filesize= file.size;
+        console.log(filename);
+        
+        if (!new RegExp("(.*?).(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$").test(filename)) {
+                  
+          alert("Solo se aceptan imÃ¡genes JPG, PNG y GIF");
+          document.getElementById("fitx").value="";
+          document.getElementById("btnExecInsert").disabled=true;
+          
+        } else{
+        
+            reader.onloadend = function () {
+                savedFileBase64 = reader.result;     // Almacenar en variable global para uso posterior	  
+                
+                document.getElementById("imagenCentro").setAttribute("src",savedFileBase64); 
+
+            }
+      
+            if (file) {
+              reader.readAsDataURL(file);
+              
+            } else {
+                document.getElementById("imagenPostre").setAttribute("src",'');
+            }
+        }
+    
+    }
 
     function logout(){
         var url = "../../controller/cLogout.php";
