@@ -55,6 +55,21 @@ class pacientesModel extends pacientesClass{
         $this->CloseConnect();
         return $list;
     }
+
+    public function insertarpaciente() // login, fill and return id of the user
+    {
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        $sql="insert INTO `pacientes`(`TIS`, `Nombre`, `Apellidos`, `Fecha_nac`, `Cod_municipio`, `DNI`) 
+        VALUES ($this->TIS,'$this->name','$this->apellido','$this->fechaNac',$this->codMunicipio,'$this->DNI')";
+               
+        $result= $this->link->query($sql);
+
+
+        $this->CloseConnect();
+        return $result;
+    }
    
     public function ObjVars()
     {

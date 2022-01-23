@@ -21,7 +21,34 @@ class municipioModel extends municipioClass{
         }
         $this->link->set_charset("utf8"); // honek behartu egiten du aplikazio eta 
         //                  //databasearen artean UTF -8 erabiltzera datuak trukatzeko
-    }                   
+    }    
+    
+    public function listmunicipios(){
+        $this->OpenConnect();
+
+        $sql="select * from municipio";
+
+        $result= $this->link->query($sql);
+
+        $list=array();
+       
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+            
+            $municipio = new municipioModel();
+            $municipio->setIdMunicipio($row['idMunicipio']);
+            $municipio->setName($row['Nombre']);
+            $municipio->setCodCentro($row['Cod_centro']);
+
+            array_push($list, get_object_vars($municipio));
+            
+        }
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+       
+
+    }
  
     public function CloseConnect()
     {

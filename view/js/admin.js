@@ -59,6 +59,22 @@ var idAdmin=0;
             console.log($scope.listacentros);
         });
 
+        $http.get('../../controller/cLoadMunicipios.php').then(function (response) { 
+            $scope.listamunicipios = response.data.municipios;
+            console.log($scope.listamunicipios);
+
+            //var newRow="";
+
+            /*for (let i = 0; i < listamunicipios.length; i++) {
+                
+                newRow+="<option value="+listamunicipios[i].idMunicipio+" data-centro="+listamunicipios[i].codCentro+">"+listamunicipios[i].name+"</option>";
+                
+            }
+            */
+        
+
+        });
+
         $scope.vistas=function(item){
 
             $scope.vercentros="no";
@@ -116,6 +132,8 @@ var idAdmin=0;
 
             $scope.objetoPaciente=item;
 
+            console.log(item);
+
             idpaciente=item.objPaciente.idPaciente;
 
             if(item.objPaciente.fechaPos==null){
@@ -130,6 +148,25 @@ var idAdmin=0;
                 console.log($scope.listacitas);
             });
             
+        }
+
+        $scope.insertarpaciente=function(){
+
+            datospaciente = { 
+                nombrepaciente : $scope.nombrepaciente,
+                apellidopaciente : $scope.apellidopaciente,
+                dnipaciente : $scope.dnipaciente,
+                municipiopaciente : $scope.municipiopaciente,
+                fechapaciente : document.getElementById("fechanacimiento").value };
+
+            console.log(datospaciente);
+
+            $http.post('../../controller/cInsertarPaciente.php',datospaciente).then(function (response) { 
+                $scope.pacienteinsert = response.data.error;
+
+                console.log($scope.pacienteinsert);
+            });
+
         }
 
 

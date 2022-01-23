@@ -193,11 +193,11 @@
 
                         <div class="w-50">
                             <h3>Nombre</h3>
-                            <input class="form-control" type="text">                            
+                            <input ng-model="nombrepaciente" class="form-control" type="text">                            
                         </div>
                         <div class="w-50">
                             <h3>Apellido</h3>
-                            <input class="form-control" type="text">  
+                            <input ng-model="apellidopaciente" class="form-control" type="text">  
                         </div>
                     </div>
 
@@ -205,21 +205,23 @@
 
                         <div class="w-50">
                             <h3>DNI</h3>
-                            <input class="form-control" type="text">                       
+                            <input ng-model="dnipaciente" class="form-control" type="text">                       
                         </div>
                         <div class="w-50">
                             <h3>Municipio</h3>
-                            <select class="form-control" name="" id=""></select>  
+                            <select ng-model="municipiopaciente" class="form-control" name="" id="combomunicipio">
+                                <option ng-repeat="item in listamunicipios" value="{{item.idMunicipio}}" data-centro="{{item.codCentro}}">{{item.name}}</option>
+                            </select>  
                         </div>
                         <div class="w-50">
                             <h3>Fecha nacimiento</h3>
-                            <input class="form-control" type="date">   
+                            <input id="fechanacimiento" ng-model="fechapaciente" class="form-control" type="date">   
                         </div>
                     </div>
 
                     <div class="d-flex p-3" style="justify-content: center;">
 
-                        <button class="btn btn-success p-3 w-25">Insertar paciente</button>
+                        <button id="insertarpaciente" ng-click="insertarpaciente()" class="btn btn-success p-3 w-25">Insertar paciente</button>
 
                     </div>
 
@@ -239,8 +241,10 @@
                     <div class="w-50">
                         <p><h3>Nombre</h3></p>
                         <p><input class="form-control" type="text">  </p>
+                        <p><h3>Municipios asociados</h3></p>
+                        <p><input class="form-control" type="text">  </p>
                         <p class="p-3"><input type="file" name="" id=""></p>
-                        <p><img class="w-100 p-3" src="/view/img/hospitalleza.jpg" alt="" srcset=""></p>
+                        <p><img class="w-100 p-3" src="/view/img/placeholder.png" alt="" srcset=""></p>
                         <p><button class="btn btn-success p-3">Insertar centro</button></p>
                     </div>
 
