@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function login()
 {
 	var TIS=document.getElementById("TIS").value;
-	var Apellido=document.getElementById("apellido").value;
-	var Fecha=document.getElementById("fecha").value;
+	var Apellido=document.getElementById("Apellido").value;
+	var Fecha=document.getElementById("Fecha").value;
 	
 	var url = "../../controller/cLoginPaciente.php";
 	var data = {'TIS':TIS, 'apellido':Apellido, 'fecha':Fecha};
