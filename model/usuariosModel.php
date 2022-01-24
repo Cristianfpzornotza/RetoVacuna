@@ -56,13 +56,32 @@ class usuariosModel extends usuariosClass{
         $this->CloseConnect();
         return $idUsuario;
     }
-   
 
+    public function listUsuarios(){
+        $this->OpenConnect();
 
+        $sql="select * from usuario";
 
+        $result= $this->link->query($sql);
 
+        $list=array();
+       
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+            
+            $user = new usuariosModel();
+            $user->setIdUsuario($row['idUsuario']);
+            $user->setName($row['Nombre']);
 
+            array_push($list, get_object_vars($user));
+            
+        }
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+       
 
+    }
 
     public function ObjVars()
     {

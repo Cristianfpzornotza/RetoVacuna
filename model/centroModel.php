@@ -52,7 +52,6 @@ class centroModel extends centroClass{
         $this->CloseConnect();
         return $list;
        
-
     }
 
     public function insertarcentro(){
@@ -75,6 +74,20 @@ class centroModel extends centroClass{
 
         $this->CloseConnect();
         return $idCentro;
+       
+
+    }
+
+    public function updatecentro(){
+        $this->OpenConnect();
+
+        $sql="update centro SET Nombre='$this->name',img='$this->img' WHERE idCentro=$this->idCentro";
+
+        $result= $this->link->query($sql);
+
+        
+        $this->CloseConnect();
+        return "no error";
        
 
     }

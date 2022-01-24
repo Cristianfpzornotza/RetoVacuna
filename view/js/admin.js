@@ -13,8 +13,11 @@ var filename="";
 
         $scope.vercentros="si";
         $scope.vercitas="no";
+        $scope.vercitas2="no";
         $scope.verpaciente="no";
         $scope.verboton="no";
+        $scope.verboton2="no";
+        $scope.verboton3="no";
         $scope.verinterfaz="si";
         $scope.agregarmunicipio="si";
 
@@ -24,11 +27,16 @@ var filename="";
         document.getElementById("btnlogout").addEventListener("click",logout);
         document.getElementById("btnlogout2").addEventListener("click",logout);
         document.getElementById("centroimg").addEventListener("change", setFileName);
+        document.getElementById("centroimg2").addEventListener("change", setFileName);
+        document.getElementById("centroimg3").addEventListener("change", setFileName2);
+
+        $http.get('../../controller/cLoadAdmin.php').then(function (response) { 
+            $scope.listaadmin = response.data.admin;
+            console.log($scope.listaadmin);
+        });
 
         $http.post('../../controller/cLoggedVerify.php').then(function (response) { 
             idAdmin=response.data.idUser;
-
-            
             
             console.log(response.data);
 
@@ -82,7 +90,10 @@ var filename="";
 
             $scope.vercentros="no";
             $scope.vercitas="si";
+            $scope.vercitas2="si";
             $scope.verboton="si";
+            $scope.verboton2="no";
+            $scope.verboton3="si";
             $scope.verpaciente="no";
 
             console.log(item);
@@ -103,14 +114,38 @@ var filename="";
 
         }
 
+        $scope.editarcentro=function(){
+
+            centroupdate = {
+
+                idCentro : $scope.hospital.idCentro,
+                nombreCentro : document.getElementById("nombrecentro").value,
+                imgCentro : filename
+
+            };
+
+            console.log(centroupdate);
+
+            $http.post('../../controller/cUpdateCentro.php',centroupdate).then(function (response) { 
+                
+                $scope.listapacientes=response.data.datos;
+        
+            });
+
+        }
+
         $scope.volverpaciente=function(){
             $scope.vercentros="no";
             $scope.verinterfaz="si";
             $scope.vercitas="si";
+            $scope.vercitas2="no";
             $scope.verboton="si";
-            $scope.verboton2="si";
+            $scope.verboton2="no";
             $scope.verbotonpaciente="no";
             $scope.verpaciente="no";
+
+            document.getElementById("imagenCentro").setAttribute("src","/view/img/placeholder.png");
+
         }
 
         $scope.volver=function(){
@@ -118,8 +153,10 @@ var filename="";
             $scope.verinterfaz="no";
             $scope.vercentros="si";
             $scope.vercitas="no";
+            $scope.vercitas2="no";
             $scope.verboton="no";
             $scope.verboton2="si";
+            $scope.verboton3="no";
             $scope.verpaciente="no";
 
             $scope.hospital="";
@@ -168,6 +205,30 @@ var filename="";
 
         }
 
+        $scope.asignarcentro=function(){
+
+            asignarusuarioid=document.getElementById("selectUsuario").value;
+            asignarcentroid=document.getElementById("selectCentro").value;
+
+
+            datosasignar = {
+
+                asignarusuarioid : document.getElementById("selectUsuario").value,
+                asignarcentroid : document.getElementById("selectCentro").value
+
+            }
+
+            console.log(datosasignar);
+
+
+            $http.post('../../controller/cAsignarCentro.php',datosasignar).then(function (response) { 
+                
+
+                
+            });
+
+        }
+
         $scope.insertarpaciente=function(){
 
             datospaciente = { 
@@ -175,7 +236,10 @@ var filename="";
                 apellidopaciente : $scope.apellidopaciente,
                 dnipaciente : $scope.dnipaciente,
                 municipiopaciente : $scope.municipiopaciente,
-                fechapaciente : document.getElementById("fechanacimiento").value };
+                fechapaciente : document.getElementById("fechanacimiento").value,
+                imgpaciente : filename
+
+            };
 
             console.log(datospaciente);
 
@@ -188,6 +252,7 @@ var filename="";
         }
 
         $scope.insertarcentro=function(){
+
 
             if($scope.municipio1==undefined){
 
@@ -247,7 +312,42 @@ var filename="";
             reader.onloadend = function () {
                 savedFileBase64 = reader.result;     // Almacenar en variable global para uso posterior	  
                 
-                document.getElementById("imagenCentro").setAttribute("src",savedFileBase64); 
+                document.getElementById("imagenCentro").setAttribute("src",savedFileBase64);
+                document.getElementById("imagenCentro2").setAttribute("src",savedFileBase64);  
+
+            }
+      
+            if (file) {
+              reader.readAsDataURL(file);
+              
+            } else {
+                document.getElementById("imagenPostre").setAttribute("src",'');
+            }
+        }
+    
+    }
+
+    function setFileName2(){
+
+        var file   = this.files[0];
+        
+        var reader  = new FileReader();
+        filename = file.name;
+        filesize= file.size;
+        console.log(filename);
+        
+        if (!new RegExp("(.*?).(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$").test(filename)) {
+                  
+          alert("Solo se aceptan imÃ¡genes JPG, PNG y GIF");
+          document.getElementById("fitx").value="";
+          document.getElementById("btnExecInsert").disabled=true;
+          
+        } else{
+        
+            reader.onloadend = function () {
+                savedFileBase64 = reader.result;     // Almacenar en variable global para uso posterior	  
+                
+                document.getElementById("imagenCentro3").setAttribute("src",savedFileBase64);
 
             }
       

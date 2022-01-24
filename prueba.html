@@ -179,6 +179,7 @@
 
                 <div>
                     <button ng-show="verboton2=='si'" ng-click="volverpaciente()" id="volver" class="btn btn-success">Volver</button>
+                    <button ng-show="verboton3=='si'" ng-click="volver()" id="volver" class="btn btn-success">Volver</button>
                     <button id="btnlogout2" class="btn btn-danger">Cerrar sesión</button>
     
                 </div>
@@ -187,72 +188,114 @@
             
             <div ng-show="verinterfaz=='si'" id="centros">
                 <div class="banner">Insertar nuevo paciente</div>
-                <div id="formulario">  
+                <div class="p-2" id="formulario" style="display: flex;">  
 
-                    <div class="d-flex p-0">
+                    <div class="p-2" style="width: 30%;">
+                        <img style="width: 100%; height: 85%;" id="imagenCentro3" src="/view/img/placeholder.png" alt="" srcset="">
+                        <input style="margin-top: 5px;" type="file" name="" id="centroimg3">
+                    </div>
+                   
+                    <div class="p-2" style="width: 70%;">
 
-                        <div class="w-50">
-                            <h3>Nombre</h3>
-                            <input ng-model="nombrepaciente" class="form-control" type="text">                            
+                        <div class="d-flex p-0">
+
+                            <div class="w-50">
+                                <h3>Nombre</h3>
+                                <input ng-model="nombrepaciente" class="form-control" type="text">                            
+                            </div>
+                            <div class="w-50">
+                                <h3>Apellido</h3>
+                                <input ng-model="apellidopaciente" class="form-control" type="text">  
+                            </div>
                         </div>
-                        <div class="w-50">
-                            <h3>Apellido</h3>
-                            <input ng-model="apellidopaciente" class="form-control" type="text">  
+
+                        <div class="d-flex p-0">
+
+                            <div class="w-50">
+                                <h3>DNI</h3>
+                                <input ng-model="dnipaciente" class="form-control" type="text">                       
+                            </div>
+                            <div class="w-50">
+                                <h3>Municipio</h3>
+                                <select ng-model="municipiopaciente" class="form-control" name="" id="combomunicipio">
+                                    <option ng-repeat="item in listamunicipios" value="{{item.idMunicipio}}" data-centro="{{item.codCentro}}">{{item.name}}</option>
+                                </select>  
+                            </div>
+                            <div class="w-50">
+                                <h3>Fecha nacimiento</h3>
+                                <input id="fechanacimiento" ng-model="fechapaciente" class="form-control" type="date">   
+                            </div>
                         </div>
+
+                        <div class="d-flex p-3" style="justify-content: center;">
+
+                            <button id="insertarpaciente" ng-click="insertarpaciente()" class="btn btn-success p-3 w-25">Insertar paciente</button>
+
+                        </div>
+
                     </div>
 
+                </div>
+
+                <div class="banner" style="display: flex; justify-content: space-between;"><div>Insertar nuevo centro</div> 
+                    <button style="margin: 5px;" ng-click="volver()" class="btn btn-info">Editar centros</button>
+                </div>
+
+                <div id="formulario2">  
+
+                    <div class="d-flex">
+
+                        <div style="width: 40%; margin: 0;">
+                            <p><img style="height: 280px;" class="w-100 p-3" id="imagenCentro" src="/view/img/placeholder.png" alt="" srcset=""></p>
+        <!--IMAGEN CENTRO--><p class="p-3 pt-0"><input ng-model="imagencentro" type="file" name="" id="centroimg"></p>
+                        </div>
+
+                        <div style="width: 60%;">
+                            <p><h3>Nombre</h3></p>
+        <!--NOMBRE CENTRO--><p><input class="form-control" ng-model="nombrecentro" type="text"></p>
+                            <p class="mt-2"><h3>Municipios asociados</h3></p>
+        <!--MUNICIPIO 1--><p class="mt-2"><input ng-model="municipio1" class="form-control" type="text"></p>
+        <!--MUNICIPIO 2--><p ng-show="municipionuevo=='si'" class="mt-2"><input ng-model="municipio2" class="form-control" type="text"></p>
+        <!--MUNICIPIO 3--><p ng-show="municipionuevo2=='si'" class="mt-2"><input ng-model="municipio3" class="form-control" type="text"></p>
+                            <p ng-show="agregarmunicipio=='si'" class="mt-2 mb-2"><button ng-click="mostrarmas()" class="btn btn-primary">Agregar nuevo municipio asociado</button></p>
+                            <p ng-show="agregarmunicipio2=='si'" class="mt-2 mb-2"><button ng-click="mostrarmas2()" class="btn btn-primary">Agregar nuevo municipio asociado</button></p>
+
+                            <p><button ng-click="insertarcentro()" class="btn btn-success mt-3 p-3">Insertar centro</button></p>                            
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="banner">Asignar centro a administradores</div>
+
+                <div class="p-4">
+
                     <div class="d-flex p-0">
 
-                        <div class="w-50">
-                            <h3>DNI</h3>
-                            <input ng-model="dnipaciente" class="form-control" type="text">                       
+                        <div class="w-50 p-2">
+                            <h3>Administrador</h3>
+                            <select class="form-control" name="" id="selectUsuario">
+                                <option ng-repeat="item in listaadmin" value="{{item.idUsuario}}">{{item.name}}</option>
+                            </select>                        
                         </div>
-                        <div class="w-50">
-                            <h3>Municipio</h3>
-                            <select ng-model="municipiopaciente" class="form-control" name="" id="combomunicipio">
-                                <option ng-repeat="item in listamunicipios" value="{{item.idMunicipio}}" data-centro="{{item.codCentro}}">{{item.name}}</option>
-                            </select>  
-                        </div>
-                        <div class="w-50">
-                            <h3>Fecha nacimiento</h3>
-                            <input id="fechanacimiento" ng-model="fechapaciente" class="form-control" type="date">   
+                        <div class="w-50 p-2">
+                            <h3>Centro</h3>
+                            <select class="form-control" name="" id="selectCentro">
+                                <option ng-repeat="item in listacentros" value="{{item.idCentro}}">{{item.name}}</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="d-flex p-3" style="justify-content: center;">
 
-                        <button id="insertarpaciente" ng-click="insertarpaciente()" class="btn btn-success p-3 w-25">Insertar paciente</button>
+                        <button id="insertarpaciente" ng-click="asignarcentro()" class="btn btn-success p-3 w-25">Asignar centro</button>
 
                     </div>
 
                 </div>
-                
-                <div id="flexbotones" class="mb-2">
 
-                    <div id="nombrehospital">
-                        <button ng-click="volver()" class="btn btn-info">Editar centros</button>
-                    </div>
-    
-                </div>
-
-                <div class="banner">Insertar nuevo centro</div>
-                <div id="formulario2">  
-
-                    <div class="w-50">
-                        <p><h3>Nombre</h3></p>
-    <!--NOMBRE CENTRO--><p><input class="form-control" ng-model="nombrecentro" type="text"></p>
-                        <p class="mt-2"><h3>Municipios asociados</h3></p>
-      <!--MUNICIPIO 1--><p class="mt-2"><input ng-model="municipio1" class="form-control" type="text"></p>
-      <!--MUNICIPIO 2--><p ng-show="municipionuevo=='si'" class="mt-2"><input ng-model="municipio2" class="form-control" type="text"></p>
-      <!--MUNICIPIO 3--><p ng-show="municipionuevo2=='si'" class="mt-2"><input ng-model="municipio3" class="form-control" type="text"></p>
-                        <p ng-show="agregarmunicipio=='si'" class="mt-4 mb-2"><button ng-click="mostrarmas()" class="btn btn-primary">Agregar nuevo municipio asociado</button></p>
-                        <p ng-show="agregarmunicipio2=='si'" class="mt-4 mb-2"><button ng-click="mostrarmas2()" class="btn btn-primary">Agregar nuevo municipio asociado</button></p>
-    <!--IMAGEN CENTRO--><p class="p-3"><input ng-model="imagencentro" type="file" name="" id="centroimg"></p>
-                        <p><img class="w-100 p-3" id="imagenCentro" src="/view/img/placeholder.png" alt="" srcset=""></p>
-                        <p><button ng-click="insertarcentro()" class="btn btn-success p-3">Insertar centro</button></p>
-                    </div>
-
-                </div>
             </div>    
 
             <div ng-show="vercentros=='si'">
@@ -267,6 +310,32 @@
                     </div>
                 </div>                
             </div>
+
+            <div ng-show="vercitas2=='si'" id="centros">
+                <div class="banner">Editar Centro</div>
+                <div id="formulario" style="display: flex;">
+ 
+                    <img style="width: 30%;" id="imagenCentro2" src="/view/img/{{hospital.img}}" alt="">
+
+                    <div style="width: 70%;">
+
+                        <div>
+                            <h3>Nombre centro</h3>
+                            <input id="nombrecentro" ng-model="hospital.name" class="form-control" type="text"> 
+                            <input style="margin-top: 10px;" type="file" name="" id="centroimg2"> 
+                        </div>
+
+                        <div class="d-flex p-3" style="justify-content: center;">
+
+                            <button id="insertarpaciente" ng-click="editarcentro()" class="btn btn-success p-3">Editar centro</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>  
 
         </div>
 

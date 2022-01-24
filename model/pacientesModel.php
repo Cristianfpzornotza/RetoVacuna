@@ -61,8 +61,8 @@ class pacientesModel extends pacientesClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
         
-        $sql="insert INTO `pacientes`(`TIS`, `Nombre`, `Apellidos`, `Fecha_nac`, `Cod_municipio`, `DNI`) 
-        VALUES ($this->TIS,'$this->name','$this->apellido','$this->fechaNac',$this->codMunicipio,'$this->DNI')";
+        $sql="insert INTO `pacientes`(`TIS`, `Nombre`, `Apellidos`, `Fecha_nac`, `Cod_municipio`, `DNI`, `img`) 
+        VALUES ($this->TIS,'$this->name','$this->apellido','$this->fechaNac',$this->codMunicipio,'$this->DNI','$this->img')";
                
         $result= $this->link->query($sql);
 

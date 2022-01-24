@@ -14,21 +14,6 @@ if ($idAdmin !=null){
  
     $user=new centroModel();
     $response['perro']=$user->listCentros($idAdmin);
-    
-
-    /*
-    if ($user->findUser()>0) // si es correcto el userName y el password
-    {
-        session_start();
-        $_SESSION['idUser']=$user->getIdUsuario(); 
-        $_SESSION['username']=$username; 
-        
-        $response['user']=$user->ObjVars(); 
-        $response['error']="no error";  
-        
-    }  else {        
-        $response['error']="Usuario o contraseña incorrecta"; // no correct user
-    }*/
 
 }  
 

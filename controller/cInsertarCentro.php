@@ -10,7 +10,7 @@ $municipio2=$data['municipio2'];
 $municipio3=$data['municipio3'];
 $imgcentro=$data['imgcentro'];
 
-echo $nombrecentro,$municipio1,$municipio2,$municipio3,$imgcentro;
+//echo $nombrecentro,$municipio1,$municipio2,$municipio3,$imgcentro;
 
 $response=array();
 
@@ -24,20 +24,30 @@ if (( $nombrecentro !=null ) && ( $municipio1 !=null ) && ( $municipio2 !=null )
 
     $municipio=new municipioModel();
     $municipio->setCodCentro($response['idCentro']);
-
+    //echo $response['idCentro'];
 
     if($municipio1!="vacio"){
+
         $municipio->setName($municipio1);
         $municipio->insertarmunicipio();
     }
     if($municipio2!="vacio"){
+
         $municipio->setName($municipio2);
         $municipio->insertarmunicipio();
     }
     if($municipio3!="vacio"){
+
         $municipio->setName($municipio3);
         $municipio->insertarmunicipio();
     }
+
+    
+    /*$municipio->setName($municipio2);
+    $municipio->insertarmunicipio();
+
+    $municipio->setName($municipio3);
+    $municipio->insertarmunicipio();*/
     
 
     $response['error']="no error";

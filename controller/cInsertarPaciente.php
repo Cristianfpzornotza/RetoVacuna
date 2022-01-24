@@ -8,6 +8,7 @@ $apellido=$data['apellidopaciente'];
 $dni=$data['dnipaciente'];
 $municipio=$data['municipiopaciente'];
 $fecha=$data['fechapaciente'];
+$img=$data['imgpaciente'];
 $TIS= mt_Rand(00000000,99999999);
 
 $response=array();
@@ -21,6 +22,7 @@ if (( $nombre !=null ) && ( $apellido !=null ) && ( $dni !=null ) && ( $municipi
     $paciente->setCodMunicipio($municipio);
     $paciente->setFechaNac($fecha);
     $paciente->setTIS($TIS);
+    $paciente->setImg($img);
 
     $paciente->insertarpaciente();
     $respone['error']="no error";
