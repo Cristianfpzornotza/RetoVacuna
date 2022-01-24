@@ -1,0 +1,194 @@
+<!DOCTYPE html >
+<html lang="en" ng-app='miApp'>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/consulta.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- calendario -->
+    <script type="text/javascript" src="calendar/common.js"></script>
+    <script type="text/javascript" src="calendar/calendar_core.js"></script>
+    <script type="text/javascript" src="calendar/calendar.js"></script>
+    <link rel="stylesheet" type="text/css" href="calendar/calendar.css" />
+</head>
+<body ng-controller="miControlador">
+    
+    <div id="btnprincipal" class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" ng-click="Citas()">
+        <label class="btn btn-outline-primary" for="btnradio1">Citas</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" ng-click="Historial()">
+        <label class="btn btn-outline-primary" for="btnradio2">Historial</label>
+      </div>
+
+      <div id="Historial" ng-show="ver=='si'">
+
+        
+        <h2 id="historialpaciente" >{{nombre}} {{apellidos}}</h2>
+        <table class="table" id="tablahistorial">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Vacuna</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <div >
+                    <tr ng-repeat="item in lista">
+                        
+                        <td>{{item.numeroDosis}}º Dosis</td>
+                        <td>{{item.objVacuna.name}}</td>
+                        <td>{{item.fecha}}</td>
+                    </tr>
+                </div>
+                
+            </tbody>
+        </table>
+
+      </div>
+      <div id="Citas" ng-show="verdos=='si'">
+        
+        <div id="citabtn">
+          <button type="button" class="btn btn-primary" id="btnpedircita" ng-click="BTNCita()">Pedir cita</button>
+
+          Anular cita:<input type="text" placeholder="Codigo" >
+        </div>
+
+        <div>        
+
+          <div id="calendar" ng-show="verDias=='si'">
+
+            <label for="start">Start date:</label>
+            
+           <input type="date"  id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20">
+
+            <div class="tabla" ng-show="verHoras == 'si'">
+              <form action="javascript:void(0);">
+              <ol>
+                <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn" value="{{item}}">{{item}}</li>
+              </ol>  
+              <button ng-show="boton=='si'"  ng-click="cogerCita()" class="btn btn-primary">PEDIR</button>
+            </form>
+              <!-- <table>
+                <tr>
+                  <td ng-repeat="item in horasminutos"><input type="radio">{{item}}</td>
+                </tr>
+              </table> -->
+              
+            </div>
+         
+            <!-- <div id="contenedorhoras" ng-show="verhoras=='si'">
+            
+              <input type="radio">8:55<input type="radio">9:10
+            
+            </div> -->
+
+          </div>
+        </div>
+
+      </div>
+
+      <div id="Citas" ng-show="verCitas=='si'">
+
+
+
+        
+
+      </div>
+            <!--<script>
+                var c = new Calender();
+                c.onSelected = function (y, m, d) {
+                    console.log([y, m, d].join("-"));
+                }
+                c.onSetToday = function () {
+                    console.log("setToday");
+                }
+                c.onClear = function () {
+                    console.log("clear");
+                }
+                c.render("calendar");
+            </script>
+
+<div id="calendar" ng-show="verhoras=='si'">
+  <div id="calender_2" class="horas">
+    <div class="horastitulo">
+      <button ng-click="Volver()">Volver</button>
+    </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+       <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+      </li> 
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="horasdiv">
+          hola <button type="button" class="btn btn-success">Success</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="horasdiv">
+          hola <button type="button" class="btn btn-success">Success</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="horasdiv">
+          hola <button type="button" class="btn btn-success">Success</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+        <div class="horasdiv">
+          hola<button type="button" class="btn btn-danger">Danger</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div> -->
+
+      
+    
+    
+    
+    <script src="js/jsHistorial.js"></script>
+    <script src="js/jsCitas.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    
+</body>
+</html>

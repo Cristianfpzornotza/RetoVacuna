@@ -28,7 +28,29 @@ class citasModel extends citasClass{
         //mysqli_close ($this->link);
         $this->link->close();
     }
-   
+
+    public function insertarCita(){
+
+        $this->OpenConnect();
+        $Fecha=$this->Fecha;
+        $Cod_paciente=$this->Cod_paciente;
+        $Cod_vacuna=$this->Cod_vacuna;
+        $Cod_centro=$this->Cod_centro;
+        $Cod_anulacion=$this->Cod_anulacion;
+
+        $sql="INSERT INTO citas (Fecha, Cod_paciente, Cod_vacuna, Cod_centro, Cod_anulacion) VALUES ($Fecha,$Cod_paciente,$Cod_vacuna, $Cod_centro,$Cod_anulacion)";
+
+        $result= $this->link->query($sql);
+
+        $list=array();
+
+        
+        mysqli_free_result($result);
+        $this->CloseConnect();
+    
+       
+
+    }
     public function ObjVars()
     {
         return get_object_vars($this);

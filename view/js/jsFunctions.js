@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
+	loggedVerify();
 	document.getElementById("login").addEventListener('click', login);
 	/*document.getElementById("signUp").addEventListener('click', function(){
 		window.location.href="view/newUser.html";
@@ -24,7 +25,8 @@ function login()
 		alert(result.error); 		
 		if (result.error =="no error")
    		{
-			window.location.href="view/home.html";
+			   console.log(result);
+			window.location.href="../view/consulta.html";
 			
    		} else {
 			alert(result.error);
@@ -32,7 +34,28 @@ function login()
 	})
 	.catch(error => console.error('Error status:', error));			
 }
-function signUp()
-{
 
+function loggedVerify(){
+	var url = "../../controller/cLoggedVerifyPaciente.php";
+
+	fetch(url, {
+	  method: 'GET',  
+	})
+	.then(res => res.json()).then(result => {
+       		
+		console.log(result);
+		
+	    if (result.error == "Sesión iniciada")
+	    {
+            alert("Iniciao");
+			window.location.href = "../view/consulta.html";
+	    } else {
+		
+	    }
+	})
+	.catch(error => console.error('Error status:', error));
 }
+
+
+
+
