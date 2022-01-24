@@ -22,7 +22,6 @@ if (( $TIS !=null ) && ( $apellido !=null ) && ( $fecha !=null )){
         $_SESSION['idPaciente']=$user->getIdPaciente(); 
         $_SESSION['paciente']=$user->ObjVars(); 
         
-        $response['paciente']=$user->ObjVars(); 
         $response['error']="no error";  
         
     }  else {        

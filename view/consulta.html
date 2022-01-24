@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="calendar/calendar.css" />
 </head>
 <body ng-controller="miControlador">
-    
+  <a href="#" id="logout" class="tooltip-test" title="Tooltip"><h5>Logout</h5></a> 
     <div id="btnprincipal" class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" ng-click="Citas()">
         <label class="btn btn-outline-primary" for="btnradio1">Citas</label>
@@ -69,7 +69,7 @@
 
             <label for="start">Start date:</label>
             
-           <input type="date"  id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20">
+           <input type="date"  id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20" min="" max='2024-01-01'>
 
             <div class="tabla" ng-show="verHoras == 'si'">
               <form action="javascript:void(0);">
@@ -187,6 +187,7 @@
     
     <script src="js/jsHistorial.js"></script>
     <script src="js/jsCitas.js"></script>
+    
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
     
