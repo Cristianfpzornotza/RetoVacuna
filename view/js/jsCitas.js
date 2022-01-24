@@ -1,3 +1,30 @@
+document.addEventListener("DOMContentLoaded", function (event) {
+
+	document.getElementById("logout").addEventListener('click', logout);
+    
+    const fecha = new Date();
+    document.getElementById("start").setAttribute("min", fecha.getUTCFullYear()+"-"+fecha.getUTCMonth()+1+"-"+fecha.getUTCDate());
+});
+
+
+
+
+function logout(){
+	
+	var url = "../../controller/cLogout.php";
+	fetch(url, {
+		  method: 'GET', 
+		  headers:{'Content-Type': 'application/json'}  // input data
+		  })
+	.then(res => res.json()).then(result => {
+	
+		console.log(result.error);
+		
+		window.location.href="../../index.html";
+	})
+	.catch(error => console.error('Error status:', error));		
+}
+
 var MyApp = angular.module('miApp', []);
 MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
     
@@ -19,7 +46,7 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
 
     $http.get('../controller/cLoggedVerifyPaciente.php').then(function (response) { 
 		$scope.paciente = response.data.paciente;
-		console.log($scope.paciente.idPaciente);
+		console.log(response.data);
         idPaciente=$scope.paciente.idPaciente
         console.log(idPaciente);
 
@@ -99,11 +126,14 @@ $scope.Citas=function(){
 
 $scope.BTNCita=function(){
  $scope.verDias="si";
-	
-} 
+
+
+ 
+}
  $scope.escogerhora=function(){
     $scope.boton="si";
-       
+
+   
    }  
 
 //    citapaciente = {
@@ -113,9 +143,35 @@ $scope.BTNCita=function(){
 //     // Cod_centro : Cod_centro,
 //     // Cod_anulacion : Cod_anulacion
 // };
+
    $scope.cogerCita=function(){
 
-    var seleccionado=document.querySelectorAll("li input");
+    $http.get('../controller/cConsultarCondiciones.php').then(function (response) { 
+        $scope.condiciones = response.data.list;
+        console.log($scope.condiciones[0]);
+
+
+        if (edad>11) {
+            
+            numerodedosis=$scope.condiciones[0].DosisDesde11;
+        } else{
+            
+            numerodedosis=$scope.condiciones[0].DosisHasta11;
+        }
+
+        console.log(numerodedosis);
+        console.log($scope.lista[0].numeroDosis);
+
+        if (numerodedosis<=$scope.lista[0].numeroDosis) {
+            alert("No puedes pedir mas citas porque tienes el nemro maximo de dosis")
+
+        } else{
+            
+
+            var seleccionado=document.querySelectorAll("li input");
+    console.log(seleccionado)
+
+    
     var select="";
     
     for (let i = 0; i < seleccionado.length; i++) {
@@ -131,17 +187,42 @@ $scope.BTNCita=function(){
 
     console.log(document.getElementById("start").value)
 
-    Cod_vacuna=Math.random() * (5 - 1) + 1;
-    console.log(Cod_vacuna);
+    Cod_vacuna=Math.ceil(Math.random() * (4 - 1) + 1);
+    // console.log(Cod_vacuna);
 
-    citapaciente = {
+    console.log($scope.paciente.codMunicipio);
+    asignarcentro={
+        idPaciente : idPaciente,
+        Cod_municipio : $scope.paciente.codMunicipio,
+    }
+
+    $http.post('../controller/cAsignarCentro.php',JSON.stringify(asignarcentro)).then(function (response) { 
+        $scope.municipio = response.data.list;
+        console.log($scope.municipio[0].idMunicipio);
+
+        
+        citapaciente = {
         Fecha : document.getElementById("start").value+" "+select.value+":00.000000",
         //2022-01-20 14:19:44.000000
         Cod_paciente : idPaciente,
         Cod_vacuna : Cod_vacuna,
-        // Cod_centro : Cod_centro,
-        // Cod_anulacion : Cod_anulacion
+        Cod_centro : $scope.municipio[0].idMunicipio,
+        Cod_anulacion : Math.random() * (1000000 - 1) + 1
     };
+        
+
+
+    $http.post('../controller/cInsertarCita.php',JSON.stringify(citapaciente)).then(function (response) { 
+       
+        console.log(response.data);
+    
+        
+        
+    }); 
+        
+    });  
+
+    
 
     var hola=$scope.paciente.fechaNac
     
@@ -165,31 +246,14 @@ $scope.BTNCita=function(){
 
     var numerodedosis=""
 
-    $http.get('../controller/cConsultarCondiciones.php').then(function (response) { 
-        $scope.condiciones = response.data.list;
-        console.log($scope.condiciones[0]);
-
-
-        if (edad>11) {
             
-            numerodedosis=$scope.condiciones[0].DosisDesde11;
-        } else{
-            
-            numerodedosis=$scope.condiciones[0].DosisHasta11;
         }
 
-        console.log(numerodedosis);
-        console.log($scope.lista[0].numeroDosis);
-
-        if (numerodedosis<=$scope.lista[0].numeroDosis) {
-            alert("No puedes pedir mas citas porque tienes el nemro maximo de dosis")
-        } else(
-            alert("si")
-
-            
-        )
-
     });
+
+    
+
+    
     
        
    }  
@@ -203,8 +267,15 @@ $scope.Volver=function(){
     var x = document.getElementById("start");
     var dia="";
 $scope.hours=function(){
+    alert("change")
     $scope.verHoras="si";
-    
+    var celdas2= document.querySelectorAll("li input");
+
+    for ( let i = 0; i < celdas2.length; i++) {
+        celdas2[i].parentNode.style.backgroundColor = "white";
+        celdas2[i].disabled = false;
+        
+    }
           
         if(dias[x.valueAsDate.getDay()-1]==undefined){
             alert("Día: " + dias[6]);
@@ -250,16 +321,18 @@ console.log(dia)
                     numerio=(pruebacierre[0]-prueba[0])*4
                     $scope.horasminutos=[];
                     $scope.horasminutos[0]=time.getHours()+":"+time.getMinutes();
+
+
                 for (let i=1; i < parseInt(numerio)+1; i++) {
-                    console.log(i)
-                    console.log(numerio)
+                    //console.log(i)
+                    //console.log(numerio)
                     minutoSumar = 15;
 
                     time.setTime(time.getTime() + (minutoSumar*60*1000));  // minutos * seg * milisegundos
 
                     //function JSClock() {
                     
-                    console.log(time.getHours()+":"+time.getMinutes());
+                    //console.log(time.getHours()+":"+time.getMinutes());
 
                     $scope.horasminutos[i]=time.getHours()+":"+time.getMinutes();
 
@@ -376,12 +449,80 @@ parseInt(citas)
                     
         //         }
         // console.log(horasminutos)
+        $http.get('../controller/cRecogerCitas.php').then(function (response) { 
+            ListaCitas = response.data.list;
+               console.log(ListaCitas);
+               var espacio=[];
+              
+            for (let z = 0; z < ListaCitas.length; z++) {
+             
+                espacio=ListaCitas[z].fecha.split(" ");
             
+         
+
+
+// console.log(espacio)
+// console.log(espacio)
+
+               var celdas= document.querySelectorAll("li input");
+               var input=document.getElementById("start").value;
+            //    console.log(celdas)
+            //    console.log(input)
+               
+            for (let i = 0; i < celdas.length; i++) {
+
+                if (espacio[0] == input) {
+
+
+                    // console.log("if1")
+                    // console.log(espacio[1])
+                    var cero = [];
+                    
+                    cero=celdas[i].value.split(":");
+                    // console.log(cero)
+
+                    if ( cero[0] < 10) {
+
+                        // console.log("ifmedio")
+                        // celdas[i].value = "0" + celdas[i].value;
+                        prue="";
+                        prue="0" + celdas[i].value
+
+                        // console.log( prue + ":00")
+
+                        if (espacio[1] == prue + ":00") {
+                            // console.log("if2")
+                            // console.log(celdas[i])
+                            celdas[i].parentNode.style.backgroundColor = "red";
+                            celdas[i].disabled = true;
+                            //    alert("COLOR ROJO")
+                        }
+                    }
+
+
+                    console.log( prue + ":00")
+
+                    if (espacio[1] == celdas[i].value + ":00") {
+                        // console.log("if2")
+                        // console.log(celdas[i])
+                        celdas[i].parentNode.style.backgroundColor = "red";
+                        celdas[i].disabled = true;
+                        //    alert("COLOR ROJO")
+                    }
+                    
+                }
+            }
+
+        }
+        
+       
+       })
 
 
 
     
     });
+ 
 }   
 
 
@@ -392,338 +533,5 @@ $scope.Horas=function(){
 }
 
 
-
-//     console.log(event.target.id);
-//     dia=event.target.id;
-//     idpaciente="1" //<%= Session["UserName"] %>
-
-//     var dato = {
-//         dia: dia,
-//         idpaciente: idpaciente
-//         };
-
-//     $http.post('../controller/cConsultaHoras.php',JSON.stringify(dato)).then(function (response) { 
-        
-//         var horario= response.data.list;
-//         console.log(horario[0].horaApertura);
-
-//         apertura=horario[0].horaApertura.split(":");
-//         // apertura= parseInt(apertura[0]=apertura[0])+2
-//         cierre=horario[0].horaCierre.split(":");
-//         console.log(apertura);
-//         console.log(cierre);
-
-//         // horainicio=parseInt(apertura[0]=apertura[0])+":"+apertura[1]
-//         // horafinal=parseInt(apertura[0]=apertura[0])+2+":"+apertura[1]
-//         // console.log(horainicio);
-//         // console.log(horario);
-
-
-//         a=parseInt(apertura[0]);
-
-//         c=parseInt(cierre[0]);
-        
-
-//         console.log(a);
-//         console.log(c);
-
-//         var horas=[];
-
-//         horas[0]=a;
-//         var cont=1;
-
-//         a=a+1;
-
-//         for (a; a<c; a++) {
-            
-//             a=a+1;
-//             console.log(a);
-//             horas[cont]=a;
-            
-//             cont=cont+1;
-
-            
-
-            
-//         }
-
-//         a=a-1;
-
-//         console.log(a);
-//         console.log(c);
-
-//         if (a==c) {
-            
-//         }else{
-//            horas[cont]=c; 
-//         }
-        
-
-//         console.log(horas);
-
-//         var newrow="";
-//         var newrow2="";
-//         for (let i = 0; i < horas.length; i++) {
-
-//             console.log(i);
-
-//             if (!horas[i+1]) {
-//                 newrow+='<li class="nav-item" role="presentation">'
-//                 +'<button class="nav-link active btnhorascita" data-minutos="'+apertura[1]+'" data-start="'+horas[i]+'" id="a'+(horas[i])+":"+(apertura[1])+'-tab" data-bs-toggle="tab" data-bs-target="#a'+(horas[i])+":"+(apertura[1])+'" type="button" role="tab" aria-controls="a'+(horas[i])+":"+(apertura[1])+'" aria-selected="true">'+(horas[i])+":"+(apertura[1])+'</button>'
-//                 +'</li>'
-//             }else{
-
-//                 newrow+='<li class="nav-item" role="presentation">'
-//                     +'<button class="nav-link active btnhorascita" data-minutos="'+apertura[1]+'" data-start="'+horas[i]+'" data-end="'+horas[i+1]+'" id="a'+(horas[i])+":"+(apertura[1])+'-tab" data-bs-toggle="tab" data-bs-target="#a'+(horas[i])+":"+(apertura[1])+'" type="button" role="tab" aria-controls="a'+(horas[i])+":"+(apertura[1])+'" aria-selected="true">'+(horas[i])+":"+(apertura[1])+'-'+(horas[i+1])+":"+(cierre[1])+'</button>'
-//                 +'</li>'
-
-//             }
-
-
-
-
-
-//             i=i+1;
-
-//         console.log(newrow);
-//         document.getElementById("myTab").innerHTML=newrow;
-//         document.getElementById("myTabContent").innerHTML=newrow2;
-
-//         contenido=document.querySelectorAll("#myTabContent .fade");
-//         //console.log(contenido);
-
-//         botonescitas=document.querySelectorAll("#myTab li button");
-//         console.log(botonescitas);
-
-//         empieza="";
-//         termina="";
-//         empiezaminuto="";
-//         var b="";
-//         var d="";
-//         botonescitas.forEach(element => {
-            
-//             console.log(element);
-
-//             element.addEventListener("click", function () {
-                
-
-//                 contenido.forEach(element2 => {
-
-//                     console.log(element.dataset.start);
-//                     console.log(element2.id);
-                    
-//                     if (element.dataset.start==element2.id) {
-//                         element2.style.display="block";
-//                         empieza=element.dataset.start
-//                         termina=element.dataset.end
-//                         empiezaminuto=element.dataset.minutos
-//                         // console.log(element.dataset.start)
-//                         // console.log(element.dataset.end)
-//                     }else{
-//                         element2.style.display="none";
-//                     }
-
-//                 });
-                
-//                 variable="a"+element.dataset.start;
-//                 console.log(variable);
-
-
-//                 var b=parseInt(empieza);
-
-//                 var d=parseInt(termina);
-//                 console.log(b);
-//                 console.log(d);
-
-//                 var horasminutos=[];
-
-//                 horasminutos[0]=empiezaminuto;
-//                 var cont=1;
-        
-//                 // b=b+1;
-        
-//                 for (b; b<d; b++) {
-//                     console.log(empiezaminuto);
-//                     empiezaminuto=parseInt(empiezaminuto)+15
-//                     if (parseInt(empiezaminuto)>60) {
-                        
-//                         horasminutos[cont]=parseInt(empiezaminuto)-60;
-                    
-//                         cont=cont+1;
-//                         // b=b+1
-//                     }else{
-                        
-//                     }
-//                     // b=b+1;
-//                     // console.log(b);
-//                     // horasminutos[cont]=b;
-                    
-//                     // cont=cont+1
-                    
-//                 }
-        
-//                 b=b-1;
-//                 cont=cont-1
-        
-//                 console.log(b);
-//                 console.log(d);
-//                 console.log(horasminutos)
-//                 if (b==d) {
-                    
-//                 }else{
-//                     horasminutos[cont]=d; 
-//                 }
-
-//             });
-
-            
-            
-//         });
-        
-
-//         // var horasminutos=[];
-
-//         // horasminutos[0]=b;
-//         // var cont=1;
-
-//         // b=b+1;
-
-//         // for (b; b<d; b++) {
-            
-//         //     b=b+1;
-//         //     console.log(b);
-//         //     horasminutos[cont]=b;
-            
-//         //     cont=cont+1;
-
-            
-
-            
-//         // }
-
-//         // b=b-1;
-
-//         // console.log(b);
-//         // console.log(d);
-//         // console.log(horasminutos)
-//         // if (b==d) {
-            
-//         // }else{
-//         //     horasminutos[cont]=d; 
-//         // }
-
-//             newrow2+='<div class="tab-pane fade show active" id="'+(horas[i-1])+'" role="tabpanel" aria-labelledby="a'+(horas[i-1])+":"+(apertura[1])+'-tab">'
-//             +'<div class="horasdiv">'
-//               +''+(horas[i-1])+":"+(apertura[1])+' <button type="button" class="btn btn-success">Success</button>'
-//             +'</div>'
-//           +'</div>'
-            
-//         }
-// });
-	
-// }   
-
-
-
-
 }]);
 
-// document.addEventListener("DOMContentLoaded", function (event) {
-	
-//     loadCitas();
-// });
-
-// function loadCitas(){	
-
-//     var cita ='<button type="button" class="btn btn-primary">Perdir cita</button>'
-    
-
-//     document.getElementById("insertaraqui").innerHTML = cita; 
-	
-// 	// var url = "../controller/cHome.php";
-
-// 	// fetch(url, {
-// 	//   method: 'GET', // or 'POST'
-// 	// })
-// 	// .then(res => res.json()).then(result => {
-		
-// 	// 		console.log('Success:', result.list);
-			
-// 	// 		document.getElementById("username").innerHTML = "Hello, "+ result.username;
-			
-// 	// 		var companies = result.list;
-
-//     //    		var newRow ="<div class='d-flex flex-wrap'>";
-  			
-// 	// 		for (let i = 0; i < companies.length; i++) 
-// 	// 		{				
-// 	// 			newRow += "<div class='col-2 m-5'>\
-// 	// 							<a href='"+companies[i].objCompany.web+"' ><img class='img-fluid img-thumbnail' src='../uploads/"+companies[i].objCompany.logo+"'></a>\
-// 	// 						</div>";	
-// 	// 		}
-//     //    		newRow +="</div>";   
-//     //    		document.getElementById("companies").innerHTML = newRow; 
-// 	// })
-// 	// .catch(error => console.error('Error status:', error));	
-// };
-
-/*Calendario*/
-// console.log(document.getElementsByClassName("btncambiar"));
-// document.querySelectorAll(".btncambiar").addEventListener("change", function () {
-// 	console.log("hola")
-// 	app.init();
-	
-// })
-// document.getElementById("btncambiarm").addEventListener("change", function () {
-// 	console.log("hola")
-// 	app.swap();
-	
-// document.getElementById("calender_1_month_select").addEventListener("change", function () {
-// 	console.log("hola")
-// 	app.swap();
-	
-	
-// })
-
-// var app = {
-	
-// 	settings: {
-// 	  container: $('#calender_1'),
-// 	  calendar: $('.calendar_body'),
-// 	//   days: $('ul li a'),
-// 	  days: $('.btncalendario'),
-// 	  form: $('.back'),
-// 	  input: $('.back input'),
-// 	  buttons: $('.back button')
-// 	},
-  
-// 	init: function() {
-// 	  instance = this;
-// 	  settings = this.settings;
-// 	  this.bindUIActions();
-// 	},
-  
-// 	swap: function(currentSide, desiredSide) {
-// 	  settings.container.toggleClass('flip');
-  
-// 	  currentSide.fadeOut(900);
-// 	  currentSide.hide();
-// 	  desiredSide.show();
-  
-// 	},
-  
-// 	bindUIActions: function() {
-// 	  settings.days.on('click', function(){
-// 		  console.log(settings.days);
-// 		instance.swap(settings.calendar, settings.form);
-// 		settings.input.focus();
-// 	  });
-  
-// 	  settings.buttons.on('click', function(){
-// 		instance.swap(settings.form, settings.calendar);
-// 	  });
-// 	}
-//   }
-  
-//   app.init();
-  /*Calendario*/
