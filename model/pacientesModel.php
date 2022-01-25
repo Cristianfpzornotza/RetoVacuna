@@ -36,7 +36,7 @@ class pacientesModel extends pacientesClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
         
-        $sql="select * from pacientes where TIS='$this->TIS' and Apellidos='$this->apellido' and Fecha_nac='$this->fechaNac'";
+        $sql="select * from pacientes where TIS=$this->TIS and Apellidos='$this->apellido' and Fecha_nac='$this->fechaNac'";
                
         $result= $this->link->query($sql);
         $list=array();
@@ -47,8 +47,10 @@ class pacientesModel extends pacientesClass{
             $new->setIdPaciente($row['idPaciente']);
             $new->setName($row['Nombre']);
             $new->setFechaNac($row['Fecha_nac']);
+            $new->setCodMunicipio($row['Cod_municipio']);
 
             $this->idPaciente=$row['idPaciente'];
+            $this->codMunicipio=$row['Cod_municipio'];
 
             array_push($list, get_object_vars($new));
         }

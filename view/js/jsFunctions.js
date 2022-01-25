@@ -26,7 +26,7 @@ function login()
 		if (result.error =="no error")
    		{
 			   console.log(result);
-			window.location.href="home.html";
+			window.location.href="../view/consulta.html";
 			
    		} else {
 			alert(result.error);
@@ -48,7 +48,7 @@ function loggedVerify(){
 	    if (result.error == "Sesión iniciada")
 	    {
             alert("Iniciao");
-			window.location.href = "home.html";
+			window.location.href = "../view/consulta.html";
 	    } else {
 			
 	    }

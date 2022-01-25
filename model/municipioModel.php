@@ -69,6 +69,36 @@ class municipioModel extends municipioClass{
         //mysqli_close ($this->link);
         $this->link->close();
     }
+
+    public function asignarcentro($paciente) {
+        $this->OpenConnect();
+
+        $idMunicipio=$this->idMunicipio;
+        
+        $sql = "SELECT centro.Nombre, centro.idCentro FROM `pacientes` 
+        INNER JOIN municipio ON municipio.idMunicipio=pacientes.Cod_municipio
+        INNER JOIN centro ON centro.idCentro=municipio.Cod_centro
+        WHERE pacientes.idPaciente=$paciente and municipio.idMunicipio=$idMunicipio;";
+        
+
+        $result = $this->link->query($sql);
+
+        $list = array();
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            // echo $row['Numero_dosis'];
+
+            $municipio = new municipioModel();
+            $municipio->setIdMunicipio($row['idCentro']);
+            $municipio->setName($row['Nombre']);
+
+
+            array_push($list, get_object_vars($municipio));
+        }
+
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+    }
    
     public function ObjVars()
     {

@@ -5,15 +5,12 @@ $historial = new historialModel();
 
 $response = array();
 
-// $dato=file_get_contents('php://input');
+$dato=json_decode(file_get_contents('php://input'),true);
 // $dato=json_decode($dato);
-
-// $idCuentaBancaria=$dato->idCuentaBancaria;
-
-$paciente="1";
+$idPaciente=$dato['idpaciente'];
 
 
-$response['list']=$historial->mostrar($paciente);
+$response['list']=$historial->mostrar($idPaciente);
 $response['error']="no error";
 
 echo json_encode($response);
