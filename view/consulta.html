@@ -18,50 +18,13 @@
     <link rel="stylesheet" type="text/css" href="calendar/calendar.css" />
 </head>
 <body ng-controller="miControlador">
-  <a href="#" id="logout" class="tooltip-test" title="Tooltip"><h5>Logout</h5></a> 
-    <div id="btnprincipal" class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" ng-click="Citas()">
-        <label class="btn btn-outline-primary" for="btnradio1">Citas</label>
+  <button type="button" class="btn btn-success" style="float: right;margin: 20px;">Volver</button>
+    
+
       
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" ng-click="Historial()">
-        <label class="btn btn-outline-primary" for="btnradio2">Historial</label>
-      </div>
-
-      <div id="Historial" ng-show="ver=='si'">
-
-        
-        <h2 id="historialpaciente" >{{nombre}} {{apellidos}}</h2>
-        <table class="table" id="tablahistorial">
-            <thead>
-                <tr>
-                    
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Vacuna</th>
-                    <th scope="col">Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <div >
-                    <tr ng-repeat="item in lista">
-                        
-                        <td>{{item.numeroDosis}}º Dosis</td>
-                        <td>{{item.objVacuna.name}}</td>
-                        <td>{{item.fecha}}</td>
-                    </tr>
-                </div>
-                
-            </tbody>
-        </table>
-
-      </div>
       <div id="Citas" ng-show="verdos=='si'">
         
-        <div id="citabtn">
-          <button type="button" class="btn btn-primary" id="btnpedircita" ng-click="BTNCita()">Pedir cita</button>
-
-          Anular cita:<input type="text" placeholder="Codigo" >
-        </div>
+        
 
         <div>        
 
@@ -69,7 +32,7 @@
 
             <label for="start">Start date:</label>
             
-           <input type="date"  id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20" min="" max='2024-01-01'>
+           <input type="date" class="form-control" style="width: 300px;" id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20" min="" max='2024-01-01'>
 
             <div class="tabla" ng-show="verHoras == 'si'">
               <form action="javascript:void(0);">
