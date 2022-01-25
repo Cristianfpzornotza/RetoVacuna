@@ -1,10 +1,12 @@
 <?php
 include_once 'connect_data.php';
 include_once 'historialClass.php';
+include_once 'vacunaModel.php';
 
 class historialModel extends historialClass{
 
     private $link;
+    private $ObjVacuna;
 
     public function OpenConnect()
     {
@@ -29,6 +31,39 @@ class historialModel extends historialClass{
         $this->link->close();
     }
    
+    public function setHistorialById(){
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        $sql="select historial.*, vacuna.Nombre FROM `historial` INNER JOIN vacuna ON vacuna.idVacuna=historial.Cod_vacuna WHERE historial.`Cod_paciente`=$this->codPaciente";
+        
+        $result= $this->link->query($sql);
+        $list=array();
+       
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+
+            $history = new historialModel();
+            $history->setFecha($row['Fecha']);
+            //$history->setCodVacuna($row['Cod_vacuna']);
+            $history->setNumeroDosis($row['Numero_dosis']);
+
+            $vacuna = new vacunaModel();
+            $vacuna->setName($row['Nombre']);
+            
+            $history->ObjVacuna=$vacuna->ObjVars();
+
+            array_push($list, get_object_vars($history));
+            
+        }
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+    }
+
+
+
+
     public function ObjVars()
     {
         return get_object_vars($this);

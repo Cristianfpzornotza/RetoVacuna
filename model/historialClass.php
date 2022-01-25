@@ -5,7 +5,7 @@ class historialClass{
    protected $idHistorial;
    protected $fecha;
    protected $codPaciente;
-   protected $tipo;
+   protected $codVacuna;
    protected $numeroDosis;
 
 
@@ -45,17 +45,7 @@ class historialClass{
       return $this;
    }
 
-   public function getTipo()
-   {
-      return $this->tipo;
-   }
-
-   public function setTipo($tipo)
-   {
-      $this->tipo = $tipo;
-
-      return $this;
-   }
+  
 
    public function getNumeroDosis()
    {
@@ -69,4 +59,17 @@ class historialClass{
       return $this;
    }
 
+
+   public function getCodVacuna()
+   {
+      return $this->codVacuna;
+   }
+
+
+   public function setCodVacuna($codVacuna)
+   {
+      $this->codVacuna = $codVacuna;
+
+      return $this;
+   }
 }

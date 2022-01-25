@@ -50,7 +50,7 @@ function loggedVerify(){
             alert("Iniciao");
 			window.location.href = "home.html";
 	    } else {
-		
+			
 	    }
 	})
 	.catch(error => console.error('Error status:', error));

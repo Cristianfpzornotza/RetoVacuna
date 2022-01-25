@@ -7,10 +7,11 @@ class pacientesClass{
    protected $fechaPos;
    protected $name;
    protected $apellido;
+   protected $apellido2;
    protected $fechaNac;
    protected $codMunicipio;
    protected $DNI;
-
+   protected $img;
 
    public function getIdPaciente()
    {
@@ -108,4 +109,32 @@ class pacientesClass{
       return $this;
    }
    
+
+   
+   public function getApellido2()
+   {
+      return $this->apellido2;
+   }
+
+   
+   public function setApellido2($apellido2)
+   {
+      $this->apellido2 = $apellido2;
+
+      return $this;
+   }
+
+
+   public function getImg()
+   {
+      return $this->img;
+   }
+
+   
+   public function setImg($img)
+   {
+      $this->img = $img;
+
+      return $this;
+   }
 }
