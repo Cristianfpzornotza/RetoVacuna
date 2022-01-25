@@ -8,6 +8,7 @@ class citasClass{
     protected $codVacuna;
     protected $codCentro;
     protected $codAnulacion;
+    protected $numero_dosis;
 
 
     public function getIdCitas()
@@ -82,4 +83,16 @@ class citasClass{
         return $this;
     }
 
+    public function getNumero_dosis()
+    {
+        return $this->numero_dosis;
+    }
+
+    
+    public function setNumero_dosis($numero_dosis)
+    {
+        $this->numero_dosis = $numero_dosis;
+
+        return $this;
+    }
 }
