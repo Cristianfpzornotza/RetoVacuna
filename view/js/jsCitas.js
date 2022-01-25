@@ -230,7 +230,7 @@ $scope.BTNCita=function(){
         Cod_municipio : $scope.paciente.codMunicipio,
     }
 
-    $http.post('../controller/cAsignarCentro.php',JSON.stringify(asignarcentro)).then(function (response) { 
+    $http.post('../controller/cAsignarCentro2.php',JSON.stringify(asignarcentro)).then(function (response) { 
         $scope.municipio = response.data.list;
         console.log($scope.municipio[0].idMunicipio);
 
