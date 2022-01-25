@@ -4,6 +4,7 @@ class centroClass{
 
    protected $idCentro;
    protected $name;
+   protected $img;
    
 
    public function getIdCentro()
@@ -30,4 +31,15 @@ class centroClass{
       return $this;
    }
 
+   public function getImg()
+   {
+      return $this->img;
+   }
+
+   public function setImg($img)
+   {
+      $this->img = $img;
+
+      return $this;
+   }
 }

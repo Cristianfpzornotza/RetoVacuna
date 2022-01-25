@@ -1,8 +1,8 @@
 <?php
 include_once 'connect_data.php';
-include_once 'municipioClass.php';
+include_once 'administraClass.php';
 
-class municipioModel extends municipioClass{
+class administraModel extends administraClass{
 
     private $link;
 
@@ -21,48 +21,23 @@ class municipioModel extends municipioClass{
         }
         $this->link->set_charset("utf8"); // honek behartu egiten du aplikazio eta 
         //                  //databasearen artean UTF -8 erabiltzera datuak trukatzeko
-    }    
+    }      
     
-    public function listmunicipios(){
+
+    public function asignarcentro(){
         $this->OpenConnect();
 
-        $sql="select * from municipio";
+        $sql="insert INTO administra(Cod_centro, Cod_usuario) VALUES ($this->Codcentro,$this->Codusuario)";
 
         $result= $this->link->query($sql);
 
-        $list=array();
-       
-        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-        {
-            
-            $municipio = new municipioModel();
-            $municipio->setIdMunicipio($row['idMunicipio']);
-            $municipio->setName($row['Nombre']);
-            $municipio->setCodCentro($row['Cod_centro']);
-
-            array_push($list, get_object_vars($municipio));
-            
-        }
-        mysqli_free_result($result);
-        $this->CloseConnect();
-        return $list;
-       
-
-    }
-
-    public function insertarmunicipio(){
-        $this->OpenConnect();
-
-        echo $this->name,$this->codCentro;
-
-        $sql="insert INTO municipio(Nombre, Cod_centro) VALUES ('$this->name',$this->codCentro)";
-
-        $result= $this->link->query($sql);
 
         $this->CloseConnect();
         return "no error";
        
+
     }
+
  
     public function CloseConnect()
     {

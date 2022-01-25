@@ -1,17 +1,19 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
+	loggedVerify();
 	document.getElementById("login").addEventListener('click', login);
-	document.getElementById("signUp").addEventListener('click', function(){
+	/*document.getElementById("signUp").addEventListener('click', function(){
 		window.location.href="view/newUser.html";
-	});
+	});*/
 });
 function login()
 {
-	var username=document.getElementById("username").value;
-	var password=document.getElementById("password").value;
+	var TIS=document.getElementById("TIS").value;
+	var Apellido=document.getElementById("apellido").value;
+	var Fecha=document.getElementById("fecha").value;
 	
-	var url = "controller/cLogin.php";
-	var data = {'username':username, 'password':password};
+	var url = "../../controller/cLoginPaciente.php";
+	var data = {'TIS':TIS, 'apellido':Apellido, 'fecha':Fecha};
 	
 	fetch(url, {
 		  method: 'POST', // or 'POST'
@@ -23,7 +25,8 @@ function login()
 		alert(result.error); 		
 		if (result.error =="no error")
    		{
-			window.location.href="view/home.html";
+			   console.log(result);
+			window.location.href="home.html";
 			
    		} else {
 			alert(result.error);
@@ -31,7 +34,28 @@ function login()
 	})
 	.catch(error => console.error('Error status:', error));			
 }
-function signUp()
-{
 
+function loggedVerify(){
+	var url = "../../controller/cLoggedVerifyPaciente.php";
+
+	fetch(url, {
+	  method: 'GET',  
+	})
+	.then(res => res.json()).then(result => {
+       		
+		console.log(result);
+		
+	    if (result.error == "Sesión iniciada")
+	    {
+            alert("Iniciao");
+			window.location.href = "home.html";
+	    } else {
+		
+	    }
+	})
+	.catch(error => console.error('Error status:', error));
 }
+
+
+
+

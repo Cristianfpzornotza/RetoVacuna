@@ -1,0 +1,135 @@
+html {
+    background-color: rgb(112, 157, 255);
+}
+
+body #contenedor{
+    background-color: rgb(112, 157, 255);
+}
+
+#admincentro div .banner{
+    background-color: #252591;
+    color: white;
+    font-size: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#admincentro{
+    width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+#admincentro p{
+    text-align: end;
+    margin-bottom: 10px;
+}
+
+#formulario{
+    padding: 40px;
+}
+
+#formulario div{
+    padding: 10px;
+}
+
+#formulario2{
+    padding: 40px;
+}
+
+#formulario2 div{
+    margin: auto;
+    padding: 10px;
+}
+
+#formulario2 div p{
+    text-align: center;
+    margin: 0;
+}
+
+#admingeneral div .banner{
+    background-color: #252591;
+    color: white;
+    font-size: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#form2{
+    
+}
+
+#admingeneral{
+    width: 1200px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+#admingeneral p{
+    text-align: end;
+    margin-bottom: 10px;
+}
+
+.content{
+    padding: 20px;
+    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+}
+
+.content .carta{
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(228, 232, 255);
+    border-radius: 5px;
+}
+
+.content .carta h4{
+    padding: 10px;
+}
+
+.content .carta button{
+    padding: 10px;
+}
+
+.content .carta:hover{
+    box-shadow: 15px 15px 30px black;
+}
+
+#flexbotones{
+    display: flex;
+    justify-content: space-between;
+}
+
+#flexbotones button{
+    padding: 10px;
+}
+
+.content img{
+    width: 100%;
+    height: 200px;
+}
+
+.content .carta{
+    text-align: center;
+}
+
+.content .carta button{
+    margin-top: 20px;
+    width: 35%;
+}
+
+#tablebody{
+    height: 100px;
+    overflow: scroll;
+}

@@ -1,0 +1,163 @@
+body{
+    /*background-image: url(https://cdn3.vectorstock.com/i/thumb-large/36/07/colored-pills-seamless-wallpaper-pattern-vector-27843607.jpg);
+*/background-color: rgb(176, 210, 255);
+}
+
+.navlinks{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+#footer{
+    background-color: rgb(48, 48, 48);
+}
+
+.navlinks:hover{
+    color: white;
+}
+
+.nav-tabs{
+    border: none;
+}
+
+nav li a{
+    padding: 0;
+}
+/*
+nav li:hover{
+    background-image: linear-gradient(to right, rgb(245, 245, 245), rgba(0, 162, 255, 0.692));
+    
+    border-radius: 20px;
+}*/
+
+#containerweb{
+    border-radius: 10px;
+    box-shadow: 0 0 35px rgb(0, 0, 0);
+}
+
+#divgrande{
+    border-radius: 10px;
+}
+
+#carouselExampleControls{
+    width: 65%;
+    margin: auto;
+}
+
+#myTab li{
+    width: 30%;
+}
+
+#myTab li button{
+    border: none;
+    width: 100%;
+    padding: 30px;
+    color: black;
+}
+
+#myTab li #home-tab{
+    background-color: lightblue;
+}
+
+#myTab li #profile-tab{
+    background-color: rgb(255, 246, 117);
+}
+
+#myTab li #contact-tab{
+    background-color: rgb(148, 255, 133);
+}
+
+#citavacunas{
+    padding: 50px;
+}
+
+#myTabContent{
+    background-color: lightblue;
+    margin: 1.65%;
+    margin-top: 0;
+}
+
+#myTabContent div{
+    width: 75%;
+    margin: auto;
+}
+
+#home{
+    margin: auto;
+    background-color: lightblue;
+}
+
+#hospitalzona{
+    border: none;
+}
+
+#citavacunas{
+    background-repeat: no-repeat;
+    background-position-x: 0%;
+    background-position-y: 50%;
+    background-size: 30%;
+    background-color: lightblue;
+}
+
+#citavacunas:hover{
+    transition: 0.5s;
+    box-shadow: 15px 15px 30px black;
+}
+
+#divvachis div{
+    height: 250px;
+}
+
+#hospitalzona{
+    padding: 50px;
+}
+
+#hospitalzona:hover{
+    transition: 0.5s;
+    box-shadow: -15px 15px 30px black;
+}
+
+.halo{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.halo2{
+    font-size: 15px;
+}
+
+.btncita{
+    width: 75px;
+}
+
+#footer{
+    margin-top: 50px;
+}
+
+.container-fluid{
+    padding: 0;
+}
+
+.navegador{
+    font-size: 18px;
+}
+
+#navbarNavDropdown .navbar-nav .dropdown .dropdown-menu{
+    width: 280px;
+    margin-left: -70px;
+    margin-top: 30px;
+    background-color: rgb(49, 121, 255);
+    color: white;
+    border: 2px solid rgb(0, 238, 255);
+}
+
+#dropdownlogin li {
+    width: 80%;
+    margin: auto;
+}
+
+.dropdown-toggle::after{
+    display: none;
+}
+

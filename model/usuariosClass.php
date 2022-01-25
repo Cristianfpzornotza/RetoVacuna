@@ -5,6 +5,7 @@ class usuariosClass{
    protected $idUsuario;
    protected $name;
    protected $contrasena;
+   protected $categoria;
 
     
    public function getIdUsuario()
@@ -43,4 +44,17 @@ class usuariosClass{
       return $this;
    }
    
+
+   public function getCategoria()
+   {
+      return $this->categoria;
+   }
+
+   
+   public function setCategoria($categoria)
+   {
+      $this->categoria = $categoria;
+
+      return $this;
+   }
 }
