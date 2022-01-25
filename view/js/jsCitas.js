@@ -161,11 +161,33 @@ $scope.BTNCita=function(){
 
         console.log(numerodedosis);
         console.log($scope.lista[0].numeroDosis);
+        var e = new Date()
+        var ultimadosis2="";
+        for (let i = 0; i < $scope.lista.length; i++) {
+            
+            console.log($scope.lista[i].fecha);
+            // var e = new Date()
+            // ultimadosis=e.setMonth(e.getMonth() + 6)
+            // console.log(ultimadosis);
 
+            ultimadosis2=$scope.lista[i].fecha;
+
+        }
+
+        var ultimadosis3=ultimadosis2.split(" ");
+        var ultimadosis3fecha=ultimadosis3[0].split("-");
+        var ultimadosis3horas=ultimadosis3[1].split(":");
+        ultimadosis=new Date(ultimadosis3fecha[0],ultimadosis3fecha[1],ultimadosis3fecha[2],ultimadosis3horas[0],ultimadosis3horas[1],ultimadosis3horas[2])
+        console.log(ultimadosis);
+        console.log(e);
         if (numerodedosis<=$scope.lista[0].numeroDosis) {
-            alert("No puedes pedir mas citas porque tienes el nemro maximo de dosis")
+            alert("No puedes pedir mas citas porque tienes el nemro maximo de dosis");
 
-        } else{
+        } 
+        else if (ultimadosis.getTime()+2629800000>e.getTime()) {
+            alert("No han pasado seis meses desde tu ultima dosis");
+        }    
+        else{
             
 
             var seleccionado=document.querySelectorAll("li input");
@@ -184,6 +206,18 @@ $scope.BTNCita=function(){
     console.log(select.value)
 
     alert("SE HA PEDIDO LA CITA CORRECTAMENTE")
+
+    var celdas3= document.querySelectorAll("li input");
+
+    for ( let i = 0; i < celdas3.length; i++) {
+        if(celdas3[i].checked==true){
+            
+            celdas3[i].parentNode.style.backgroundColor = "red";
+            celdas3[i].disabled = true;
+        }
+        
+        
+    }
 
     console.log(document.getElementById("start").value)
 
