@@ -129,3 +129,22 @@ body #contenedor{
     height: 100px;
     overflow: scroll;
 }
+
+#padrehoras{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+#padrehoras a div{
+    width: 100%;
+    margin: 0;
+}
+
+#padrehoras a{
+    padding: 2px;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+}
+
