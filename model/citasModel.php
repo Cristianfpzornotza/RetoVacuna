@@ -1,11 +1,18 @@
 <?php
 include_once 'connect_data.php';
 include_once 'citasClass.php';
-
+include_once 'pacientesModel.php';
+include_once 'vacunaModel.php';
+include_once 'centroModel.php';
+include_once 'historialModel.php';
 class citasModel extends citasClass{
 
     private $link;
 
+    private $objPaciente;
+    private $objVacuna;
+    private $objCentro;
+    private $objHistorial;
     public function OpenConnect()
     {
         $konDat=new connect_data();
@@ -92,7 +99,68 @@ class citasModel extends citasClass{
 
     }
     
+    public function listCitasPaciente($paciente) {
+        $this->OpenConnect();
+        
+        $sql = "SELECT citas.*, centro.Nombre AS Lugar, CONCAT_WS(' ', pacientes.Nombre, pacientes.Apellidos) AS SOLICITANTE, historial.Numero_dosis AS DOSIS
+        FROM citas
+        INNER JOIN pacientes
+        ON pacientes.idPaciente=citas.Cod_paciente
+        INNER JOIN vacuna
+        ON vacuna.idVacuna=citas.Cod_vacuna
+        INNER JOIN centro
+        ON centro.idCentro=citas.Cod_centro
+        INNER JOIN historial
+        ON historial.Numero_dosis=vacuna.Numero
+        WHERE pacientes.idPaciente=$paciente;";
+        
+
+        $result = $this->link->query($sql);
+
+        $list = array();
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            // echo $row['Numero_dosis'];
+
+            $historial = new historialModel();
+
+            $cita = new citasModel();
+            $cita->setIdCitas($row['idCitas']);
+            $cita->setFecha($row['Fecha']);
+            $cita->setCodPaciente($row['Cod_paciente']);
+            $cita->setCodVacuna($row['Cod_vacuna']);
+            $cita->setCodCentro($row['Cod_centro']);
+            $cita->setCodAnulacion($row['Cod_anulacion']);
+
+            $vacuna = new vacunaModel();
+            $vacuna->setIdVacuna($row['Cod_vacuna']);
+
+            $cita->objVacuna=$vacuna->ObjVars();            
+
+            $paciente = new pacientesModel();
+            $paciente->setName($row['SOLICITANTE']);
+            //$paciente->setApellido($row['Apellidos']);
+
+            $cita->objPaciente=$paciente->ObjVars();
+
+            $centro = new centroModel();
+            $centro->setIdCentro($row['Cod_centro']);
+            $centro->setName($row['Lugar']);
+           
+            $cita->objCentro=$centro->ObjVars();
+
+            $historial = new historialModel();
+            $historial->setNumeroDosis($row['DOSIS']);
+
+            $cita->objHistorial=$historial->ObjVars();
+            array_push($list, get_object_vars($cita));
+        }
+
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+    }
        
+
 
     
     public function ObjVars()

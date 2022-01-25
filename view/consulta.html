@@ -97,11 +97,102 @@
 
       </div>
 
-      <div id="Citas" ng-show="verCitas=='si'">
-
-
-
+      <div  ng-show="verCitas=='si'">
+        <div class="nav">
+          <nav class="navbar navbar-expand-lg navbar-light p-0">
+            <div class="container-fluid justify-content-between h-100 w-100">
+              <a class="navbar-brand" href="#">				
+                <img class="ms-5" src="/view/img/logohospitalazul.png" alt="" height="60px" width="60px">
+                  </a>
         
+              <div class="me-5 navegador">
+        
+             
+        
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+               
+              <ul class="navbar-nav">
+                <h1>Cita Previa</h1>
+                <!-- <li class="nav-item">
+                <a class="nav-link text-black" aria-current="page" href="#">Centro de Salud</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-black" href="#">Yo que se ahi </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-black" href="#">Cita Vacunas</a>
+                </li>
+                <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Inicio de Sesión
+                  <i class="bi bi-box-arrow-in-right mt-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                  </svg>
+                </i>
+                </a>
+                <ul id="dropdownlogin" class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
+                  <li>
+                    <h3>Login</h3>
+                    <hr>
+                  </li>
+                  <li>
+                    <label for="">Usuario:</label>	<br>
+                    <input class="form-control mb-2" type="text" id="username">
+                    <label for="">Contraseña:</label><br>
+                    <input class="form-control" type="password" id="password">
+                  </li>
+        
+                  <li class="text-center">
+                    <button id="btnlogin" class="btn btn-info w-100 mt-3 mb-2">Login</button>
+                  </li>
+                </ul>
+                </li>
+                <li class="nav-item d-flex">
+                <a class="nav-link" href="#">Login
+                  <i class="bi bi-box-arrow-in-right mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                      <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                    </svg>
+                  </i>
+                </a>
+                </li>--> 
+              </ul>
+              </div>
+            </div>
+            </div>
+          </nav>	
+        </div>
+        <div  class="padre">
+        <p>Citas Confirmadas()</p>
+        <div ng-repeat="item in cita" class="contenedores">
+        <div class="contenedorpadre">
+          <div>SOLICITANTE:{{item.objPaciente.name}}</div>
+          
+          <!-- <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> -->
+        </div>
+        <div class="contenedorpadre">
+          <div>Lugar:{{item.objCentro.name}}</div>
+          <div>Cita:{{item.objHistorial.numeroDosis}}</div>
+          <div>Dia:{{item.fecha}}</div>
+          <div>Hora:{{item.fecha}}</div>
+          <div>*Codigo de cita:{{item.codAnulacion}}</div>
+          
+          <!-- <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> -->
+        </div>
+        <div class="contenedorpadre">
+          <div>Lugar:{{item.objCentro.name}}</div>
+          <div>Cita:{{item.objHistorial.numeroDosis}}</div>
+          <div>Dia:{{item.fecha}}</div>
+          <div>Hora:{{item.fecha}}</div>
+          <!-- <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> -->
+        </div>
+      </div>
 
       </div>
             <!--<script>
