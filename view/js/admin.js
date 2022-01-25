@@ -129,6 +129,8 @@ var filename="";
             $http.post('../../controller/cUpdateCentro.php',centroupdate).then(function (response) { 
                 
                 $scope.listapacientes=response.data.datos;
+
+                window.location.href="prueba.html";
         
             });
 
@@ -223,9 +225,28 @@ var filename="";
 
             $http.post('../../controller/cAsignarCentro.php',datosasignar).then(function (response) { 
                 
-
-                
+                window.location.href="prueba.html";
             });
+
+        }
+
+        $scope.insertaradmin=function(){
+
+            datosadmin = {
+
+                nombre : $scope.adminnombre,
+                contraseña : $scope.adminpassword
+
+            };
+
+            console.log(datosadmin);
+
+            $http.post('../../controller/cInsertarAdmin.php',datosadmin).then(function (response) { 
+                
+
+                window.location.href="prueba.html";
+            });
+
 
         }
 
@@ -247,6 +268,8 @@ var filename="";
                 $scope.pacienteinsert = response.data.error;
 
                 console.log($scope.pacienteinsert);
+
+                window.location.href="prueba.html";
             });
 
         }
@@ -285,6 +308,8 @@ var filename="";
                 $scope.centroinsert = response.data.error;
 
                 console.log($scope.centroinsert);
+
+                window.location.href="prueba.html";
             });
 
         }

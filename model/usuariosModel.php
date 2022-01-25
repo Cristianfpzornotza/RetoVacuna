@@ -57,10 +57,23 @@ class usuariosModel extends usuariosClass{
         return $idUsuario;
     }
 
+    public function insertaradmin(){
+        $this->OpenConnect();
+
+        $sql="insert INTO usuario(Nombre, Contrasena, Categoria) VALUES ('$this->name','$this->contrasena','AdminCentro')";
+
+        $result= $this->link->query($sql);
+
+        $this->CloseConnect();
+        return "no error";
+       
+
+    }
+
     public function listUsuarios(){
         $this->OpenConnect();
 
-        $sql="select * from usuario";
+        $sql="select * from usuario where Categoria='AdminCentro'";
 
         $result= $this->link->query($sql);
 

@@ -155,7 +155,6 @@
                                                 <td>{{item.fecha}}</td>
                                                 <td>{{item.objVacuna.name}}</td>
                                                 <td>1º</td>
-                                                <td><button ng-click="pacientevistas()" class="btn btn-success">Confirmar asistencia</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -268,7 +267,39 @@
 
                 </div>
 
-                <div class="banner">Asignar centro a administradores</div>
+                <div class="banner" style="display: flex; justify-content: space-between;"><div>Asignar centro a administradores</div> 
+                    <button style="margin: 5px;" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">insertar administrador</button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">Insertar nuevo administrador</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <p>
+                                    <h5>Nombre</h5>
+                                    <input ng-model="adminnombre" type="text" class="form-control">                                    
+                                </p>
+                                
+                                <p>
+                                    <h5>Contraseña</h5>
+                                    <input ng-model="adminpassword" type="password" class="form-control">
+                                </p>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" ng-click="insertaradmin()" class="btn btn-success">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="p-4">
 
