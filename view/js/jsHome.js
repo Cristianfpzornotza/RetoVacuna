@@ -11,7 +11,11 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 	$scope.crearcita="no";
 	$scope.volver="no";
 	
+	$scope.redirect=function(){
 
+		window.location.href="view/consulta.html";
+
+	}
 
 	$http.get('../../controller/cLoggedVerifyPaciente.php').then(function (response) { 
 

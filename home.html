@@ -79,7 +79,7 @@
 
                     <div class="d-flex justify-content-between banner p-2">
 						<div class="banner">Citas paciente</div>
-						<button ng-click="crearcita='si'; verpaciente='no'; volver='si'" class="btn btn-primary">Pedir cita</button>
+						<button ng-click="redirect()" class="btn btn-primary">Pedir cita</button>
 						<div class="d-flex" style="width: 40%;">
 							<input ng-model="codigoanulacion" id="cod_anu" class="form-control" type="number" style="width: 70%; border-top-right-radius: 0; border-bottom-right-radius: 0;" placeholder="Código de anulación">
 							<button ng-click="borrarcita()" id="cancelarcita" class="btn btn-danger" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Cancelar Cita</button>
@@ -121,7 +121,7 @@
 
 
 
-			<div ng-show="crearcita=='si'">
+			<!-- <div ng-show="crearcita=='si'">
 				<div class="d-flex justify-content-between banner">
 					<div class="banner">Pedir Cita</div>
 				</div>
@@ -179,11 +179,12 @@
 
 
 
-        </div> 
-
- </a>       
+        </div>  -->
+    
 
     </div>
+
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

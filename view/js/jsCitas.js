@@ -178,8 +178,8 @@ $scope.BTNCita=function(){
         var ultimadosis3fecha=ultimadosis3[0].split("-");
         var ultimadosis3horas=ultimadosis3[1].split(":");
         ultimadosis=new Date(ultimadosis3fecha[0],ultimadosis3fecha[1],ultimadosis3fecha[2],ultimadosis3horas[0],ultimadosis3horas[1],ultimadosis3horas[2])
-        console.log(ultimadosis);
-        console.log(e);
+        console.log(numerodedosis);
+        console.log($scope.lista[0].numeroDosis);
         if (numerodedosis<=$scope.lista[0].numeroDosis) {
             alert("No puedes pedir mas citas porque tienes el nemro maximo de dosis");
 
