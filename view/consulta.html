@@ -97,7 +97,7 @@
 
       </div>
 
-      <div  ng-show="verCitas=='si'">
+      <div ng-show="verCitas=='si'">
         <div class="nav">
           <nav class="navbar navbar-expand-lg navbar-light p-0">
             <div class="container-fluid justify-content-between h-100 w-100">
@@ -170,12 +170,11 @@
         </div>
         <div  class="padre">
         <p>Citas Confirmadas()</p>
-        <div ng-repeat="item in cita" class="contenedores">
-        <div class="contenedorpadre">
+         <div class="contenedores" id="container">
+        <!-- <div class="contenedorpadre">
           <div>SOLICITANTE:{{item.objPaciente.name}}</div>
-          
-          <!-- <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> -->
-        </div>
+          </div>
+          <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> 
         <div class="contenedorpadre">
           <div>Lugar:{{item.objCentro.name}}</div>
           <div>Cita:{{item.objHistorial.numeroDosis}}</div>
@@ -183,17 +182,17 @@
           <div>Hora:{{item.fecha}}</div>
           <div>*Codigo de cita:{{item.codAnulacion}}</div>
           
-          <!-- <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> -->
+         <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> 
         </div>
         <div class="contenedorpadre">
           <div>Lugar:{{item.objCentro.name}}</div>
           <div>Cita:{{item.objHistorial.numeroDosis}}</div>
           <div>Dia:{{item.fecha}}</div>
           <div>Hora:{{item.fecha}}</div>
-          <!-- <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> -->
-        </div>
+          <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png">
+        </div> -->
       </div>
-
+ 
       </div>
             <!--<script>
                 var c = new Calender();

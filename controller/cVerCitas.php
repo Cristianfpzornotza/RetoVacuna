@@ -6,7 +6,10 @@ $response=array();
 
 $cita = new citasModel();
 $idPaciente=$data['idpaciente'];
-$response['list']=$cita->listCitasPaciente($idPaciente);
+
+$cita->setCodPaciente($idPaciente);
+
+$response['list']=$cita->listCitasPaciente();
 $response['error']="no error";
 echo json_encode($response);
 

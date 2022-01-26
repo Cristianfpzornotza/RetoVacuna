@@ -66,7 +66,6 @@ class citasModel extends citasClass{
     }
 
 
-
     
     public function listCitas(){
         $this->OpenConnect();
@@ -99,7 +98,7 @@ class citasModel extends citasClass{
 
     }
     
-    public function listCitasPaciente($paciente) {
+    public function listCitasPaciente() {
         $this->OpenConnect();
         
         $sql = "SELECT citas.*, centro.Nombre AS Lugar, CONCAT_WS(' ', pacientes.Nombre, pacientes.Apellidos) AS SOLICITANTE, historial.Numero_dosis AS DOSIS
@@ -112,7 +111,7 @@ class citasModel extends citasClass{
         ON centro.idCentro=citas.Cod_centro
         INNER JOIN historial
         ON historial.Numero_dosis=vacuna.Numero
-        WHERE pacientes.idPaciente=$paciente;";
+        WHERE pacientes.idPaciente=$this->codPaciente and citas.Fecha='$this->fecha'";
         
 
         $result = $this->link->query($sql);
@@ -121,7 +120,6 @@ class citasModel extends citasClass{
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             // echo $row['Numero_dosis'];
 
-            $historial = new historialModel();
 
             $cita = new citasModel();
             $cita->setIdCitas($row['idCitas']);
@@ -152,6 +150,7 @@ class citasModel extends citasClass{
             $historial->setNumeroDosis($row['DOSIS']);
 
             $cita->objHistorial=$historial->ObjVars();
+
             array_push($list, get_object_vars($cita));
         }
 
