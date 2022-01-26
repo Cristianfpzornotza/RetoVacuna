@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    
+    document.getElementById("logout").addEventListener('click', logout);
 
     const fecha = new Date();
-    
     document.getElementById("start").setAttribute("min", fecha.getUTCFullYear() + "-" + fecha.getUTCMonth() + 1 + "-" + fecha.getUTCDate());
 });
+
+var FechaCita="";
+var citapaciente=[];
 
 
 
@@ -86,9 +88,9 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
                 
             } else {
                 $scope.nombre = $scope.lista[0].objPaciente.nombre;
-            $scope.apellidos = $scope.lista[0].objPaciente.apellidos;
-            console.log($scope.nombre);
-            console.log($scope.apellidos);
+                $scope.apellidos = $scope.lista[0].objPaciente.apellidos;
+                console.log($scope.nombre);
+                console.log($scope.apellidos);
             }
 
             
@@ -143,24 +145,60 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
                 numerodedosis = $scope.condiciones[0].DosisDesde11;
             } else {
         
+                numerodedosis=$scope.condiciones[0].DosisHasta11;
+            }
+
+            console.log(numerodedosis);
+            // console.log($scope.lista[0].numeroDosis);
+            var e = new Date()
+            var ultimadosis2="";
+            for (let i = 0; i < $scope.lista.length; i++) {
+                
+                console.log($scope.lista[i].fecha);
+                // var e = new Date()
+                // ultimadosis=e.setMonth(e.getMonth() + 6)
+                // console.log(ultimadosis);
+
+                ultimadosis2=$scope.lista[i].fecha;
+
+            }
+
+        if ($scope.lista.length==0) {
             
-                    numerodedosis=$scope.condiciones[0].DosisHasta11;
-                }
+            var seleccionado = document.querySelectorAll("li input");
+                console.log(seleccionado)
 
-        console.log(numerodedosis);
-        // console.log($scope.lista[0].numeroDosis);
-        var e = new Date()
-        var ultimadosis2="";
-        for (let i = 0; i < $scope.lista.length; i++) {
+    var celdas3= document.querySelectorAll("li input");
+
+    for ( let i = 0; i < celdas3.length; i++) {
+        if(celdas3[i].checked==true){
             
-            console.log($scope.lista[i].fecha);
-            // var e = new Date()
-            // ultimadosis=e.setMonth(e.getMonth() + 6)
-            // console.log(ultimadosis);
-
-            ultimadosis2=$scope.lista[i].fecha;
-
+            celdas3[i].parentNode.style.backgroundColor = "red";
+            celdas3[i].disabled = true;
         }
+        
+        
+    }
+
+    console.log(document.getElementById("start").value)
+
+                var select = "";
+
+                for (let i = 0; i < seleccionado.length; i++) {
+
+                    if (seleccionado[i].checked == true) {
+                        select = seleccionado[i];
+                    }
+
+                }
+                console.log(select.value)
+
+                alert("SE HA PEDIDO LA CITA CORRECTAMENTE")
+
+                console.log(document.getElementById("start").value)
+
+                Cod_vacuna = Math.ceil(Math.random() * (4 - 1) + 1);
+                // console.log(Cod_vacuna);
 
         if ($scope.lista.length==0) {
             
@@ -224,6 +262,30 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
 
                         console.log(response.data);
 
+                        $scope.cita=response.data.list;
+                        var fechahora= $scope.cita[0].fecha.split(" ");
+
+                        console.log(fechahora);
+
+                        newrow="<div class='contenedorpadre'><div>SOLICITANTE:"+$scope.cita[0].objPaciente.name+"</div></div>"
+                  
+                            
+                        newrow+="<div class='contenedorpadre'><div>Lugar:"+$scope.cita[0].objCentro.name+"</div><div>Cita:"+$scope.cita[0].objHistorial.numeroDosis+"</div><div>Dia:"+fechahora[0]+"</div><div>Hora:"+fechahora[1]+"</div><div>*Codigo de cita:"+$scope.cita[0].codAnulacion+"</div></div>"
+                            
+                        
+                        document.getElementById("container").innerHTML=newrow;
+                        
+                        
+                        // document.getElementById("container").innerHTML="<div>SOLICITANTE:"+$scope.cita.objPaciente.name+"</div><div class='contenedorpadre'><div>Lugar:"+$scope.cita.objCentro.name+"</div><div>Cita:"+$scope.cita.objHistorial.numeroDosis+"</div><div>Dia:"+$scope.cita.fecha+"</div><div>Hora:"+$scope.cita.fecha+"</div><div>*Codigo de cita:"+$scope.cita.codAnulacion+"</div></div>";
+        
+                        $scope.verCitas="si";
+                        $scope.ver = "no"; 
+                        $scope.verdos = "no";
+        
+        
+                        document.getElementById("logout").style.display="none";
+                        document.getElementById("btnprincipal").style.display="none";
+
 
 
                     });
@@ -267,9 +329,9 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
             alert("No puedes pedir mas citas porque tienes el nemro maximo de dosis");
 
         } 
-        else if (ultimadosis.getTime()+2629800000>e.getTime()) {
-            alert("No han pasado seis meses desde tu ultima dosis");
-        }    
+        // else if (ultimadosis.getTime()+2629800000>e.getTime()) {
+        //     alert("No han pasado seis meses desde tu ultima dosis");
+        // }    
         else{
             
 
@@ -329,15 +391,7 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
                         Cod_centro: $scope.municipio[0].idMunicipio,
                         Cod_anulacion: Math.random() * (1000000 - 1) + 1
                     };
-                    /////////////INSERTAR CITA EN LA BASE DE DATOS//////////////////
-                    $http.post('../controller/cInsertarCita.php', JSON.stringify(citapaciente)).then(function (response) {
 
-                        console.log(response.data);
-
-
-
-                    });
-                    ////////////FIN INSERTAR CITA EN LA BASE DE DATOS////////////////
                 });
                 ////////////////////////////FIN ASIGNAR CENTRO//////////////////////////////
 
@@ -368,6 +422,7 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
 
             }
 
+        }
         }
         
 

@@ -1,2 +1,22 @@
 
+body {font-family: Arial, Helvetica, sans-serif; background-color:rgb(112, 112, 255); ;}
 
+#divPrincipal{margin: auto; margin-top:80px; width: 800px; height: 500px; background-color: white; border-radius: 10px; flex-direction: column;}
+
+#divcontainer{height: 40%; display: flex; justify-content: space-between;}
+#divcontainer img:first-child{width: 400px; height: 150px;}
+#divcontainer img:last-child{margin-right: 20px; margin-top: 20px; width: 300px; height: 120px;}
+#divcontainer2{color: white; margin: 15px; padding: 20px; padding-top: 5px; height: 55%; background-color: rgb(31, 0, 116); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; font-family: Arial, Helvetica, sans-serif;}
+#numeros{width: 50%; margin: auto; text-align: center;}
+.formulario{padding-left: 30px; padding-top: 10px;}
+#form-body{display: flex; justify-content: space-between;}
+.inputs{display: flex;}
+.inputs h2:first-child{width: min-content; font-weight: bold;}
+.inputs h2:first-child #TIS{padding-left: 5px; width: 160px;  border-radius: 5px;}
+.inputs h2:first-child #Fecha{padding-left: 5px; width: 270px; height: 43px; border-radius: 5px;}
+.inputs h2:last-child{color: red; width: min-content;}
+.formulario div{display: flex;}
+.formulario div input{padding-left: 5px; width: 350px; border-radius: 5px;}
+.formulario div h2{color: red;}
+.boton{text-align: center; margin-top: 30px; margin-bottom: 30px;}
+#login{width: 150px; height: 50px;}
