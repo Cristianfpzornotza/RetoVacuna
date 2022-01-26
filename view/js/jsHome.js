@@ -1,12 +1,13 @@
 var miApp=angular.module('miApp',[]);
 paciente=0;
+var idcertificado="";
 
 datospaciente=[];
 
 miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 	
 	document.getElementById("btnlogout").addEventListener('click', logout);
-
+	makeid();
 	$scope.verpaciente="si";
 	$scope.crearcita="no";
 	$scope.volver="no";
@@ -109,6 +110,16 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 }]);
 
 
+function makeid() { 
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%@"; 
+
+	for( var i=0; i < 30; i++ ) {
+
+		idcertificado += possible.charAt(Math.floor(Math.random() * possible.length)); 
+
+	}
+}
+
 function genPDF() {
 		
 	var doc = new jsPDF();
@@ -116,7 +127,7 @@ function genPDF() {
 	var apellidos = datospaciente[1]+ " " + datospaciente[2] + ",";
 	var nombre = datospaciente[0];
 	var nacimiento = datospaciente[3];
-	var idcertificado = "01ES16V21DA3CB293D197AA4E433#9";
+	var id = idcertificado;
 	var vacuna = datospaciente[4];
 	var fabricante = datospaciente[5];
 	var fecha = "2021-09-10";
@@ -188,7 +199,7 @@ function genPDF() {
 
 	doc.setFontSize(14);
 	doc.setTextColor(0,0,0);
-	doc.text(20,142, idcertificado);
+	doc.text(20,142, id);
 
 	doc.setTextColor(128, 128, 128);
 	doc.setFontSize(10);
