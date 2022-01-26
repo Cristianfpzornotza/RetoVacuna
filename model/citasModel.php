@@ -66,6 +66,7 @@ class citasModel extends citasClass{
 
     }
 
+
     public function CloseConnect()
     {
         //mysqli_close ($this->link);
@@ -137,7 +138,7 @@ class citasModel extends citasClass{
     public function listCitasPaciente() {
         $this->OpenConnect();
         
-        $sql = "SELECT citas.*, centro.Nombre AS Lugar, CONCAT_WS(' ', pacientes.Nombre, pacientes.Apellidos) AS SOLICITANTE, historial.Numero_dosis AS DOSIS
+        $sql = "select citas.*, centro.Nombre AS Lugar, CONCAT_WS(' ', pacientes.Nombre, pacientes.Apellidos) AS SOLICITANTE, historial.Numero_dosis AS DOSIS
         FROM citas
         INNER JOIN pacientes
         ON pacientes.idPaciente=citas.Cod_paciente
@@ -148,6 +149,8 @@ class citasModel extends citasClass{
         INNER JOIN historial
         ON historial.Numero_dosis=vacuna.Numero
         WHERE pacientes.idPaciente=$this->codPaciente and citas.Fecha='$this->fecha'";
+
+
         
 
         $result = $this->link->query($sql);
