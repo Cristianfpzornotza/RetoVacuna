@@ -11,6 +11,7 @@ var filename="";
 
     miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 
+
         $scope.vercentros="si";
         $scope.vercitas="no";
         $scope.vercitas2="no";
@@ -385,6 +386,7 @@ var filename="";
         }
     
     }
+
 
     function logout(){
         var url = "../../controller/cLogout.php";
