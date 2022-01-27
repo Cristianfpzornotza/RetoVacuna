@@ -164,3 +164,17 @@ nav li:hover{
     display: none;
 }
 
+@media only screen and (max-width: 1000px) {
+    #carouselExampleControls{
+        width:auto;
+        margin:30px;
+    }
+ }
+
+
+@media only screen and (min-width: 700px) {
+   #divgrande{
+       width:80%;
+   }
+
+}
