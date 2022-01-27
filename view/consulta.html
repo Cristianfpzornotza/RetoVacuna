@@ -1,73 +1,74 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html lang="en" ng-app='miApp'>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/consulta.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/consulta.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- calendario -->
-    <script type="text/javascript" src="calendar/common.js"></script>
-    <script type="text/javascript" src="calendar/calendar_core.js"></script>
-    <script type="text/javascript" src="calendar/calendar.js"></script>
-    <link rel="stylesheet" type="text/css" href="calendar/calendar.css" />
+  <!-- calendario -->
+  <script type="text/javascript" src="calendar/common.js"></script>
+  <script type="text/javascript" src="calendar/calendar_core.js"></script>
+  <script type="text/javascript" src="calendar/calendar.js"></script>
+  <link rel="stylesheet" type="text/css" href="calendar/calendar.css" />
 </head>
+
 <body ng-controller="miControlador">
-  <button type="button" class="btn btn-success" style="float: right;margin: 20px;">Volver</button>
-  <a href="#" id="logout" class="tooltip-test" title="Tooltip"><h5>Logout</h5></a>
+  <button type="button" class="btn btn-success" ng-click="volver()" style="float: right;margin: 20px;">Volver</button>
 
-      
-      <div id="Citas" ng-show="verdos=='si'">
-        
-        
+  <div id="Citas" ng-show="verdos=='si'">
 
-        <div>        
+    <div>
 
-          <div id="calendar" ng-show="verDias=='si'">
+      <div id="calendar" ng-show="verDias=='si'">
 
-            <label for="start">Start date:</label>
-            
-           <input type="date" class="form-control" style="width: 300px;" id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20" min="" max='2024-01-01'>
+        <label for="start">Start date:</label>
 
-            <div class="tabla" ng-show="verHoras == 'si'">
-              <form action="javascript:void(0);">
-              <ol>
-                <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn" value="{{item}}">{{item}}</li>
-              </ol>  
-              <button ng-show="boton=='si'"  ng-click="cogerCita()" class="btn btn-primary">PEDIR</button>
-            </form>
-            
-              
-            </div>
-         
+        <input type="date" class="form-control" style="width: 300px;" id="start" ng-change="hours()" ng-model="hora"
+          name="trip-start" value="2022-01-20" min="" max='2024-01-01'>
 
-          </div>
+        <div class="tabla" ng-show="verHoras == 'si'">
+          <form action="javascript:void(0);">
+            <ol>
+              <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn"
+                  value="{{item}}">{{item}}</li>
+            </ol>
+            <button ng-show="boton=='si'" ng-click="cogerCita()" class="btn btn-primary">PEDIR</button>
+          </form>
+
+
         </div>
 
-      </div>
 
-      <div ng-show="verCitas=='si'">
-        <div class="nav">
-          <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <div class="container-fluid justify-content-between h-100 w-100">
-              <a class="navbar-brand" href="#">				
-                <img class="ms-5" src="/view/img/logohospitalazul.png" alt="" height="60px" width="60px">
-                  </a>
-        
-              <div class="me-5 navegador">
-        
-             
-        
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      </div>
+    </div>
+
+  </div>
+
+  <div ng-show="verCitas=='si'">
+    <div class="nav">
+      <nav class="navbar navbar-expand-lg navbar-light p-0">
+        <div class="container-fluid justify-content-between h-100 w-100">
+          <a class="navbar-brand" href="#">
+            <img class="ms-5" src="/view/img/logohospitalazul.png" alt="" height="60px" width="60px">
+          </a>
+
+          <div class="me-5 navegador">
+
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-               
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
               <ul class="navbar-nav">
                 <h1>Cita Previa</h1>
                 <!-- <li class="nav-item">
@@ -115,16 +116,16 @@
                     </svg>
                   </i>
                 </a>
-                </li>--> 
+                </li>-->
               </ul>
-              </div>
             </div>
-            </div>
-          </nav>	
+          </div>
         </div>
-        <div  class="padre">
-        <p>Citas Confirmadas()</p>
-         <div class="contenedores" id="container">
+      </nav>
+    </div>
+    <div class="padre">
+      <p>Citas Confirmadas()</p>
+      <div class="contenedores" id="container">
         <!-- <div class="contenedorpadre">
           <div>SOLICITANTE:{{item.objPaciente.name}}</div>
           </div>
@@ -146,9 +147,9 @@
           <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png">
         </div> -->
       </div>
- 
-      </div>
-            <!--<script>
+
+    </div>
+    <!--<script>
                 var c = new Calender();
                 c.onSelected = function (y, m, d) {
                     console.log([y, m, d].join("-"));
@@ -225,15 +226,16 @@
   </div>
 </div> -->
 
-      
-    
-    
-    
+
+
+
+
     <script src="js/jsHistorial.js"></script>
     <script src="js/jsCitas.js"></script>
-    
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
 </body>
+
 </html>

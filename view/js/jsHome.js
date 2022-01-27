@@ -53,7 +53,7 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 			$http.post('../../controller/cHistorialById.php',idpaciente).then(function (response){
 				console.log(response.data.datos);
 				
-				var fechacompleta = response.data.fecha[0].fecha;
+				var fechacompleta = response.data.datos[0].fecha;
 				console.log(fechacompleta);
 
 				var fechasplit = fechacompleta.split(" ");
