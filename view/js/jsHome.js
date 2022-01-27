@@ -98,15 +98,23 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 
 				console.log($scope.arrhistorial.length);
 
+				
+
+
+
 				if(edad <= 11){
-					if($scope.arrhistorial.length == 1){
-						document.getElementById("btncertificado").disabled = false;
+					if($scope.arrhistorial.length >= 1){
+						document.getElementById("btncertificado").style.display = 'block';
+						document.getElementById("pedircita").style.display = 'none';
+						datospaciente[7] = "1/1";
 					}
 				}
 
 				if(edad > 11){
-					if($scope.arrhistorial.length == 3){
-						document.getElementById("btncertificado").disabled = false;
+					if($scope.arrhistorial.length >= 3){
+						document.getElementById("btncertificado").style.display = 'block';
+						document.getElementById("pedircita").style.display = 'none';
+						datospaciente[7] = "3/3";
 					}
 				}
 
@@ -192,6 +200,8 @@ function genPDF() {
 	var vacuna = datospaciente[4];
 	var fabricante = datospaciente[5];
 	var fecha = datospaciente[6];
+
+	var cantidad = datospaciente[7];
 
 	var españa="";
 	var paisvasco="";
@@ -325,7 +335,7 @@ function genPDF() {
 
 	doc.setTextColor(0,0,0);
 	doc.setFontSize(13);
-	doc.text(110, 215, "2/2");
+	doc.text(110, 215, cantidad);
 
 	doc.setTextColor(128, 128, 128);
 	doc.setFontSize(10);
