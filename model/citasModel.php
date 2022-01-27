@@ -48,7 +48,7 @@ class citasModel extends citasClass{
             $citas->setCodVacuna($row['Cod_vacuna']);
             $citas->setCodCentro($row['Cod_centro']);
             $citas->setCodAnulacion($row['Cod_anulacion']);
-
+            $citas->setNumero_dosis($row['Numero_dosis']);
 
             $vacuna = new vacunaModel();
             $vacuna->setIdVacuna($row['Cod_vacuna']);
@@ -251,6 +251,17 @@ class citasModel extends citasClass{
     }
 
 
+    public function confirmarcitabyid(){
+        $this->OpenConnect();
+        
+        $sql="delete FROM `citas` WHERE `idCitas`=$this->idCitas";
+
+        $result= $this->link->query($sql);
+        
+
+        $this->CloseConnect();
+        return $result;
+    }
 
 
 

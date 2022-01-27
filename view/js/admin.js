@@ -87,6 +87,54 @@ var filename="";
 
         });
 
+
+        
+
+        ////////////////////////////////////   LO   MIO    ///////////////////////////////////////////////////
+
+
+        $scope.confirmar=function(item){
+            console.log(item);
+           
+            idpaciente=item.codPaciente;
+
+
+            var idcitadelete = item.idCitas;
+            var fechacitadelete = item.fecha;
+            var ndcitadelete = item.numero_dosis;
+            var vccitadelete = item.codVacuna;
+
+            console.log(idcitadelete);
+            console.log(fechacitadelete);
+            console.log(ndcitadelete);
+            console.log(vccitadelete);
+
+
+            $http.post('../../controller/cConfirmar.php',{'idpaciente': idpaciente, 'id':idcitadelete, 'fecha':fechacitadelete, 'nd':ndcitadelete, 'vc':vccitadelete}).then(function(response){
+
+                $http.post('../../controller/cLoadCitas.php',idpaciente).then(function (response) { 
+                    $scope.listacitas = response.data.citas;
+    
+                    console.log($scope.listacitas);
+                });
+
+
+                $http.post('../../controller/cHistorialById.php',idpaciente).then(function (response) { 
+                    $scope.listahistorial = response.data.datos;
+    
+                    console.log($scope.listahistorial);
+                });
+
+            });            
+        }
+            
+
+
+
+
+        ////////////////////////////////////   LO   MIO    ///////////////////////////////////////////////////
+
+
         $scope.vistas=function(item){
 
             $scope.vercentros="no";
@@ -189,6 +237,12 @@ var filename="";
                 $scope.listacitas = response.data.citas;
 
                 console.log($scope.listacitas);
+            });
+
+            $http.post('../../controller/cHistorialById.php',idpaciente).then(function (response) { 
+                $scope.listahistorial = response.data.datos;
+
+                console.log($scope.listahistorial);
             });
             
         }

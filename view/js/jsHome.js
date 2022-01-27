@@ -74,9 +74,57 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 				}
 
 				$scope.arrhistorial = response.data.datos;
+				console.log($scope.arrhistorial.length);
+
+
+				var pacientenac = $scope.paciente.fechaNac;
+                var split = pacientenac.split("-");
+				console.log(split);
+
+                var Hoy = new Date();
+                var nacimiento = new Date(split[0], parseInt(split[1]) - 1, split[2]);
+                console.log(nacimiento);
+                console.log(Hoy.getTime())
+                console.log(nacimiento.getTime())
+
+
+                var edad = Hoy.getFullYear() - nacimiento.getFullYear();
+                var m = Hoy.getMonth() - nacimiento.getMonth();
+
+            	if (m < 0 || (m === 0 && Hoy.getDate() < nacimiento.getDate())) {
+                    edad--;
+                    }
+                console.log(edad);
+
+				console.log($scope.arrhistorial.length);
+
+				if(edad <= 11){
+					if($scope.arrhistorial.length == 1){
+						document.getElementById("btncertificado").disabled = false;
+					}
+				}
+
+				if(edad > 11){
+					if($scope.arrhistorial.length == 3){
+						document.getElementById("btncertificado").disabled = false;
+					}
+				}
+
+
+
+
+
+
+
+				/*if($scope.arrhistorial.length >= 2){
+					document.getElementById("btncertificado").disabled = false;
+				}*/
+
 
 				console.log(response.data.datos2);
 				$scope.arrcitas = response.data.datos2;
+
+
 			})
 
 			$scope.borrarcita=function(){
@@ -106,6 +154,11 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 				
 				
 			}
+
+			
+
+
+
 
             
 	    } else {

@@ -138,6 +138,23 @@ class historialModel extends historialClass{
 
 
 
+    public function insertHistorial(){
+        $this->OpenConnect();
+        $fecha=$this->fecha;
+        $codPaciente=$this->codPaciente;
+        $codVacuna=$this->codVacuna;
+        $numero_dosis=$this->numeroDosis;
+
+        $sql="insert INTO `historial` (`idHistorial`, `Fecha`, `Cod_paciente`, `Cod_vacuna`, `Numero_dosis`) VALUES (NULL, '$fecha', $codPaciente, $codVacuna, $numero_dosis);";
+
+        $this->link->query($sql);
+ 
+        $this->CloseConnect();
+    
+    }
+
+
+
     public function ObjVars()
     {
         return get_object_vars($this);
