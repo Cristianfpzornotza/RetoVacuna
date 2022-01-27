@@ -582,80 +582,12 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
             for (let i = 0; i < citaslista.length; i++) {
                 
                 separado=citaslista[i].fecha.split(" ");
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
                 if(fechaelegida==separado[0]){
 
                     
-
-
 
                 }
                 
