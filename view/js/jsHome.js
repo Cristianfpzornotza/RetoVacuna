@@ -52,7 +52,15 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 
 			$http.post('../../controller/cHistorialById.php',idpaciente).then(function (response){
 				console.log(response.data.datos);
+				
+				var fechacompleta = response.data.fecha[0].fecha;
+				console.log(fechacompleta);
 
+				var fechasplit = fechacompleta.split(" ");
+				datospaciente[6] = fechasplit[0];
+				console.log(datospaciente[6]);
+
+				
 				datospaciente[4] = response.data.datos[0].ObjVacuna.name;
 
 				if(datospaciente[4] == "Moderna"){
@@ -130,7 +138,7 @@ function genPDF() {
 	var id = idcertificado;
 	var vacuna = datospaciente[4];
 	var fabricante = datospaciente[5];
-	var fecha = "2021-09-10";
+	var fecha = datospaciente[6];
 
 	var españa="";
 	var paisvasco="";

@@ -112,6 +112,32 @@ class historialModel extends historialClass{
 
 
 
+    public function setLastHistorial(){
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        $sql="select * FROM historial WHERE Cod_paciente=2 ORDER BY Fecha DESC LIMIT 1";
+        
+        $result= $this->link->query($sql);
+        $list=array();
+       
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+
+            $history = new historialModel();
+            $history->setFecha($row['Fecha']);
+            //$history->setCodVacuna($row['Cod_vacuna']);
+
+            array_push($list, get_object_vars($history));
+            
+        }
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+    }
+
+
+
     public function ObjVars()
     {
         return get_object_vars($this);
