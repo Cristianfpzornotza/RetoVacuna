@@ -10,6 +10,7 @@ class pacientesClass{
    protected $fechaNac;
    protected $codMunicipio;
    protected $DNI;
+   protected $img;
 
 
    public function getIdPaciente()
@@ -108,4 +109,15 @@ class pacientesClass{
       return $this;
    }
    
+   public function getImg()
+   {
+      return $this->img;
+   }
+
+   public function setImg($img)
+   {
+      $this->img = $img;
+
+      return $this;
+   }
 }

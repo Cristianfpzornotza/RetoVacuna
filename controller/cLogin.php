@@ -19,6 +19,7 @@ if (( $username !=null ) && ( $password !=null )){
         session_start();
         $_SESSION['idUser']=$user->getIdUsuario(); 
         $_SESSION['username']=$username; 
+        $_SESSION['categoria']=$user->getCategoria(); 
         
         $response['user']=$user->ObjVars(); 
         $response['error']="no error";  

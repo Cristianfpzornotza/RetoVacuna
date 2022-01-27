@@ -1,30 +1,19 @@
 <?php 
-include_once '../model/centroModel.php';
-include_once '../model/municipioModel.php';
+include_once '../model/administraModel.php';
 
-$dato=json_decode(file_get_contents('php://input'),true);
-// $dato=json_decode($dato);
-$idPaciente=$dato['idPaciente'];
-$Cod_municipio=$dato['Cod_municipio'];
+$data=json_decode(file_get_contents("php://input"),true);
 
 
-
-$municipio = new municipioModel();
-$municipio->setIdMunicipio($Cod_municipio);
-
-$response = array();
+$Codusuario=$data['asignarusuarioid'];
+$Codcentro=$data['asignarcentroid'];
 
 
-$response['list']=$municipio->asignarcentro($idPaciente);
+$administra = new administraModel();
+$administra->setCodcentro($Codcentro);
+$administra->setCodusuario($Codusuario);
+$administra->asignarcentro();
 
-
-
-
-
-
-
-// $response['list']=$horario->mostrar($paciente);
-$response['error']="no error";
 
 echo json_encode($response);
 
+unset($response);
