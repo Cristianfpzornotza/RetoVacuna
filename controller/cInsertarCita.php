@@ -34,8 +34,12 @@ if (isset($codAnulacion)){
 
 $response = array();
 
+$cita->insertarCita();
 
-$response['list']=$cita->insertarCita();
+echo $fecha, $codPaciente;
+
+
+$response['list']=$cita->listCitasPaciente();
 $response['error']="no error";
 
 echo json_encode($response);
