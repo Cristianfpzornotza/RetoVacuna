@@ -232,9 +232,9 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
                 historialhola = 0;
             }
             else {
-                console.log(ultimadosis.setMonth(ultimadosis.getMonth() + 6));
+                console.log(ultimadosis);
                 console.log(e);
-                if (ultimadosis.setMonth(ultimadosis.getMonth() + 6) > e.getTime()) { //ultimadosis.getTime() + 2629800000
+                if (ultimadosis.setMonth(ultimadosis.getMonth() + 6) < e.getTime()) { //ultimadosis.getTime() + 2629800000
                     console.log(ultimadosis);
                     alert("hosddvnjrenr")
                     meses6 = 1;
