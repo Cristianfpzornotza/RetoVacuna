@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded",function(){
         graficaGipuzkoa();
         miGraficaAra();
         estilosmenu();
+
         document.getElementById("btnlogin").addEventListener('click', login);
         document.getElementById("buttoncita").addEventListener('click', function(){
             window.location.href = "login.html";
