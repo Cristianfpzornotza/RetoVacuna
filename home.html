@@ -31,10 +31,11 @@
                 <div id="centros">
                     <div class="banner" style="justify-content: space-between; display: flex;"><div>Paciente</div><div style="margin-right: 20px;">TIS: {{paciente.TIS}}</div></div>
                     <div id="pacienteinfo" style="display: flex;">  
-                        <div>
-                            <img style="width: 350px; height: 350px; padding: 40px;" id="imgperfil" alt="" srcset="">
+                        <div style="padding: 40px;">
+                            <img style="width: 350px; height: 350px; margin-bottom: 10px;" id="imgperfil" alt="" srcset="">
+                            <input type="file" name="" id="fotoperfil">
                         </div>
-                        <div style="width: 100%; padding: 20px; font-family: Arial, Helvetica, sans-serif;">
+                        <div style="width: 100%; padding: 40px; padding-left: 0; font-family: Arial, Helvetica, sans-serif;">
                             <h2><b>{{paciente.name}}</b></h2>
                             <h2><b>{{paciente.apellido}}</b> <b>{{paciente.apellido2}}</b></h2>
                             <h4 style="color: grey;">DNI: {{paciente.DNI}}</h4>
@@ -96,7 +97,6 @@
                                             <tr>
                                                 <th><span>Fecha</span></th>
                                                 <th><span>Vacuna</span></th>
-                                                <th><span>Dosis</span></th>
 												<th><span>Codigo de Anulación</span></th>
 											</tr>
                                         </thead>
@@ -104,7 +104,6 @@
                                             <tr ng-repeat="item in arrcitas">
                                                 <td>{{item.fecha}}</td>
                                                 <td>{{item.ObjVacuna.name}}</td>
-                                                <td>{{item.numero_dosis}}</td>
 												<td>{{item.codAnulacion}}</td>
                                             </tr>
                                         </tbody>

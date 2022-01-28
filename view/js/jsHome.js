@@ -5,6 +5,57 @@ var idcertificado="";
 datospaciente=[];
 
 miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
+
+	document.getElementById("fotoperfil").addEventListener("change", function(){
+
+		var file   = this.files[0];
+		
+		var reader  = new FileReader();
+		filename = file.name;
+		filesize= file.size;
+		console.log(filename);
+		
+		if (!new RegExp("(.*?).(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$").test(filename)) {
+					
+			alert("Solo se aceptan imÃ¡genes JPG, PNG y GIF");
+			document.getElementById("fitx").value="";
+			document.getElementById("btnExecInsert").disabled=true;
+			
+		} else{
+		
+			reader.onloadend = function () {
+				savedFileBase64 = reader.result;     // Almacenar en variable global para uso posterior	  
+				
+				document.getElementById("imgperfil").setAttribute("src",savedFileBase64);
+	
+
+				datosforupdate = {
+
+					foto : filename,
+					id : idpaciente
+
+				}
+
+				
+				$http.post('../../controller/cEditarFoto.php',datosforupdate).then(function (response){
+
+
+
+				})
+	
+			}
+		
+			if (file) {
+				reader.readAsDataURL(file);
+				
+			} else {
+				document.getElementById("imagenPostre").setAttribute("src",'');
+			}
+		}
+		
+	});
+
+
 	
 	document.getElementById("btnlogout").addEventListener('click', logout);
 	makeid();
@@ -33,14 +84,24 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 
 				$scope.paciente=response.data.datos[0];
 
-				if($scope.paciente.img == null){
+				console.log($scope.paciente);
+
+				if($scope.paciente.img == null || $scope.paciente.img == ""){
 					document.getElementById("imgperfil").src="../view/img/placeholder.png";
 				}else{
 					document.getElementById("imgperfil").src="../view/img/"+$scope.paciente.img;
 				}
 
-				console.log($scope.paciente);
-				
+
+				if($scope.paciente.fechaPos == null || $scope.paciente.fechaPos == "" || $scope.paciente.fechaPos == "0000-00-00"){
+
+					document.getElementById("positivo").innerHTML="Fecha positivo: No ha dado positivo";
+
+
+				}
+
+
+
 				datospaciente[0] = $scope.paciente.name.toUpperCase();
 				datospaciente[1] = $scope.paciente.apellido.toUpperCase();
 				datospaciente[2] = $scope.paciente.apellido2.toUpperCase();
@@ -50,87 +111,100 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 			});
 
 
+
 			$http.post('../../controller/cHistorialById.php',idpaciente).then(function (response){
 				console.log(response.data.datos);
 				
-				var fechacompleta = response.data.datos[0].fecha;
-				console.log(fechacompleta);
 
-				var fechasplit = fechacompleta.split(" ");
-				datospaciente[6] = fechasplit[0];
-				console.log(datospaciente[6]);
+				if(response.data.datos.length > 0){
 
-				
-				datospaciente[4] = response.data.datos[0].ObjVacuna.name;
+					var fechacompleta = response.data.datos[0].fecha;
+					console.log(fechacompleta);
 
-				if(datospaciente[4] == "Moderna"){
-					datospaciente[5] = "Moderna";
-				}else if(datospaciente[4] == "Pfizer-BioNTech"){
-					datospaciente[5] = "BioNTech";
-				}else if(datospaciente[4] == "Janssen de Jhonson & Jhonson"){
-					datospaciente[5] = "Janssen Jhonson & Jhonson";
-				}else if(datospaciente[4] == "AstraZeneca"){
-					datospaciente[5] = "AstraZeneca";
-				}
+					var fechasplit = fechacompleta.split(" ");
+					datospaciente[6] = fechasplit[0];
+					console.log(datospaciente[6]);
 
-				$scope.arrhistorial = response.data.datos;
-				console.log($scope.arrhistorial.length);
+					
+					datospaciente[4] = response.data.datos[0].ObjVacuna.name;
 
-
-				var pacientenac = $scope.paciente.fechaNac;
-                var split = pacientenac.split("-");
-				console.log(split);
-
-                var Hoy = new Date();
-                var nacimiento = new Date(split[0], parseInt(split[1]) - 1, split[2]);
-                console.log(nacimiento);
-                console.log(Hoy.getTime())
-                console.log(nacimiento.getTime())
-
-
-                var edad = Hoy.getFullYear() - nacimiento.getFullYear();
-                var m = Hoy.getMonth() - nacimiento.getMonth();
-
-            	if (m < 0 || (m === 0 && Hoy.getDate() < nacimiento.getDate())) {
-                    edad--;
-                    }
-                console.log(edad);
-
-				console.log($scope.arrhistorial.length);
-
-				
-
-
-
-				if(edad <= 11){
-					if($scope.arrhistorial.length >= 1){
-						document.getElementById("btncertificado").style.display = 'block';
-						document.getElementById("pedircita").style.display = 'none';
-						datospaciente[7] = "1/1";
+					if(datospaciente[4] == "Moderna"){
+						datospaciente[5] = "Moderna";
+					}else if(datospaciente[4] == "Pfizer-BioNTech"){
+						datospaciente[5] = "BioNTech";
+					}else if(datospaciente[4] == "Janssen de Jhonson & Jhonson"){
+						datospaciente[5] = "Janssen Jhonson & Jhonson";
+					}else if(datospaciente[4] == "AstraZeneca"){
+						datospaciente[5] = "AstraZeneca";
 					}
-				}
 
-				if(edad > 11){
-					if($scope.arrhistorial.length >= 3){
-						document.getElementById("btncertificado").style.display = 'block';
-						document.getElementById("pedircita").style.display = 'none';
-						datospaciente[7] = "3/3";
+					$scope.arrhistorial = response.data.datos;
+					console.log($scope.arrhistorial.length);
+
+
+					var pacientenac = $scope.paciente.fechaNac;
+					var split = pacientenac.split("-");
+					console.log(split);
+
+					var Hoy = new Date();
+					var nacimiento = new Date(split[0], parseInt(split[1]) - 1, split[2]);
+					console.log(nacimiento);
+					console.log(Hoy.getTime())
+					console.log(nacimiento.getTime())
+
+
+					var edad = Hoy.getFullYear() - nacimiento.getFullYear();
+					var m = Hoy.getMonth() - nacimiento.getMonth();
+
+					if (m < 0 || (m === 0 && Hoy.getDate() < nacimiento.getDate())) {
+						edad--;
+						}
+					console.log(edad);
+
+					console.log($scope.arrhistorial.length);
+
+					
+
+
+
+					if(edad <= 11){
+						if($scope.arrhistorial.length >= 1){
+							document.getElementById("btncertificado").style.display = 'block';
+							document.getElementById("pedircita").style.display = 'none';
+							datospaciente[7] = "1/1";
+						}
 					}
+
+					if(edad > 11){
+						if($scope.arrhistorial.length >= 3){
+							document.getElementById("btncertificado").style.display = 'block';
+							document.getElementById("pedircita").style.display = 'none';
+							datospaciente[7] = "3/3";
+						}
+					}
+
+
+
+
+
+
+
+					/*if($scope.arrhistorial.length >= 2){
+						document.getElementById("btncertificado").disabled = false;
+					}*/
+
+					
 				}
-
-
-
-
-
-
-
-				/*if($scope.arrhistorial.length >= 2){
-					document.getElementById("btncertificado").disabled = false;
-				}*/
 
 
 				console.log(response.data.datos2);
 				$scope.arrcitas = response.data.datos2;
+
+				if($scope.arrcitas.length > 0){
+
+					document.getElementById("pedircita").style.display="none";
+
+				}
 
 
 			})
@@ -163,12 +237,6 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 				
 			}
 
-			
-
-
-
-
-            
 	    } else {
 			window.location.href = "login.html";
 	    }
@@ -177,6 +245,7 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 
 
 }]);
+
 
 
 function makeid() { 

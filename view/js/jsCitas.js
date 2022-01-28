@@ -189,6 +189,35 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
             console.log(edad);
 
 
+            /*RECOGER FECHA DE LA CITA SOLICITADA
+            **************************************************/
+
+            var seleccionado = document.querySelectorAll("li input");
+
+
+            var select = "";
+
+            for (let i = 0; i < seleccionado.length; i++) {
+
+                if (seleccionado[i].checked == true) {
+                    select = seleccionado[i];
+                }
+
+            }
+            console.log(select.value)
+
+            fechacita = document.getElementById("start").value + " " + select.value + ":00.000000";
+            console.log(fechacita);
+
+            var Fecha_pos4 = fechacita.split(" ");
+            var Fecha_pos4fecha = Fecha_pos4[0].split("-");
+            var Fecha_pos4horas = Fecha_pos4[1].split(":");
+            Fecha_pos5 = new Date(Fecha_pos4fecha[0], Fecha_pos4fecha[1], Fecha_pos4fecha[2], Fecha_pos4horas[0], Fecha_pos4horas[1], Fecha_pos4horas[2])
+
+
+            /*******************/
+
+
             var ultimadosis = 1;
 
             console.log(edad);
@@ -231,9 +260,9 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
                 historialhola = 0;
             }
             else {
-                console.log(ultimadosis.setMonth(ultimadosis.getMonth() + 6));
+                console.log(ultimadosis);
                 console.log(e);
-                if (ultimadosis.setMonth(ultimadosis.getMonth() + 6) > e.getTime()) { //ultimadosis.getTime() + 2629800000
+                if (ultimadosis.setMonth(ultimadosis.getMonth() + 6) < Fecha_pos5.getTime()) { //ultimadosis.getTime() + 2629800000
                     console.log(ultimadosis);
                     alert("hosddvnjrenr")
                     meses6 = 1;
@@ -247,6 +276,9 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
             comprobacion6meses = 0;
             // console.log($scope.citas[0].codPaciente);
             console.log(idPaciente);
+
+            console.log($scope.citas);
+
             for (let i = 0; i < $scope.citas.length; i++) {
                 console.log($scope.citas[i].codPaciente);
                 console.log(idPaciente);
@@ -286,30 +318,9 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
             Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 5)
             console.log(Fecha_pos3);
             // console.log(Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 6));
-            console.log(e.getTime());
+            // console.log(e.getTime());
 
 
-            var seleccionado = document.querySelectorAll("li input");
-
-
-            var select = "";
-
-            for (let i = 0; i < seleccionado.length; i++) {
-
-                if (seleccionado[i].checked == true) {
-                    select = seleccionado[i];
-                }
-
-            }
-            console.log(select.value)
-
-            fechacita = document.getElementById("start").value + " " + select.value + ":00.000000";
-            console.log(fechacita);
-
-            var Fecha_pos4 = fechacita.split(" ");
-            var Fecha_pos4fecha = Fecha_pos4[0].split("-");
-            var Fecha_pos4horas = Fecha_pos4[1].split(":");
-            Fecha_pos5 = new Date(Fecha_pos4fecha[0], Fecha_pos4fecha[1], Fecha_pos4fecha[2], Fecha_pos4horas[0], Fecha_pos4horas[1], Fecha_pos4horas[2])
 
             validar=false;
 
@@ -336,9 +347,11 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
                     if (meses6 == 1) {
                         if (comprobacion6meses == 0) {
 
+                            if (citapedida == 0) {
                             if(validar==false){
                                 pedircitaconfirmado();
                             }
+                        }
                         }
 
                     } else {

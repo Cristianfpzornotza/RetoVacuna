@@ -83,7 +83,7 @@ class historialModel extends historialClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
         
-        $sql="select historial.*, vacuna.Nombre FROM `historial` INNER JOIN vacuna ON vacuna.idVacuna=historial.Cod_vacuna WHERE historial.`Cod_paciente`=$this->codPaciente";
+        $sql="select historial.*, vacuna.Nombre FROM `historial` INNER JOIN vacuna ON vacuna.idVacuna=historial.Cod_vacuna WHERE historial.`Cod_paciente`=$this->codPaciente order by historial.Fecha asc";
         
         $result= $this->link->query($sql);
         $list=array();

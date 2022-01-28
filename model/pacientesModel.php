@@ -49,10 +49,12 @@ class pacientesModel extends pacientesClass{
             $new->setFechaNac($row['Fecha_nac']);
             $new->setCodMunicipio($row['Cod_municipio']);
             $new->setFechaPos($row['Fecha_pos']);
+            $new->setImg($row['img']);
 
             $this->idPaciente=$row['idPaciente'];
             $this->codMunicipio=$row['Cod_municipio'];
             $this->fechaPos=$row['Fecha_pos'];
+            $this->img=$row['img'];
 
             array_push($list, get_object_vars($new));
         }
@@ -66,8 +68,60 @@ class pacientesModel extends pacientesClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
         
-        $sql="insert INTO `pacientes`(`TIS`, `Nombre`, `Apellidos`, `Fecha_nac`, `Cod_municipio`, `DNI`, `img`) 
-        VALUES ($this->TIS,'$this->name','$this->apellido','$this->fechaNac',$this->codMunicipio,'$this->DNI','$this->img')";
+        $sql="insert INTO `pacientes`(`TIS`, `Nombre`, `Apellidos`, `Apellidos2` , `Fecha_nac`, `Cod_municipio`, `DNI`, `img`) 
+        VALUES ($this->TIS,'$this->name','$this->apellido','$this->apellido2','$this->fechaNac',$this->codMunicipio,'$this->DNI','$this->img')";
+               
+        $result= $this->link->query($sql);
+
+
+        $this->CloseConnect();
+        return $result;
+    }
+
+
+    public function updateMunicipioPaciente($municipio) // login, fill and return id of the user
+    {
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        $sql="select * from municipio where Nombre='$municipio'";
+
+        $result= $this->link->query($sql);
+
+        if ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+
+            $idMunicipio=$row['idMunicipio'];
+
+            $sql="UPDATE pacientes SET Cod_municipio='$idMunicipio' WHERE idPaciente=$this->idPaciente";
+               
+            $result= $this->link->query($sql);
+        }
+
+        $this->CloseConnect();
+        return $result;
+    }
+
+
+    public function updatefoto() // login, fill and return id of the user
+    {
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        $sql="UPDATE pacientes SET img='$this->img' WHERE idPaciente=$this->idPaciente";
+               
+        $result= $this->link->query($sql);
+
+
+        $this->CloseConnect();
+        return $result;
+    }
+
+    public function updatepositivo() // login, fill and return id of the user
+    {
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        $sql="UPDATE pacientes SET Fecha_pos='$this->fechaPos' WHERE idPaciente=$this->idPaciente";
                
         $result= $this->link->query($sql);
 

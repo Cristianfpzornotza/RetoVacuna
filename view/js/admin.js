@@ -31,6 +31,8 @@ var filename="";
         document.getElementById("centroimg2").addEventListener("change", setFileName);
         document.getElementById("centroimg3").addEventListener("change", setFileName2);
 
+
+
         $http.get('../../controller/cLoadAdmin.php').then(function (response) { 
             $scope.listaadmin = response.data.admin;
             console.log($scope.listaadmin);
@@ -73,16 +75,7 @@ var filename="";
 
         $http.get('../../controller/cLoadMunicipios.php').then(function (response) { 
             $scope.listamunicipios = response.data.municipios;
-            console.log($scope.listamunicipios);
-
-            //var newRow="";
-
-            /*for (let i = 0; i < listamunicipios.length; i++) {
-                
-                newRow+="<option value="+listamunicipios[i].idMunicipio+" data-centro="+listamunicipios[i].codCentro+">"+listamunicipios[i].name+"</option>";
-                
-            }
-            */
+            console.log($scope.listamunicipios);         
         
 
         });
@@ -103,6 +96,8 @@ var filename="";
             var fechacitadelete = item.fecha;
             var ndcitadelete = item.numero_dosis;
             var vccitadelete = item.codVacuna;
+
+            ndcitadelete=$scope.listahistorial.length+1;
 
             console.log(idcitadelete);
             console.log(fechacitadelete);
@@ -223,15 +218,103 @@ var filename="";
 
             $scope.objetoPaciente=item;
 
+
+            if($scope.objetoPaciente.objPaciente.img==null || $scope.objetoPaciente.objPaciente.img==""){
+
+                document.getElementById("fotoperfil").src="/view/img/placeholder.png";
+            }else{
+
+                document.getElementById("fotoperfil").src="/view/img/"+$scope.objetoPaciente.objPaciente.img;
+            }
+
+
+            cont=1;
+            $scope.muniorder=[];
+
+            for (let i = 0; i < $scope.listamunicipios.length; i++) {
+                
+                if($scope.listamunicipios[i].name==$scope.objetoPaciente.objMunicipio.name){
+
+                    $scope.muniorder[0]=$scope.listamunicipios[i].name;
+
+                }else{
+
+                    $scope.muniorder[cont]=$scope.listamunicipios[i].name;
+                    cont=cont+1;
+
+                }
+
+            }
+
+
+            var newRow="";
+
+            for (let i = 0; i < $scope.muniorder.length; i++) {
+                
+                newRow+="<option value="+$scope.muniorder[i]+">"+$scope.muniorder[i]+"</option>";
+                
+            }
+
+            document.getElementById("muniorder").innerHTML=newRow;
+
+            
+            document.getElementById("muniorder").addEventListener("change", function(){
+
+
+                datomunicipio = {
+
+                    municipio : document.getElementById("muniorder").value,
+                    idpaciente : idpaciente
+
+
+                }
+
+                if(confirm("Estas seguro que desea cambiar el municipio de este paciente?")){
+
+
+                    $http.post('../../controller/cEditarMunicipioPaciente.php', datomunicipio).then(function (response) { 
+
+                        window.location.href="prueba.html";
+
+                    });
+
+                }
+
+            });
+
+
             console.log(item);
 
             idpaciente=item.objPaciente.idPaciente;
 
             if(item.objPaciente.fechaPos==null){
-                document.getElementById("positivo").innerHTML="Fecha positivo: No ha dado positivo";
+                document.getElementById("positivo").innerHTML="Fecha positivo: <input id='positivocovid' type='date' class='form-control w-50 ms-2' value='No ha dado positivo'>";
             }else{
-                document.getElementById("positivo").innerHTML="Fecha positivo: "+$scope.objetoPaciente.objPaciente.fechaPos;
+                document.getElementById("positivo").innerHTML="Fecha positivo: <input id='positivocovid' type='date' class='form-control w-50 ms-2' value='"+$scope.objetoPaciente.objPaciente.fechaPos+"'>";
             }
+
+
+            document.getElementById("positivocovid").addEventListener("change", function(event) {
+                event.preventDefault();
+                    
+                datosupdatepositivo = {
+
+                    id: idpaciente,
+                    positivo : document.getElementById("positivocovid").value
+
+                }
+
+                if(confirm("Es correcta la nueva fecha de positivo del paciente?")){
+
+                    $http.post('../../controller/cEditarPositivo.php', datosupdatepositivo).then(function (response) { 
+
+                        window.location.href="prueba.html";
+
+                    });
+
+                }
+        
+            });
 
             $http.post('../../controller/cLoadCitas.php',idpaciente).then(function (response) { 
                 $scope.listacitas = response.data.citas;
@@ -310,6 +393,7 @@ var filename="";
             datospaciente = { 
                 nombrepaciente : $scope.nombrepaciente,
                 apellidopaciente : $scope.apellidopaciente,
+                apellido2paciente : $scope.apellido2paciente,
                 dnipaciente : $scope.dnipaciente,
                 municipiopaciente : $scope.municipiopaciente,
                 fechapaciente : document.getElementById("fechanacimiento").value,
@@ -483,6 +567,7 @@ var filename="";
         })
         .catch(error => console.error('Error status:', error));	
     }
+
 
 
 
