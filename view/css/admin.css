@@ -15,6 +15,15 @@ body #contenedor{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.banner{
+    background-color: #252591;
+    color: white;
+    font-size: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 #admincentro{
     width: 1200px;
     margin: auto;

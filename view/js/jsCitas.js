@@ -675,7 +675,7 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
         var celdas2 = document.querySelectorAll("li input");
 
         for (let i = 0; i < celdas2.length; i++) {
-            celdas2[i].parentNode.style.backgroundColor = "white";
+            //celdas2[i].parentNode.style.backgroundColor = "white";
             celdas2[i].disabled = false;
 
         }
