@@ -1,12 +1,8 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-
-
+    
     const fecha = new Date();
     document.getElementById("start").setAttribute("min", fecha.getUTCFullYear() + "-" + fecha.getUTCMonth() + 1 + "-" + fecha.getUTCDate());
 });
-
-
-
 
 function logout() {
 

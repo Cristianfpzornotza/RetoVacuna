@@ -7,6 +7,8 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
     $scope.apellidos='';
     $scope.lista=[];
 
+    loggedVerify();
+
     $scope.Historial=function(){
                         
         $scope.ver2='no';
@@ -22,9 +24,32 @@ MyApp.controller('miControlador',['$scope','$http', function($scope,$http){
             console.log($scope.nombre);
             console.log($scope.apellidos);
         });   
-}    
-
-
+    }    
 
 
 }]);
+
+
+function loggedVerify(){
+
+    alert("adios");
+
+	var url = "../../controller/cLoggedVerifyPaciente.php";
+
+	fetch(url, {
+	  method: 'GET',  
+	})
+	.then(res => res.json()).then(result => {
+       		
+		console.log(result);
+		
+	    if (result.error == "Sesión iniciada")
+	    {
+            alert("Iniciao");
+			window.location.href = "home.html";
+	    } else {
+			
+	    }
+	})
+	.catch(error => console.error('Error status:', error));
+}
