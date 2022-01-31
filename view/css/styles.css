@@ -18,5 +18,5 @@ body {font-family: Arial, Helvetica, sans-serif; background-color:rgb(112, 112, 
 .formulario div{display: flex;}
 .formulario div input{padding-left: 5px; width: 350px; border-radius: 5px;}
 .formulario div h2{color: red;}
-.boton{text-align: center; margin-top: 30px; margin-bottom: 30px;}
+.boton{text-align: center; margin-top: 30px; margin-bottom: 30px;width:800px}
 #login{width: 150px; height: 50px;}
