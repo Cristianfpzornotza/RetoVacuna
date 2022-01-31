@@ -262,6 +262,8 @@ function estilosmenu(){
         document.querySelector("#citavacunas .halo").style.transition = "0.5s";
         document.querySelector("#citavacunas .halo2").style.transition = "0.5s";
         document.querySelector("#citavacunas .btncita").style.transition = "0.5s";
+        document.querySelector("#citavacunas").style.height = "auto";
+
     });
 
     
@@ -281,6 +283,8 @@ function estilosmenu(){
         document.querySelector("#hospitalzona .halo").style.transition = "0.5s";
         document.querySelector("#hospitalzona .halo2").style.transition = "0.5s";
         document.querySelector("#hospitalzona .btncita").style.transition = "0.5s";
+        document.querySelector("#hospitalzona").style.height = "auto";
+
     });
 
     document.getElementById("hospitalzona").addEventListener('mouseout', function(){
