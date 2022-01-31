@@ -119,12 +119,14 @@
                                                 <th><span>Fecha</span></th>
                                                 <th><span>Vacuna <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
                                                                 class="feather icon-help-circle f-16"></i></a></span></th>
+                                                <th>Centro</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="item in listacitas">
                                                 <td>{{item.fecha}}</td>
-                                                <td>{{item.objVacuna.name}}</td>
+                                                <td>{{item.ObjVacuna.name}}</td>
+                                                <td>{{item.objCentro.name}}</td>
                                                 <td>
                                                     <button ng-click="confirmar(item)" class="btn btn-success">Confirmar asistencia</button>
                                                     <button ng-click="denegar(item)" class="btn btn-danger">Cancelar asistencia</button>
@@ -150,6 +152,7 @@
                                                                 class="feather icon-help-circle f-16"></i></a></span></th>
                                                 <th><span>Dosis <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
                                                                 class="feather icon-help-circle f-16"></i></a></span></th>
+                                                <th>Centro</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -157,6 +160,7 @@
                                                 <td>{{item.fecha}}</td>
                                                 <td>{{item.ObjVacuna.name}}</td>
                                                 <td>{{item.numeroDosis}}º Dosis</td>
+                                                <td>{{item.objCentro.name}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

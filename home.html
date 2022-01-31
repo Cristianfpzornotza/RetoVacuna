@@ -59,20 +59,19 @@
                                         <thead>
                                             <tr>
                                                 <th><span>Fecha</span></th>
+                                                <th>Centro</th>
                                                 <th><span>Vacuna <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
                                                                 class="feather icon-help-circle f-16"></i></a></span></th>
                                                 <th><span>Dosis <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
                                                                 class="feather icon-help-circle f-16"></i></a></span></th>
-                                                <th>Centro</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="item in arrhistorial">
                                                 <td>{{item.fecha}}</td>
+                                                <td>{{item.objCentro.name}}</td>
                                                 <td>{{item.ObjVacuna.name}}</td>
                                                 <td>{{item.numeroDosis}}º dosis</td>
-                                                <td>{{item.objCentro.name}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -99,6 +98,7 @@
                                         <thead>
                                             <tr>
                                                 <th><span>Fecha</span></th>
+                                                <th><span>Centro</span></th>
                                                 <th><span>Vacuna</span></th>
 												<th><span>Codigo de Anulación</span></th>
 											</tr>
@@ -106,6 +106,7 @@
                                         <tbody>
                                             <tr ng-repeat="item in arrcitas">
                                                 <td>{{item.fecha}}</td>
+                                                <td>{{item.objCentro.name}}</td>
                                                 <td>{{item.ObjVacuna.name}}</td>
 												<td>{{item.codAnulacion}}</td>
                                             </tr>

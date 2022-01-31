@@ -198,7 +198,7 @@ class citasModel extends citasClass{
         //$sql="call spLoginEncripted('$this->username')";
         
         
-        $sql="select citas.*, vacuna.Nombre FROM `citas` INNER JOIN vacuna ON vacuna.idVacuna=citas.Cod_vacuna WHERE citas.`Cod_paciente`=$this->codPaciente";
+        $sql="select citas.*, vacuna.Nombre, centro.nombre as centro FROM `citas` INNER JOIN vacuna ON vacuna.idVacuna=citas.Cod_vacuna INNER JOIN centro ON centro.idCentro=citas.Cod_centro WHERE citas.`Cod_paciente`=$this->codPaciente";
 
         $result= $this->link->query($sql);
         $list=array();
@@ -213,8 +213,11 @@ class citasModel extends citasClass{
 
             $vacuna = new vacunaModel();
             $vacuna->setName($row['Nombre']);
-            
             $cita->ObjVacuna=$vacuna->ObjVars();
+
+            $centro = new centroModel();
+            $centro->setName($row['centro']);
+            $cita->objCentro=$centro->ObjVars();
 
             array_push($list, get_object_vars($cita));
             
