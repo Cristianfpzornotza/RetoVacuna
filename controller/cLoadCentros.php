@@ -14,6 +14,7 @@ if ($idAdmin !=null){
  
     $user=new centroModel();
     $response['perro']=$user->listCentros($idAdmin);
+    $response['gato']=$user->listAllCentros();
 
 }  
 

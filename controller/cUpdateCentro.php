@@ -7,15 +7,14 @@ $idCentro=$data['idCentro'];
 $imgCentro=$data['imgCentro'];
 $nombreCentro=$data['nombreCentro'];
 
-//echo $nombrecentro,$municipio1,$municipio2,$municipio3,$imgcentro;
 
 $response=array();
 
-if (( $idCentro !=null ) && ( $imgCentro !=null ) && ( $nombreCentro !=null )){
+if (( $idCentro !=null ) && ( $nombreCentro !=null ) && ( $imgCentro !=null )){
  
     $centro=new centroModel();
     $centro->setIdCentro($idCentro);
-    $centro->setImg($imgCentro);
+    $centro->setImg($imgCentro);  
     $centro->setName($nombreCentro);
 
     $response['centro']=$centro->updatecentro();

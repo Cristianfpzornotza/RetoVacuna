@@ -14,7 +14,7 @@ $imgcentro=$data['imgcentro'];
 
 $response=array();
 
-if (( $nombrecentro !=null ) && ( $municipio1 !=null ) && ( $municipio2 !=null ) && ( $municipio3 !=null ) && ( $imgcentro !=null )){
+if (( $nombrecentro !=null ) && ( $municipio1 !=null ) && ( $municipio2 !=null ) && ( $municipio3 !=null )){
  
     $centro=new centroModel();
     $centro->setName($nombrecentro);

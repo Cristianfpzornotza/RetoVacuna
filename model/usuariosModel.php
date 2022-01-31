@@ -73,7 +73,7 @@ class usuariosModel extends usuariosClass{
     public function listUsuarios(){
         $this->OpenConnect();
 
-        $sql="select * from usuario where Categoria='AdminCentro'";
+        $sql="select * from usuario";
 
         $result= $this->link->query($sql);
 

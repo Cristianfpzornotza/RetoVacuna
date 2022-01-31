@@ -84,6 +84,7 @@ var filename="";
 
         $http.get('../../controller/cLoadCentros.php').then(function (response) { 
             $scope.listacentros = response.data.perro;
+            $scope.listaAllcentros = response.data.gato;
             console.log($scope.listacentros);
         });
 
@@ -103,7 +104,7 @@ var filename="";
         $scope.confirmar=function(item){
             console.log(item);
            
-            idpaciente=item.codPaciente;
+            //idpaciente=item.codPaciente;
 
 
             var idcitadelete = item.idCitas;
@@ -113,6 +114,7 @@ var filename="";
 
             ndcitadelete=$scope.listahistorial.length+1;
 
+            console.log(idpaciente);
             console.log(idcitadelete);
             console.log(fechacitadelete);
             console.log(ndcitadelete);
@@ -188,7 +190,7 @@ var filename="";
                 
                 $scope.listapacientes=response.data.datos;
 
-                window.location.href="prueba.html";
+                //window.location.href="prueba.html";
         
             });
 
@@ -310,7 +312,8 @@ var filename="";
 
             document.getElementById("positivocovid").addEventListener("change", function(event) {
                 event.preventDefault();
-                    
+
+                
                 datosupdatepositivo = {
 
                     id: idpaciente,
@@ -322,7 +325,7 @@ var filename="";
 
                     $http.post('../../controller/cEditarPositivo.php', datosupdatepositivo).then(function (response) { 
 
-                        window.location.href="prueba.html";
+                        //window.location.href="prueba.html";
 
                     });
 
@@ -448,12 +451,18 @@ var filename="";
 
             }
 
+            if(filename==""){
+                variableInsert="placeholder.png";
+            }else{
+                variableInsert=filename;
+            }
+
             datoscentro = { 
                 nombrecentro : $scope.nombrecentro,
                 municipio1 : $scope.municipio1,
                 municipio2 : $scope.municipio2,
                 municipio3 : $scope.municipio3,
-                imgcentro : filename };
+                imgcentro : variableInsert };
 
                 console.log(datoscentro);
 
@@ -462,7 +471,14 @@ var filename="";
 
                 console.log($scope.centroinsert);
 
-                window.location.href="prueba.html";
+                $http.get('../../controller/cLoadCentros.php').then(function (response) { 
+                    $scope.listacentros = response.data.perro;
+                    $scope.listaAllcentros = response.data.gato;
+
+                    console.log($scope.listacentros);
+                });
+
+                //window.location.href="prueba.html";
             });
 
         }

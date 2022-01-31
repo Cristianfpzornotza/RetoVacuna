@@ -207,9 +207,11 @@ class citasModel extends citasClass{
         {
 
             $cita = new citasModel();
+            $cita->setIdCitas($row['idCitas']);
             $cita->setFecha($row['Fecha']);
             $cita->setNumero_dosis($row['Numero_dosis']);
             $cita->setCodAnulacion($row['Cod_anulacion']);
+            $cita->setCodVacuna($row['Cod_vacuna']);
 
             $vacuna = new vacunaModel();
             $vacuna->setName($row['Nombre']);
