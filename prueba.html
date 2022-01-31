@@ -125,7 +125,10 @@
                                             <tr ng-repeat="item in listacitas">
                                                 <td>{{item.fecha}}</td>
                                                 <td>{{item.objVacuna.name}}</td>
-                                                <td><button ng-click="confirmar(item)" class="btn btn-success">Confirmar asistencia</button></td>
+                                                <td>
+                                                    <button ng-click="confirmar(item)" class="btn btn-success">Confirmar asistencia</button>
+                                                    <button ng-click="denegar(item)" class="btn btn-danger">Cancelar asistencia</button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -32,6 +32,20 @@ var filename="";
         document.getElementById("centroimg3").addEventListener("change", setFileName2);
 
 
+        $scope.denegar=function(item){
+
+
+            $http.post('../../controller/cDeleteCita.php',item.codAnulacion).then(function (response) { 
+
+                $http.post('../../controller/cLoadCitas.php',idpaciente).then(function (response) { 
+                    $scope.listacitas = response.data.citas;
+    
+                    console.log($scope.listacitas);
+                });
+
+            });
+
+        }
 
         $http.get('../../controller/cLoadAdmin.php').then(function (response) { 
             $scope.listaadmin = response.data.admin;

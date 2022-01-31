@@ -116,7 +116,9 @@ class historialModel extends historialClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
         
-        $sql="select * FROM historial WHERE Cod_paciente=2 ORDER BY Fecha DESC LIMIT 1";
+        $sql="select historial.*, vacuna.Nombre FROM historial
+            INNER JOIN vacuna ON vacuna.idVacuna=historial.Cod_vacuna
+            WHERE Cod_paciente=$this->codPaciente ORDER BY Fecha DESC LIMIT 1";
         
         $result= $this->link->query($sql);
         $list=array();
@@ -127,6 +129,11 @@ class historialModel extends historialClass{
             $history = new historialModel();
             $history->setFecha($row['Fecha']);
             //$history->setCodVacuna($row['Cod_vacuna']);
+
+
+            $vacuna = new vacunaModel();
+            $vacuna->setName($row['Nombre']);
+            $history->objVacuna=$vacuna->ObjVars();
 
             array_push($list, get_object_vars($history));
             

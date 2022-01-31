@@ -113,12 +113,12 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 
 
 			$http.post('../../controller/cHistorialById.php',idpaciente).then(function (response){
-				console.log(response.data.datos);
+				console.log(response.data.fecha);
 				
 
-				if(response.data.datos.length > 0){
+				if(response.data.fecha.length > 0){
 
-					var fechacompleta = response.data.datos[0].fecha;
+					var fechacompleta = response.data.fecha[0].fecha;
 					console.log(fechacompleta);
 
 					var fechasplit = fechacompleta.split(" ");
@@ -126,7 +126,7 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 					console.log(datospaciente[6]);
 
 					
-					datospaciente[4] = response.data.datos[0].ObjVacuna.name;
+					datospaciente[4] = response.data.fecha[0].objVacuna.name;
 
 					if(datospaciente[4] == "Moderna"){
 						datospaciente[5] = "Moderna";
@@ -269,6 +269,8 @@ function genPDF() {
 	var vacuna = datospaciente[4];
 	var fabricante = datospaciente[5];
 	var fecha = datospaciente[6];
+
+	console.log(datospaciente);
 
 	var cantidad = datospaciente[7];
 

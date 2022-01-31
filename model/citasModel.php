@@ -92,13 +92,7 @@ class citasModel extends citasClass{
             return $this->link->error;
         };
 
-        
-
-        
-        
         $this->CloseConnect();
-    
-       
 
     }
 
