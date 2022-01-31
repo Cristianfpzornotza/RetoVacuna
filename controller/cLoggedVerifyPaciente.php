@@ -3,10 +3,6 @@ session_start();
 
 $response=array();
 
-/*
-$_SESSION['idUser']=$user->getIdUsuario(); 
-        $_SESSION['username']=$username; 
-*/
 
 if (isset($_SESSION['idPaciente']))
 {

@@ -15,6 +15,15 @@ body #contenedor{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.banner{
+    background-color: #252591;
+    color: white;
+    font-size: 30px;
+    border-radius: 2px;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 #admincentro{
     width: 1200px;
     margin: auto;
@@ -61,9 +70,7 @@ body #contenedor{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#form2{
-    
-}
+
 
 #admingeneral{
     width: 1200px;
@@ -132,4 +139,41 @@ body #contenedor{
 #tablebody{
     height: 100px;
     overflow: scroll;
+}
+
+#padrehoras{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+#btncertificado{
+    display: none;
+}
+
+#pedircita{
+    display: block;
+}
+
+@media(max-width: 1200px){
+    #admincentro{
+        width: 100%;
+    }
+}
+
+@media(max-width: 720px){
+    #pacienteinfo{
+        flex-direction: column;
+    }
+
+    #mediacitas{
+        flex-direction: column;
+    }
+
+
+}
+@media(min-width: 720px){
+    #buttonscitas{
+        width: 50%;
+    }
 }

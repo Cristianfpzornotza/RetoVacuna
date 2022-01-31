@@ -1,285 +1,260 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html lang="en" ng-app='miApp'>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/consulta.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/consulta.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- calendario -->
-    <script type="text/javascript" src="calendar/common.js"></script>
-    <script type="text/javascript" src="calendar/calendar_core.js"></script>
-    <script type="text/javascript" src="calendar/calendar.js"></script>
-    <link rel="stylesheet" type="text/css" href="calendar/calendar.css" />
+  <!-- calendario -->
+  <script type="text/javascript" src="calendar/common.js"></script>
+  <script type="text/javascript" src="calendar/calendar_core.js"></script>
+  <script type="text/javascript" src="calendar/calendar.js"></script>
+  <link rel="stylesheet" type="text/css" href="calendar/calendar.css" />
 </head>
-<body ng-controller="miControlador">
-  <a href="#" id="logout" class="tooltip-test" title="Tooltip"><h5>Logout</h5></a> 
-    <div id="btnprincipal" class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" ng-click="Citas()">
-        <label class="btn btn-outline-primary" for="btnradio1">Citas</label>
-      
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" ng-click="Historial()">
-        <label class="btn btn-outline-primary" for="btnradio2">Historial</label>
+
+<body ng-controller="miControlador" style="background-color: rgb(112, 157, 255);">
+
+  <div style="margin: auto; background-color: white; width: 80%; border-radius: 5px; margin-top: 20px; margin-bottom: 20px; padding: 40px;">
+
+    <div id="flexbotones" class="mb-2 d-flex justify-content-end">
+      <div>
+        <button ng-click="volver()" class="btn btn-success">Volver</button>
       </div>
+    </div>
 
-      <div id="Historial" ng-show="ver=='si'">
+    <div class="banner" style="display: flex; justify-content: space-between; margin-bottom: 20px;"><div>Pedir cita</div></div>
 
-        
-        <h2 id="historialpaciente" >{{nombre}} {{apellidos}}</h2>
-        <table class="table" id="tablahistorial">
-            <thead>
-                <tr>
-                    
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Vacuna</th>
-                    <th scope="col">Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <div >
-                    <tr ng-repeat="item in lista">
-                        
-                        <td>{{item.numeroDosis}}º Dosis</td>
-                        <td>{{item.objVacuna.name}}</td>
-                        <td>{{item.fecha}}</td>
-                    </tr>
-                </div>
-                
-            </tbody>
-        </table>
 
-      </div>
-      <div id="Citas" ng-show="verdos=='si'">
-        
-        <div id="citabtn">
-          <button type="button" class="btn btn-primary" id="btnpedircita" ng-click="BTNCita()">Pedir cita</button>
+    
 
-          Anular cita:<input type="text" placeholder="Codigo" >
-        </div>
 
-        <div>        
+    <div id="Citas" ng-show="verdos=='si'">
 
-          <div id="calendar" ng-show="verDias=='si'">
+      <div>
 
-            <label for="start">Start date:</label>
-            
-           <input type="date"  id="start" ng-change="hours()" ng-model="hora" name="trip-start" value="2022-01-20" min="" max='2024-01-01'>
+        <div id="calendar" ng-show="verDias=='si'">
 
-            <div class="tabla" ng-show="verHoras == 'si'">
-              <form action="javascript:void(0);">
+          <label for="start">Selecciona una fecha:</label>
+
+          <input type="date" class="form-control" style="width: 300px;" id="start" ng-change="hours()" ng-model="hora"
+            name="trip-start" value="2022-01-20" min="" max='2024-01-01'>
+
+          <div class="tabla" ng-show="verHoras == 'si'">
+            <form action="javascript:void(0);">
               <ol>
-                <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn" value="{{item}}">{{item}}</li>
-              </ol>  
-              <button ng-show="boton=='si'"  ng-click="cogerCita()" class="btn btn-primary">PEDIR</button>
+                <li ng-repeat="item in horasminutos"><input ng-click="escogerhora()" type="radio" name="btn"
+                    value="{{item}}">{{item}}</li>
+              </ol>
+              <div style="text-align: center;">
+                <button ng-show="boton=='si'" ng-click="cogerCita()" style="padding: 10px; width: 100px;" class="btn btn-primary">PEDIR</button>
+              </div>
             </form>
-              <!-- <table>
-                <tr>
-                  <td ng-repeat="item in horasminutos"><input type="radio">{{item}}</td>
-                </tr>
-              </table> -->
-              
-            </div>
-         
-            <!-- <div id="contenedorhoras" ng-show="verhoras=='si'">
-            
-              <input type="radio">8:55<input type="radio">9:10
-            
-            </div> -->
+
 
           </div>
-        </div>
 
+
+        </div>
       </div>
 
-      <div ng-show="verCitas=='si'">
-        <div class="nav">
-          <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <div class="container-fluid justify-content-between h-100 w-100">
-              <a class="navbar-brand" href="#">				
-                <img class="ms-5" src="/view/img/logohospitalazul.png" alt="" height="60px" width="60px">
-                  </a>
-        
-              <div class="me-5 navegador">
-        
-             
-        
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+    </div>
+
+    <div ng-show="verCitas=='si'">
+      <div class="nav">
+        <nav class="navbar navbar-expand-lg navbar-light p-0">
+          <div class="container-fluid justify-content-between h-100 w-100">
+            <a class="navbar-brand" href="#">
+              <img class="ms-5" src="/view/img/logohospitalazul.png" alt="" height="60px" width="60px">
+            </a>
+
+            <div class="me-5 navegador">
+
+
+
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
-               
-              <ul class="navbar-nav">
-                <h1>Cita Previa</h1>
-                <!-- <li class="nav-item">
-                <a class="nav-link text-black" aria-current="page" href="#">Centro de Salud</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-black" href="#">Yo que se ahi </a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-black" href="#">Cita Vacunas</a>
-                </li>
-                <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Inicio de Sesión
-                  <i class="bi bi-box-arrow-in-right mt-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                  </svg>
-                </i>
-                </a>
-                <ul id="dropdownlogin" class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
-                  <li>
-                    <h3>Login</h3>
-                    <hr>
+
+                <ul class="navbar-nav">
+                  <h1>Cita Previa</h1>
+                  <!-- <li class="nav-item">
+                  <a class="nav-link text-black" aria-current="page" href="#">Centro de Salud</a>
                   </li>
-                  <li>
-                    <label for="">Usuario:</label>	<br>
-                    <input class="form-control mb-2" type="text" id="username">
-                    <label for="">Contraseña:</label><br>
-                    <input class="form-control" type="password" id="password">
+                  <li class="nav-item">
+                  <a class="nav-link text-black" href="#">Yo que se ahi </a>
                   </li>
-        
-                  <li class="text-center">
-                    <button id="btnlogin" class="btn btn-info w-100 mt-3 mb-2">Login</button>
+                  <li class="nav-item">
+                  <a class="nav-link text-black" href="#">Cita Vacunas</a>
                   </li>
-                </ul>
-                </li>
-                <li class="nav-item d-flex">
-                <a class="nav-link" href="#">Login
-                  <i class="bi bi-box-arrow-in-right mt-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                  <li class="nav-item dropdown ">
+                  <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Inicio de Sesión
+                    <i class="bi bi-box-arrow-in-right mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
                       <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                     </svg>
                   </i>
-                </a>
-                </li>--> 
-              </ul>
+                  </a>
+                  <ul id="dropdownlogin" class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
+                    <li>
+                      <h3>Login</h3>
+                      <hr>
+                    </li>
+                    <li>
+                      <label for="">Usuario:</label>	<br>
+                      <input class="form-control mb-2" type="text" id="username">
+                      <label for="">Contraseña:</label><br>
+                      <input class="form-control" type="password" id="password">
+                    </li>
+          
+                    <li class="text-center">
+                      <button id="btnlogin" class="btn btn-info w-100 mt-3 mb-2">Login</button>
+                    </li>
+                  </ul>
+                  </li>
+                  <li class="nav-item d-flex">
+                  <a class="nav-link" href="#">Login
+                    <i class="bi bi-box-arrow-in-right mt-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                      </svg>
+                    </i>
+                  </a>
+                  </li>-->
+                </ul>
               </div>
             </div>
-            </div>
-          </nav>	
-        </div>
-        <div  class="padre">
-        <p>Citas Confirmadas()</p>
-         <div class="contenedores" id="container">
-        <!-- <div class="contenedorpadre">
-          <div>SOLICITANTE:{{item.objPaciente.name}}</div>
           </div>
+        </nav>
+      </div>
+      <div class="padre">
+        <p>Citas Confirmadas()</p>
+        <div class="contenedores" id="container">
+          <!-- <div class="contenedorpadre">
+            <div>SOLICITANTE:{{item.objPaciente.name}}</div>
+            </div>
+            <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> 
+          <div class="contenedorpadre">
+            <div>Lugar:{{item.objCentro.name}}</div>
+            <div>Cita:{{item.objHistorial.numeroDosis}}</div>
+            <div>Dia:{{item.fecha}}</div>
+            <div>Hora:{{item.fecha}}</div>
+            <div>*Codigo de cita:{{item.codAnulacion}}</div>
+            
           <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> 
-        <div class="contenedorpadre">
-          <div>Lugar:{{item.objCentro.name}}</div>
-          <div>Cita:{{item.objHistorial.numeroDosis}}</div>
-          <div>Dia:{{item.fecha}}</div>
-          <div>Hora:{{item.fecha}}</div>
-          <div>*Codigo de cita:{{item.codAnulacion}}</div>
-          
-         <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png"> 
+          </div>
+          <div class="contenedorpadre">
+            <div>Lugar:{{item.objCentro.name}}</div>
+            <div>Cita:{{item.objHistorial.numeroDosis}}</div>
+            <div>Dia:{{item.fecha}}</div>
+            <div>Hora:{{item.fecha}}</div>
+            <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png">
+          </div> -->
         </div>
-        <div class="contenedorpadre">
-          <div>Lugar:{{item.objCentro.name}}</div>
-          <div>Cita:{{item.objHistorial.numeroDosis}}</div>
-          <div>Dia:{{item.fecha}}</div>
-          <div>Hora:{{item.fecha}}</div>
-          <img src="https://www.osakidetza.euskadi.eus/images/ab84-logo-osakidetza.png">
-        </div> -->
-      </div>
- 
-      </div>
-            <!--<script>
-                var c = new Calender();
-                c.onSelected = function (y, m, d) {
-                    console.log([y, m, d].join("-"));
-                }
-                c.onSetToday = function () {
-                    console.log("setToday");
-                }
-                c.onClear = function () {
-                    console.log("clear");
-                }
-                c.render("calendar");
-            </script>
 
-<div id="calendar" ng-show="verhoras=='si'">
-  <div id="calender_2" class="horas">
-    <div class="horastitulo">
-      <button ng-click="Volver()">Volver</button>
-    </div>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-      </li> 
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <div class="horasdiv">
-          hola <button type="button" class="btn btn-success">Success</button>
-        </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
       </div>
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <div class="horasdiv">
-          hola <button type="button" class="btn btn-success">Success</button>
-        </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
+      <!--<script>
+                  var c = new Calender();
+                  c.onSelected = function (y, m, d) {
+                      console.log([y, m, d].join("-"));
+                  }
+                  c.onSetToday = function () {
+                      console.log("setToday");
+                  }
+                  c.onClear = function () {
+                      console.log("clear");
+                  }
+                  c.render("calendar");
+              </script>
+
+  <div id="calendar" ng-show="verhoras=='si'">
+    <div id="calender_2" class="horas">
+      <div class="horastitulo">
+        <button ng-click="Volver()">Volver</button>
       </div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        <div class="horasdiv">
-          hola <button type="button" class="btn btn-success">Success</button>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+        </li> 
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="horasdiv">
+            hola <button type="button" class="btn btn-success">Success</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
         </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="horasdiv">
+            hola <button type="button" class="btn btn-success">Success</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
         </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
-        <div class="horasdiv">
-          hola<button type="button" class="btn btn-danger">Danger</button>
-        </div>
-      </div> 
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          <div class="horasdiv">
+            hola <button type="button" class="btn btn-success">Success</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
+          <div class="horasdiv">
+            hola<button type="button" class="btn btn-danger">Danger</button>
+          </div>
+        </div> 
+      </div>
     </div>
+  </div> -->
+
+
+
   </div>
-</div> -->
 
-      
-    
-    
-    
+
+
+
+
     <script src="js/jsHistorial.js"></script>
     <script src="js/jsCitas.js"></script>
-    
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
 </body>
+
 </html>

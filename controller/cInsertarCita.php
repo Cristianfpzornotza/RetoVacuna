@@ -36,6 +36,8 @@ $response = array();
 
 $cita->insertarCita();
 
+echo $fecha, $codPaciente;
+
 
 $response['list']=$cita->listCitasPaciente();
 $response['error']="no error";

@@ -8,7 +8,6 @@ include_once 'historialModel.php';
 class citasModel extends citasClass{
 
     private $link;
-
     private $objPaciente;
     private $objVacuna;
     private $objCentro;
@@ -49,7 +48,7 @@ class citasModel extends citasClass{
             $citas->setCodVacuna($row['Cod_vacuna']);
             $citas->setCodCentro($row['Cod_centro']);
             $citas->setCodAnulacion($row['Cod_anulacion']);
-
+            $citas->setNumero_dosis($row['Numero_dosis']);
 
             $vacuna = new vacunaModel();
             $vacuna->setIdVacuna($row['Cod_vacuna']);
@@ -66,6 +65,7 @@ class citasModel extends citasClass{
 
 
     }
+
 
     public function CloseConnect()
     {
@@ -92,13 +92,7 @@ class citasModel extends citasClass{
             return $this->link->error;
         };
 
-        
-
-        
-        
         $this->CloseConnect();
-    
-       
 
     }
 
@@ -134,11 +128,11 @@ class citasModel extends citasClass{
        
 
     }
-    
+
     public function listCitasPaciente() {
         $this->OpenConnect();
         
-        $sql = "SELECT citas.*, centro.Nombre AS Lugar, CONCAT_WS(' ', pacientes.Nombre, pacientes.Apellidos) AS SOLICITANTE, historial.Numero_dosis AS DOSIS
+        $sql = "select citas.*, centro.Nombre AS Lugar, CONCAT_WS(' ', pacientes.Nombre, pacientes.Apellidos) AS SOLICITANTE, historial.Numero_dosis AS DOSIS
         FROM citas
         INNER JOIN pacientes
         ON pacientes.idPaciente=citas.Cod_paciente
@@ -149,6 +143,8 @@ class citasModel extends citasClass{
         INNER JOIN historial
         ON historial.Numero_dosis=vacuna.Numero
         WHERE pacientes.idPaciente=$this->codPaciente and citas.Fecha='$this->fecha'";
+
+
         
 
         $result = $this->link->query($sql);
@@ -195,7 +191,72 @@ class citasModel extends citasClass{
         $this->CloseConnect();
         return $list;
     }
+
+
+    public function setCitasById(){
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        
+        $sql="select citas.*, vacuna.Nombre FROM `citas` INNER JOIN vacuna ON vacuna.idVacuna=citas.Cod_vacuna WHERE citas.`Cod_paciente`=$this->codPaciente";
+
+        $result= $this->link->query($sql);
+        $list=array();
        
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+        {
+
+            $cita = new citasModel();
+            $cita->setFecha($row['Fecha']);
+            $cita->setNumero_dosis($row['Numero_dosis']);
+            $cita->setCodAnulacion($row['Cod_anulacion']);
+
+            $vacuna = new vacunaModel();
+            $vacuna->setName($row['Nombre']);
+            
+            $cita->ObjVacuna=$vacuna->ObjVars();
+
+            array_push($list, get_object_vars($cita));
+            
+        }
+        mysqli_free_result($result);
+        $this->CloseConnect();
+        return $list;
+    }
+
+    public function deleteCitaByCod(){
+        $this->OpenConnect();
+        //$sql="call spLoginEncripted('$this->username')";
+        
+        
+        $sql="delete FROM citas WHERE Cod_anulacion=$this->codAnulacion";
+
+        $result= $this->link->query($sql);
+        echo $result;
+
+        //$eliminado = 0;
+
+        // if (mysqli_fetch_row()!=0)
+        // {
+        //     $eliminado = 1;
+        // }
+        $this->CloseConnect();
+        return $result;
+    }
+
+
+    public function confirmarcitabyid(){
+        $this->OpenConnect();
+        
+        $sql="delete FROM `citas` WHERE `idCitas`=$this->idCitas";
+
+        $result= $this->link->query($sql);
+        
+
+        $this->CloseConnect();
+        return $result;
+    }
+
 
 
     

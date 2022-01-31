@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded",function(){
     console.log(location.pathname);
 
+    document.getElementById("divmap").style.display = "none";
+
+    
+
     //document.getElementById("linkpdf").addEventListener('click', pdf);
 
     if(location.pathname == "/index.html" || location.pathname=="/"){
@@ -22,6 +26,21 @@ document.addEventListener("DOMContentLoaded",function(){
     }
 
 })
+
+function mapa(){
+    /*
+    document.getElementById("divmap").style.display = "block";
+    document.getElementById("btnmapa").innerHTML = "Quitar";
+    */
+    if(document.getElementById("btnmapa").innerHTML == "Quitar"){
+        document.getElementById("divmap").style.display = "none";
+        document.getElementById("btnmapa").innerHTML = "Ver";
+    }else{
+        document.getElementById("divmap").style.display = "block";
+        document.getElementById("btnmapa").innerHTML = "Quitar";
+    }
+
+}
 
 function loggedVerify(){
     

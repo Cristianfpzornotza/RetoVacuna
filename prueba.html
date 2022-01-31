@@ -91,17 +91,19 @@
                     <div class="banner" style="justify-content: space-between; display: flex;"><div>Paciente</div><div style="margin-right: 20px;">TIS: {{objetoPaciente.objPaciente.TIS}}</div></div>
                     <div style="display: flex;">  
                         <div>
-                            <img style="width: 350px; height: 350px; padding: 20px;" src="/view/img/placeholderusuario.jpg" alt="" srcset="">
+                            <img style="width: 350px; height: 350px; padding: 20px;" alt="" srcset="" id="fotoperfil">
                         </div>
                         <div style="width: 100%; padding: 20px; font-family: Arial, Helvetica, sans-serif;">
                             <h2><b>{{objetoPaciente.objPaciente.name}}</b></h2>
                             <h2><b>{{objetoPaciente.objPaciente.apellido}}</b></h2>
                             <h4 style="color: grey;">DNI: {{objetoPaciente.objPaciente.DNI}}</h4>
                             <div style="opacity: 0;">.</div>
-                            <h3 style="color: grey;">Municipio: {{objetoPaciente.objMunicipio.name}}</h3>
+
+                            <div class="d-flex"><h3 style="color: grey;">Municipio: </h3><select class="form-control w-50 ms-2" name="" id="muniorder"></select></div>
+
                             <h3 style="color: grey;">Fecha nacimiento: {{objetoPaciente.objPaciente.fechaNac}}</h3>
                             <div style="opacity: 0;">.</div>
-                            <h3 style="color: grey;" id="positivo">Fecha positivo: {{objetoPaciente.objPaciente.fechaPos}}</h3>
+                            <h3><div class="d-flex" style="color: grey;" id="positivo"></div></h3>
                         </div>
                     </div>
                 </div> 
@@ -117,16 +119,16 @@
                                                 <th><span>Fecha</span></th>
                                                 <th><span>Vacuna <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
                                                                 class="feather icon-help-circle f-16"></i></a></span></th>
-                                                <th><span>Dosis <a class="help" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"><i
-                                                                class="feather icon-help-circle f-16"></i></a></span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="item in listacitas">
                                                 <td>{{item.fecha}}</td>
                                                 <td>{{item.objVacuna.name}}</td>
-                                                <td>1º</td>
-                                                <td><button ng-click="pacientevistas()" class="btn btn-success">Confirmar asistencia</button></td>
+                                                <td>
+                                                    <button ng-click="confirmar(item)" class="btn btn-success">Confirmar asistencia</button>
+                                                    <button ng-click="denegar(item)" class="btn btn-danger">Cancelar asistencia</button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -151,10 +153,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="item in listacitas">
+                                            <tr ng-repeat="item in listahistorial">
                                                 <td>{{item.fecha}}</td>
-                                                <td>{{item.objVacuna.name}}</td>
-                                                <td>1º</td>
+                                                <td>{{item.ObjVacuna.name}}</td>
+                                                <td>{{item.numeroDosis}}º Dosis</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -205,6 +207,10 @@
                             <div class="w-50">
                                 <h3>Apellido</h3>
                                 <input ng-model="apellidopaciente" class="form-control" type="text">  
+                            </div>
+                            <div class="w-50">
+                                <h3>Apellido 2</h3>
+                                <input ng-model="apellido2paciente" class="form-control" type="text">  
                             </div>
                         </div>
 

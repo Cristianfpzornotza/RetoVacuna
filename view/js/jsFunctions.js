@@ -26,7 +26,7 @@ function login()
 		if (result.error =="no error")
    		{
 			   console.log(result);
-			window.location.href="../view/consulta.html";
+			window.location.href="home.html";
 			
    		} else {
 			alert(result.error);
@@ -48,9 +48,9 @@ function loggedVerify(){
 	    if (result.error == "Sesión iniciada")
 	    {
             alert("Iniciao");
-			window.location.href = "../view/consulta.html";
+			window.location.href = "home.html";
 	    } else {
-		
+			
 	    }
 	})
 	.catch(error => console.error('Error status:', error));

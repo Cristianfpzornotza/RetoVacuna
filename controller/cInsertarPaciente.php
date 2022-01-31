@@ -7,6 +7,7 @@ $nombre=$data['nombrepaciente'];
 $apellido=$data['apellidopaciente'];
 $dni=$data['dnipaciente'];
 $municipio=$data['municipiopaciente'];
+$apellido2=$data['apellido2paciente'];
 $fecha=$data['fechapaciente'];
 $img=$data['imgpaciente'];
 $TIS= mt_Rand(00000000,99999999);
@@ -18,6 +19,7 @@ if (( $nombre !=null ) && ( $apellido !=null ) && ( $dni !=null ) && ( $municipi
     $paciente=new pacientesModel();
     $paciente->setName($nombre);
     $paciente->setApellido($apellido);
+    $paciente->setApellido2($apellido2);
     $paciente->setDNI($dni);
     $paciente->setCodMunicipio($municipio);
     $paciente->setFechaNac($fecha);

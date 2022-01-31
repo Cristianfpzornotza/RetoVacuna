@@ -97,7 +97,7 @@ class centroModel extends centroClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
         
-        $sql="SELECT pacientes.idPaciente, pacientes.TIS, pacientes.Fecha_pos, pacientes.Nombre, pacientes.Apellidos, pacientes.Fecha_nac, pacientes.DNI, municipio.Nombre as municipio, centro.Nombre as centro FROM pacientes
+        $sql="SELECT pacientes.idPaciente, pacientes.TIS, pacientes.img, pacientes.Fecha_pos, pacientes.Nombre, pacientes.Apellidos, pacientes.Fecha_nac, pacientes.DNI, municipio.Nombre as municipio, centro.Nombre as centro FROM pacientes
         INNER JOIN municipio ON municipio.idMunicipio = pacientes.Cod_municipio
         INNER JOIN centro ON centro.idCentro=municipio.Cod_centro
         WHERE centro.idCentro=$this->idCentro";
@@ -119,6 +119,7 @@ class centroModel extends centroClass{
             $new->setApellido($row['Apellidos']);
             $new->setFechaNac($row['Fecha_nac']);
             $new->setDNI($row['DNI']);
+            $new->setImg($row['img']);
 
             $municipio=new municipioModel();
             $municipio->setName($row['municipio']);
