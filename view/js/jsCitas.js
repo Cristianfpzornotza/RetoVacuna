@@ -302,26 +302,35 @@ MyApp.controller('miControlador', ['$scope', '$http', function ($scope, $http) {
             console.log(historialhola);
             console.log(meses6);
 
-            var Fecha_pos2 = Fecha_pos.split("-");
-            console.log(Fecha_pos2);
+            var patata=false;
 
-            Fecha_pos3 = new Date(Fecha_pos2[0], Fecha_pos2[1], Fecha_pos2[2], "01", "01", "01")
+            if(Fecha_pos!=null){
 
+                var Fecha_pos2 = Fecha_pos.split("-");
+                console.log(Fecha_pos2);
 
-            // Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 6)
-
-            // console.log(Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 6) > e.getTime());
-            Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 5)
-            console.log(Fecha_pos3);
-            // console.log(Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 6));
-            // console.log(e.getTime());
+                Fecha_pos3 = new Date(Fecha_pos2[0], Fecha_pos2[1], Fecha_pos2[2], "01", "01", "01")
 
 
+                // Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 6)
+
+                // console.log(Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 6) > e.getTime());
+                Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 5)
+                console.log(Fecha_pos3);
+                // console.log(Fecha_pos3.setMonth(Fecha_pos3.getMonth() + 6));
+                // console.log(e.getTime());
+
+                
+                if(Fecha_pos3.getTime() < Fecha_pos5.getTime()){
+                    patata=true;
+                }
+
+            }
 
             validar=false;
 
-            console.log(Fecha_pos5)
-            if (Fecha_pos3.getTime() < Fecha_pos5.getTime()) {
+            //console.log(Fecha_pos5)
+            if (patata==true || Fecha_pos==null) {
 
                 if (historialhola == 1) {
 
