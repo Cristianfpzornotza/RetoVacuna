@@ -10,6 +10,7 @@ class historialModel extends historialClass{
     private $link;
     private $objPaciente;
     private $objVacuna;
+    private $objCentro;
 
     public function OpenConnect()
     {
@@ -83,7 +84,7 @@ class historialModel extends historialClass{
         $this->OpenConnect();
         //$sql="call spLoginEncripted('$this->username')";
         
-        $sql="select historial.*, vacuna.Nombre FROM `historial` INNER JOIN vacuna ON vacuna.idVacuna=historial.Cod_vacuna WHERE historial.`Cod_paciente`=$this->codPaciente order by historial.Fecha asc";
+        $sql="select historial.*, vacuna.Nombre, centro.Nombre as Centro FROM vacuna INNER JOIN historial ON vacuna.idVacuna = historial.Cod_vacuna INNER JOIN pacientes ON pacientes.idPaciente=historial.Cod_paciente INNER JOIN municipio ON municipio.idMunicipio=pacientes.Cod_municipio INNER JOIN centro ON centro.idCentro=municipio.Cod_centro WHERE historial.`Cod_paciente` = $this->codPaciente ORDER BY historial.Fecha ASC";
         
         $result= $this->link->query($sql);
         $list=array();
@@ -98,6 +99,11 @@ class historialModel extends historialClass{
 
             $vacuna = new vacunaModel();
             $vacuna->setName($row['Nombre']);
+
+            $centro = new centroModel();
+            $centro->setName($row['Centro']);
+
+            $history->objCentro=$centro->ObjVars();
             
             $history->ObjVacuna=$vacuna->ObjVars();
 

@@ -139,7 +139,7 @@ miApp.controller('micontrolador',['$scope','$http', function($scope,$http){
 					}
 
 					$scope.arrhistorial = response.data.datos;
-					console.log($scope.arrhistorial.length);
+					console.log($scope.arrhistorial);
 
 
 					var pacientenac = $scope.paciente.fechaNac;
